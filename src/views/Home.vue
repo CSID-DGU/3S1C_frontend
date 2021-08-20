@@ -47,7 +47,7 @@
                         src="https://cdn.pixabay.com/photo/2020/12/23/14/41/forest-5855196_1280.jpg"
                         :aspect-ratio="16 / 9"
                         gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
-                        height="200px"
+                        height="150px"
                         class="elevation-2"
                         style="border-radius: 16px"
                       >
