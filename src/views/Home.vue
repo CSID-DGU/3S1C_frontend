@@ -102,7 +102,12 @@
                     class="elevation-2 fill-height"
                   >
                     <div
-                      class="d-flex flex-column justify-space-between fill-height"
+                      class="
+                        d-flex
+                        flex-column
+                        justify-space-between
+                        fill-height
+                      "
                     >
                       <v-card-text>
                         <v-btn color="accent">ANIMALS</v-btn>
