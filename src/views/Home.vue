@@ -29,7 +29,7 @@
             <h2 class="text-h4 font-weight-bold pb-4">Today's hot issue</h2>
 
             <v-row>
-              <v-col cols="12" md="6" lg="4" v-for="i in 6" :key="i">
+              <v-col cols="10" md="6" lg="4" v-for="i in 6" :key="i">
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="50"
