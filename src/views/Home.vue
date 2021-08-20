@@ -52,7 +52,12 @@
                         style="border-radius: 16px"
                       >
                         <v-card-text>
-                          <v-btn color="accent" to="category">TIPS</v-btn>
+                          <div
+                            class="text-center text-h2 white--text-center ma-7"
+                            style="background:rgba(255,255,255,0.3);color:white"
+                          >
+                            hiiii
+                          </div>
                         </v-card-text>
                       </v-img>
 
