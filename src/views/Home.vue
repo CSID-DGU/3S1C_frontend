@@ -26,7 +26,7 @@
       <v-col cols="10" lg="10" xl="8">
         <div>
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4">Recommended For You</h2>
+            <h2 class="text-h4 font-weight-bold pb-4">Today's hot issue</h2>
 
             <v-row>
               <v-col cols="12" md="6" lg="4" v-for="i in 6" :key="i">
