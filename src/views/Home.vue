@@ -16,13 +16,6 @@
                   TODO : Catch Prase middle position
                 </h2>
               </v-col>
-              <v-col class="d-flex align-center">
-                <v-avatar class="elevation-4" color="accent">
-                  <v-icon large>mdi-feather</v-icon>
-                </v-avatar>
-
-                <div class="text-h6 pl-2">Yan Lee · 22 July 2019</div>
-              </v-col>
             </v-row>
           </v-card-text>
         </v-img>
