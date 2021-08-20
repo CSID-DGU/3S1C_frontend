@@ -62,6 +62,8 @@
                       </v-img>
 
                       <v-card-text>
+                        <v-btn color="accent" to="category">#선거</v-btn>
+                        <v-btn color="accent" to="category">#정치</v-btn>
                         <div class="text-h5 font-weight-bold primary--text">
                           How to write an awesome blog post in 5 steps
                         </div>
