@@ -102,30 +102,21 @@
 export default {
   data: () => ({
     drawer: null,
-    btnItems: [
-      {
-        text: "Free Download",
-        href: "https://github.com/AGDholo/giraffe",
-        target: "_black",
-        color: "primary",
-        icon: "mdi-download",
-      },
-    ],
     barItems: [
       {
         title: "Home",
         to: "/",
       },
       {
-        title: "Category",
+        title: "Menu1",
         to: "/category",
       },
       {
-        title: "Detail",
+        title: "Menu2",
         to: "/detail",
       },
       {
-        title: "Authors",
+        title: "Menu3",
         to: "/authors",
       },
     ],
