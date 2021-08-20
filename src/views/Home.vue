@@ -11,9 +11,6 @@
         >
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column">
-              <v-col>
-                <v-btn color="accent" to="category">Travel</v-btn>
-              </v-col>
               <v-col cols="12" md="10" lg="8" xl="7">
                 <h2 class="text-h3 py-3" style="line-height: 1.2">
                   Great Travel Blogs From Around The World To Inspire You
