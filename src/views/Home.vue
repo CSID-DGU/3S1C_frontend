@@ -13,7 +13,7 @@
             <v-row class="flex-column">
               <v-col cols="12" md="10" lg="8" xl="7">
                 <h2 class="text-h3 py-3" style="line-height: 1.2">
-                  Great Travel Blogs From Around The World To Inspire You
+                  TODO : Catch Prase middle position
                 </h2>
               </v-col>
               <v-col class="d-flex align-center">
