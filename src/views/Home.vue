@@ -62,8 +62,30 @@
                       </v-img>
 
                       <v-card-text>
-                        <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
+                        <div class="text-center">
+                          <v-progress-circular
+                            :rotate="180"
+                            :size="80"
+                            :width="15"
+                            :value="gender.ratio"
+                            :text="text"
+                          >
+                            {{ gender.info }}
+                          </v-progress-circular>
+                          <v-progress-circular
+                            :rotate="360"
+                            :size="80"
+                            :width="15"
+                            :color="teal"
+                          >
+                          </v-progress-circular>
+                          <v-progress-circular
+                            :rotate="360"
+                            :size="80"
+                            :width="15"
+                            :color="teal"
+                          >
+                          </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
@@ -197,5 +219,28 @@ export default {
   components: {
     siderbar: () => import("@/components/details/sidebar"),
   },
+  data() {
+    return {
+      // TODO : mock api
+      gender : {
+        info : '',
+        ratio : 0
+      }
+      //female: 30,
+      //male: 70,
+      //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
+      //text: this.female > this.male ? "여성" : "남성", // TODO : 성별 infographic으로 변경하기
+    };
+  },
+  methods:{
+    getGender(){
+      this.gender.info = '여'
+      this.gender.ratio = 90
+    }
+  },
+  mounted(){
+    this.getGender();
+  }
 };
+
 </script>
