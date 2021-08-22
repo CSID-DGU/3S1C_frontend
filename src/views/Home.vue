@@ -11,8 +11,8 @@
         >
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column">
-              <v-col cols="12" md="10" lg="8" xl="7">
-                <h2 class="text-h3 py-3" style="line-height: 1.2">
+              <v-col cols="12" md="12" lg="12" xl="12">
+                <h2 class="text-h3 text-center text-h2 white--text-center ma-7">
                   TODO : Catch Prase middle position
                 </h2>
               </v-col>
