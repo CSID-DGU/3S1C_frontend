@@ -10,6 +10,7 @@
   font-family: "MAPO";
 }
 </style>
+
 <template>
   <div>
     <div>
@@ -42,7 +43,6 @@
         <div>
           <div class="pt-16">
             <h2 class="text-h4 font-weight-bold pb-4">Today's hot issue</h2>
-
             <v-row>
               <v-col cols="10" md="6" lg="4" v-for="i in 6" :key="i">
                 <v-hover
@@ -69,7 +69,10 @@
                         <v-card-text>
                           <div
                             class="text-center text-h2 white--text-center ma-7"
-                            style="background:rgba(255,255,255,0.3);color:white"
+                            style="
+                              background: rgba(255, 255, 255, 0.3);
+                              color: white;
+                            "
                           >
                             #keyword
                           </div>
@@ -94,8 +97,12 @@
                           <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
                         -->
-                        <v-btn color="accent" to="category" class="pa-3 ma-1">#아이유</v-btn>
-                        <v-btn color="accent" to="category" class="pa-3 ma-1">#데헷</v-btn>
+                        <v-btn color="accent" to="category" class="pa-3 ma-1"
+                          >#아이유</v-btn
+                        >
+                        <v-btn color="accent" to="category" class="pa-3 ma-1"
+                          >#데헷</v-btn
+                        >
                       </v-card-text>
                     </v-card>
                   </div>
