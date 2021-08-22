@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h3 class="text-h5 font-weight-medium pb-4">Popular Posts</h3>
+      <h3 class="text-h5 font-weight-medium pb-4">Cumulative Statistics</h3>
 
       <v-divider></v-divider>
 
