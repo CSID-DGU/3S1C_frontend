@@ -21,11 +21,14 @@
           height="500px"
           dark
         >
-          <v-card-text class="fill-height d-flex align-end">
+          <v-card-text class="fill-height d-flex align-center">
             <v-row class="flex-column">
               <v-col cols="12" md="12" lg="12" xl="12">
-                <h2 class="text-h3 text-center text-h2 white--text-center ma-7">
-                  TODO : Catch Prase middle position
+                <h2
+                  class="text-h3 text-center text-h2 white--text-center ma-12"
+                  style="background: rgba(220, 220, 220, 0.3); color: white"
+                >
+                  "Team 3S1C's News-Comment Analyzer"
                 </h2>
               </v-col>
             </v-row>
