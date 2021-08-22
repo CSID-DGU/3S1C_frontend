@@ -62,8 +62,6 @@
                       </v-img>
 
                       <v-card-text>
-                        <v-btn color="accent" to="category">#선거</v-btn>
-                        <v-btn color="accent" to="category">#정치</v-btn>
                         <div class="text-h5 font-weight-bold primary--text">
                           How to write an awesome blog post in 5 steps
                         </div>
@@ -72,7 +70,7 @@
                           Ultrices sagittis orci a scelerisque. Massa placerat
                           duis ultricies lacus sed turpis
                         </div>
-
+                        <!--
                         <div class="d-flex align-center">
                           <v-avatar color="accent" size="36">
                             <v-icon dark>mdi-feather</v-icon>
@@ -80,6 +78,9 @@
 
                           <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
+                        -->
+                        <v-btn color="accent" to="category" class="pa-3 ma-1">#아이유</v-btn>
+                        <v-btn color="accent" to="category" class="pa-3 ma-1">#데헷</v-btn>
                       </v-card-text>
                     </v-card>
                   </div>
