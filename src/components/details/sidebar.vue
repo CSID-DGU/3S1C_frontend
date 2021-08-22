@@ -10,7 +10,7 @@
           <v-col cols="12" md="6" lg="5">
             <v-card height="100%" flat>
               <v-img
-                src="https://cdn.pixabay.com/photo/2021/01/22/16/55/camera-5940588_1280.jpg"
+                src="https://dimg.donga.com/wps/NEWS/IMAGE/2021/01/17/104953245.2.jpg"
                 :aspect-ratio="16 / 9"
                 height="100%"
               ></v-img>
