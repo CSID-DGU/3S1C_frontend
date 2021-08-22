@@ -3,7 +3,7 @@
     <div>
       <v-card to="detail">
         <v-img
-          src="https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg"
+          src="https://images-workbench.99static.com/Rh-3PTyZljv9zwCbgEiI_0d3iWg=/http://s3.amazonaws.com/projects-files/110/11020/1102080/233549a5-4006-4aa6-9e59-761c218a2232.gif"
           gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
           :aspect-ratio="16 / 9"
           height="500px"
@@ -44,7 +44,7 @@
                       to="/detail"
                     >
                       <v-img
-                        src="https://cdn.pixabay.com/photo/2020/12/23/14/41/forest-5855196_1280.jpg"
+                        src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
                         :aspect-ratio="16 / 9"
                         gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                         height="150px"
