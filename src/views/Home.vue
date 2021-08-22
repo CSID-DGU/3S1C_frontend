@@ -1,3 +1,15 @@
+
+<style>
+@font-face {
+  font-family: "MAPO";
+  src: local("MAPO"), url(./OSEONGANDHANEUM-BOLD.TTF) format(truetype);
+}
+</style>
+<style>
+.description {
+  font-family: "MAPO";
+}
+</style>
 <template>
   <div>
     <div>
