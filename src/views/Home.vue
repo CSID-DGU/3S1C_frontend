@@ -54,13 +54,16 @@
                         <v-card-text>
                           <div
                             class="text-center text-h2 white--text-center ma-7"
-                            style="background:rgba(255,255,255,0.3);color:white"
+                            style="
+                              background: rgba(255, 255, 255, 0.3);
+                              color: white;
+                            "
                           >
+                            <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
                             #keyword
                           </div>
                         </v-card-text>
                       </v-img>
-
                       <v-card-text>
                         <div class="text-center">
                           <v-progress-circular
@@ -81,6 +84,7 @@
                             :color="teal"
                           >
                           </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="360"
                             :size="80"
@@ -103,8 +107,12 @@
                           <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
                         -->
-                        <v-btn color="accent" to="category" class="pa-3 ma-1">#아이유</v-btn>
-                        <v-btn color="accent" to="category" class="pa-3 ma-1">#데헷</v-btn>
+                        <v-btn color="accent" to="category" class="pa-3 ma-1"
+                          >#아이유</v-btn
+                        >
+                        <v-btn color="accent" to="category" class="pa-3 ma-1"
+                          >#데헷</v-btn
+                        >
                       </v-card-text>
                     </v-card>
                   </div>
