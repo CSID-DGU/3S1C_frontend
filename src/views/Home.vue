@@ -93,25 +93,28 @@
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
-                            :rotate="360"
+                            :rotate="180"
                             :size="80"
                             :width="15"
-                            :color="teal"
+                            color="teal"
+                            :value="age.ratio"
                           >
+                            {{ age.info }}
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
-                            :rotate="360"
+                            :rotate="180"
                             :size="80"
                             :width="15"
-                            :color="teal"
+                            color="orange"
+                            :value="hvyCmt.ratio"
                           >
+                            {{ hvyCmt.info }}
                           </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
+                          {{ summary.content }}
                         </div>
                         <!--
                         <div class="d-flex align-center">
