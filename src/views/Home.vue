@@ -69,9 +69,11 @@
                             :width="15"
                             :value="gender.ratio"
                             :text="text"
+                            color="red"
                           >
                             {{ gender.info }}
                           </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="360"
                             :size="80"
