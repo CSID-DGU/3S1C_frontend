@@ -68,7 +68,7 @@
                       >
                         <v-card-text>
                           <div
-                            class="text-center text-h2 white--text-center ma-7"
+                            class="text-center text-h3 white--text-center ma-8"
                             style="
                               background: rgba(255, 255, 255, 0.3);
                               color: white;
