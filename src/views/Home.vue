@@ -232,25 +232,24 @@ export default {
   data() {
     return {
       // TODO : mock api
-      gender : {
-        info : '',
-        ratio : 0
-      }
+      gender: {
+        info: "",
+        ratio: 0,
+      },
       //female: 30,
       //male: 70,
       //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
       //text: this.female > this.male ? "여성" : "남성", // TODO : 성별 infographic으로 변경하기
     };
   },
-  methods:{
-    getGender(){
-      this.gender.info = '여'
-      this.gender.ratio = 90
-    }
+  methods: {
+    getGender() {
+      this.gender.info = "여";
+      this.gender.ratio = 30;
+    },
   },
-  mounted(){
+  mounted() {
     this.getGender();
-  }
+  },
 };
-
 </script>
