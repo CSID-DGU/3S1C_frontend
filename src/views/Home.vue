@@ -74,14 +74,39 @@
                               color: white;
                             "
                           >
+                            <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
                             #keyword
                           </div>
                         </v-card-text>
                       </v-img>
-
                       <v-card-text>
-                        <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
+                        <div class="text-center">
+                          <v-progress-circular
+                            :rotate="180"
+                            :size="80"
+                            :width="15"
+                            :value="gender.ratio"
+                            :text="text"
+                            color="red"
+                          >
+                            {{ gender.info }}
+                          </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
+                          <v-progress-circular
+                            :rotate="360"
+                            :size="80"
+                            :width="15"
+                            :color="teal"
+                          >
+                          </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
+                          <v-progress-circular
+                            :rotate="360"
+                            :size="80"
+                            :width="15"
+                            :color="teal"
+                          >
+                          </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
@@ -218,6 +243,28 @@ export default {
   name: "Home",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
+  },
+  data() {
+    return {
+      // TODO : mock api
+      gender: {
+        info: "",
+        ratio: 0,
+      },
+      //female: 30,
+      //male: 70,
+      //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
+      //text: this.female > this.male ? "여성" : "남성", // TODO : 성별 infographic으로 변경하기
+    };
+  },
+  methods: {
+    getGender() {
+      this.gender.info = "여";
+      this.gender.ratio = 30;
+    },
+  },
+  mounted() {
+    this.getGender();
   },
 };
 </script>
