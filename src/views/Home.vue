@@ -68,25 +68,53 @@
                       >
                         <v-card-text>
                           <div
-                            class="text-center text-h2 white--text-center ma-7"
+                            class="text-center text-h3 white--text-center ma-8"
                             style="
                               background: rgba(255, 255, 255, 0.3);
                               color: white;
                             "
                           >
+                            <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
                             #keyword
                           </div>
                         </v-card-text>
                       </v-img>
-
                       <v-card-text>
-                        <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
+                        <div class="text-center">
+                          <v-progress-circular
+                            :rotate="180"
+                            :size="80"
+                            :width="15"
+                            :value="gender.ratio"
+                            :text="text"
+                            color="red"
+                          >
+                            {{ gender.info }}
+                          </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
+                          <v-progress-circular
+                            :rotate="180"
+                            :size="80"
+                            :width="15"
+                            color="teal"
+                            :value="age.ratio"
+                          >
+                            {{ age.info }}
+                          </v-progress-circular>
+                          <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
+                          <v-progress-circular
+                            :rotate="180"
+                            :size="80"
+                            :width="15"
+                            color="orange"
+                            :value="hvyCmt.ratio"
+                          >
+                            {{ hvyCmt.info }}
+                          </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
+                          {{ summary.content }}
                         </div>
                         <!--
                         <div class="d-flex align-center">
@@ -218,6 +246,54 @@ export default {
   name: "Home",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
+  },
+  data() {
+    return {
+      // TODO : mock api
+      gender: {
+        info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
+        ratio: 0,
+      },
+      age: {
+        info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
+        ratio: 0,
+      },
+      hvyCmt: {
+        info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
+        ratio: 0,
+      },
+      summary: {
+        content: "", //요약문
+      },
+      //female: 30,
+      //male: 70,
+      //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
+      //text: this.female > this.male ? "여성" : "남성", // TODO : 성별 infographic으로 변경하기
+    };
+  },
+  methods: {
+    getGender() {
+      this.gender.info = "여";
+      this.gender.ratio = 30;
+    },
+    getAges() {
+      this.age.info = "30대";
+      this.age.ratio = 25;
+    },
+    getHvyCmt() {
+      this.hvyCmt.info = "의심";
+      this.hvyCmt.ratio = 50;
+    },
+    getSummary() {
+      this.summary.content =
+        "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
+    },
+  },
+  mounted() {
+    this.getGender();
+    this.getAges();
+    this.getHvyCmt();
+    this.getSummary();
   },
 };
 </script>
