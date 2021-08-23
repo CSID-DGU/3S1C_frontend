@@ -251,8 +251,19 @@ export default {
     return {
       // TODO : mock api
       gender: {
-        info: "",
+        info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
         ratio: 0,
+      },
+      age: {
+        info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
+        ratio: 0,
+      },
+      hvyCmt: {
+        info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
+        ratio: 0,
+      },
+      summary: {
+        content: "", //요약문
       },
       //female: 30,
       //male: 70,
@@ -265,9 +276,24 @@ export default {
       this.gender.info = "여";
       this.gender.ratio = 30;
     },
+    getAges() {
+      this.age.info = "30대";
+      this.age.ratio = 25;
+    },
+    getHvyCmt() {
+      this.hvyCmt.info = "의심";
+      this.hvyCmt.ratio = 50;
+    },
+    getSummary() {
+      this.summary.content =
+        "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
+    },
   },
   mounted() {
     this.getGender();
+    this.getAges();
+    this.getHvyCmt();
+    this.getSummary();
   },
 };
 </script>
