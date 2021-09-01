@@ -81,7 +81,7 @@
                             "
                           >
                             <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
-                            #keyword
+                            {{ item.keyword }}
                           </div>
                         </v-card-text>
                       </v-img>
@@ -91,11 +91,11 @@
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            :value="gender.ratio"
+                            :value="item.gender.ratio"
                             :text="text"
                             color="red"
                           >
-                            {{ gender.info }}
+                            {{ item.gender.info }}
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
@@ -103,9 +103,9 @@
                             :size="80"
                             :width="15"
                             color="teal"
-                            :value="age.ratio"
+                            :value="item.age.ratio"
                           >
-                            {{ age.info }}
+                            {{ item.age.info }}
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
@@ -113,14 +113,14 @@
                             :size="80"
                             :width="15"
                             color="orange"
-                            :value="hvyCmt.ratio"
+                            :value="item.hvyCmt.ratio"
                           >
-                            {{ hvyCmt.info }}
+                            {{ item.hvyCmt.info }}
                           </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
-                          {{ summary.content }}
+                          {{ item.summary.content }}
                         </div>
                         <!--
                         <div class="d-flex align-center">
@@ -131,11 +131,8 @@
                           <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
                         -->
-                        <v-btn color="accent" to="category" class="pa-3 ma-1"
-                          >#아이유</v-btn
-                        >
-                        <v-btn color="accent" to="category" class="pa-3 ma-1"
-                          >#데헷</v-btn
+                        <v-btn v-for="tag in tags" color="accent" to="category" class="pa-3 ma-1"
+                          ></v-btn
                         >
                       </v-card-text>
                     </v-card>
