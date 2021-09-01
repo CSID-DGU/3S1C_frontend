@@ -253,6 +253,7 @@ export default {
   data() {
     return {
       // TODO : mock api
+      items: [],
       gender: {
         info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
         ratio: 0,
@@ -291,12 +292,19 @@ export default {
       this.summary.content =
         "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
     },
+    loadItems() {
+      this.items = [
+        { keyword: "singer", gender: { info: "여", ratio: 30 } },
+        { keyword: "dancer", gender: { info: "남", ratio: 70 } },
+      ];
+    },
   },
   mounted() {
     this.getGender();
     this.getAges();
     this.getHvyCmt();
     this.getSummary();
+    this.loadItems();
   },
 };
 </script>
