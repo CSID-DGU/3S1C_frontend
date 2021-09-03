@@ -72,6 +72,7 @@
                             style="
                               background: rgba(255, 255, 255, 0.3);
                               color: white;
+                              border-radius: 16px;
                             "
                           >
                             <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
