@@ -149,39 +149,136 @@ myChart();
                       </v-chip>
                     </div>
                   </div>
-                </div>
+                </div> -->
+                <v-sheet
+                  class="mx-auto my-5"
+                  color="#f8f9fe"
+                  style="
+                    background: rgba(235, 240, 255, 0.3);
+                    border-radius: 16px;
+                  "
+                >
+                  <v-slide-group
+                    v-model="model"
+                    class="pa-4"
+                    center-active
+                    show-arrows=""
+                    mandatory
+                  >
+                    <v-slide-item
+                      v-for="n in 5"
+                      :key="n"
+                      v-slot="{ active, toggle }"
+                    >
+                      <v-card
+                        :color="active ? '#FEE8FE' : '#FFFFFF'"
+                        class="ma-4"
+                        height="600"
+                        width="800"
+                        @click="toggle"
+                      >
+                        <v-row
+                          class="fill-height"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-scale-transition>
+                            <v-icon
+                              v-if="active"
+                              color="white"
+                              size="48"
+                            ></v-icon>
+                            <!--v-text="'mdi-close-circle-outline'"-->
+                          </v-scale-transition>
+                        </v-row>
+                      </v-card>
+                    </v-slide-item>
+                  </v-slide-group>
+                </v-sheet>
 
-                <v-divider class="my-4"></v-divider>
-
-                <div>
-                  <p class="text-subtitle-1 primary--text font-weight-medium">
-                    Dignissim cras tincidunt lobortis feugiat vivamus at. Amet luctus venenatis lectus magna fringilla. Nibh tellus molestie nunc non blandit.
-                    Et magnis dis parturient montes nascetur ridiculus mus mauris vitae. Amet massa vitae tortor condimentum lacinia quis vel eros. Eros
-                    in cursus turpis massa tincidunt dui ut ornare. Est ante in nibh mauris cursus mattis molestie. Nec ullamcorper sit amet risus nullam
-                    eget felis eget. Tincidunt praesent semper feugiat nibh sed. Et leo duis ut diam quam nulla pottitor massa id. Convallis convallis tellus id
-                    interdum velit laoreet id. Enim ut sem viverra aliquet eget sit. Mollis aliquam ut porttitor leo a diam. Eleifend donec pretium vulputate
-                    sapien nec sagittis aliquam. Velit egestas dui id ornares.
-                  </p>
-                </div>
-
-                <div class="py-4">
+                <div class="py-2">
                   <v-alert
                     class="font-italic text-h6 text-center"
                     border="left"
                     colored-border
                     color="accent"
                   >
-                    Srem Ipsum is simply dummy text of the printing and typesetting industry. Lorem lpsum has been
-                    the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply .
+                    <b id="각 slide item마다 간단한 해설">
+                      {비교 준거} 대비 {성별}의 관심도가 {수치} 더 높은
+                      키워드입니다.
+                    </b>
                   </v-alert>
                 </div>
+                <v-divider class="my-4"></v-divider>
 
-                <div class="text-h5 primary--text font-weight-bold">
+                <div>
+                  <v-row class="mx-1 my-5" style="height: 500px">
+                    <v-col
+                      cols="12"
+                      lg="12"
+                      xl="12"
+                      style="background: #eeefff"
+                    >
+                    </v-col>
+                  </v-row>
+                  <div class="py-2">
+                    <v-alert
+                      class="font-italic text-h6 text-center"
+                      border="left"
+                      colored-border
+                      color="accent"
+                    >
+                      <b id="차트에 간단한 해설">
+                        뭔가... 뭔가 차트같은 것이 있는 것이와요 hawawa
+                      </b>
+                    </v-alert>
+                  </div>
+                </div>
+
+                <!-- <div>
+                  <p class="text-subtitle-1 primary--text font-weight-medium">
+                    내용
+                  </p>
+                </div> -->
+
+                <!-- 
+                <v-col class="mb-5" style="border-radius: 1px">
+                  <v-card height="200">
+                    <v-progress-linear
+                      v-model="power"
+                      color="orange"
+                      height="25"
+                      >hello</v-progress-linear
+                    >
+                    <br />
+                    <v-progress-linear
+                      v-model="skill"
+                      color="blue-grey"
+                      height="25"
+                    >
+                      <template v-slot:default="{ value }">
+                        <strong>{{ Math.ceil(value) }}%</strong>
+                      </template>
+                    </v-progress-linear>
+                  </v-card>
+                </v-col> -->
+
+                <!-- <div class="text-h5 primary--text font-weight-bold">
                   Ultricies mi quis hendrerit dolor
-                  <p class="text-subtitle-1 primary--text font-weight-medium mt-5">
-                    Quam adipiscing vitae proin sagittis nisl rhoncus. Integer vitae justo eget magna fermentum iaculis eu non. Vitae congue mauris
-                    rhoncus aenean vel elit. Nibh mauris cursus mattis molestie. Etiam sit amet nisl purus. At auctor urna nunc id cursus metus. Diam in arcu
-                    cursus euismod quis viverra nibh cras.
+                  <p
+                    class="
+                      text-subtitle-1
+                      primary--text
+                      font-weight-medium
+                      mt-5
+                    "
+                  >
+                    Quam adipiscing vitae proin sagittis nisl rhoncus. Integer
+                    vitae justo eget magna fermentum iaculis eu non. Vitae
+                    congue mauris rhoncus aenean vel elit. Nibh mauris cursus
+                    mattis molestie. Etiam sit amet nisl purus. At auctor urna
+                    nunc id cursus metus. Diam in arcu cursus euismod quis
+                    viverra nibh cras.
                   </p>
                 </div>
 
