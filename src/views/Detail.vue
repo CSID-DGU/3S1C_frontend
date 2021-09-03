@@ -85,27 +85,51 @@ myChart();
           <div>
             <v-card flat color="transparent">
               <v-img
-                src="https://cdn.pixabay.com/photo/2020/02/07/20/32/cyprus-4828328_1280.jpg"
-                :aspect-ratio="16 / 9"
+                src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
+                :aspect-ratio="21 / 4"
+                :position="top"
                 gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                 style="border-radius: 16px"
-              ></v-img>
+              >
+                <v-card-text>
+                  <div
+                    class="
+                      text-center
+                      font-weight-bold
+                      text-h3
+                      white--text-center
+                      ma-10
+                      pa-5
+                    "
+                    style="
+                      background: rgba(255, 255, 255, 0.3);
+                      color: white;
+                      border-radius: 16px;
+                    "
+                  >
+                    <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
+                    #keyword
+                  </div>
+                </v-card-text>
+              </v-img>
 
               <v-card-text>
-                <div>
+                <!-- <div>
                   <v-btn color="accent">ANIMAL</v-btn>
-                </div>
+                </div> -->
 
                 <div class="text-h4 font-weight-bold primary--text pt-4">
-                  <h4>15 Things | have always wondered about birds</h4>
+                  <h4>{gender}에 따른 키워드 관심도</h4>
                 </div>
 
-                <div class="text-body-1 py-4">
-                  Mattis enim ut tellus elementum sagittis vitae et. Enim ut tellus elementum sagittis vitae et leo duis ut. Quis vel eros donec.
-                  Faucibus nisl tincidunt eget nullam. Quis commodo odio aenean sed adipiscing diam doneg.
+                <div class="text-body-1 pt-4">
+                  "평균 댓글 작성자 성비, 인구 통계, 타 키워드 대비 성비 분석
+                  결과"
                 </div>
 
-                <div class="d-flex align-center justify-space-between">
+                <!-- <canvas id="myChart"></canvas> -->
+
+                <!-- <div class="d-flex align-center justify-space-between">
                   <div class="d-flex align-center">
                     <v-avatar color="accent" size="36">
                       <v-icon dark>mdi-feather</v-icon>
