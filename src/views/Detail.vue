@@ -308,28 +308,41 @@ myChart();
 
                 <div class="text-h5 primary--text font-weight-bold">
                   Nibh tellus molestie nunc non blandit massa enim
-                  <div class="text-subtitle-1 primary--text font-weight-medium mt-5">
+                  <div
+                    class="
+                      text-subtitle-1
+                      primary--text
+                      font-weight-medium
+                      mt-5
+                    "
+                  >
                     <ul>
                       <li class="my-2">
-                        Aliquam purus sit amet luctus venenatis lectus magna fringilla urna. Malesuada bibendum arcu vitae elementum curabitur vitae
-                        nunc sed. Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis.
+                        Aliquam purus sit amet luctus venenatis lectus magna
+                        fringilla urna. Malesuada bibendum arcu vitae elementum
+                        curabitur vitae nunc sed. Urna porttitor rhoncus dolor
+                        purus non enim praesent elementum facilisis.
                       </li>
 
                       <li class="my-2">
-                        Proin libero nunc consequat interdum varius. Amet luctus venenatis lectus magna fringillal urna porttitor. Enim tortor at auctor
-                        urna nunc id cursus.
+                        Proin libero nunc consequat interdum varius. Amet luctus
+                        venenatis lectus magna fringillal urna porttitor. Enim
+                        tortor at auctor urna nunc id cursus.
                       </li>
 
                       <li class="my-2">
-                        Volutpat maecenas volutpat blandit aliquam. Adipiscing enim eu turpis egestas pretium aenean pharetra magna Morbi leo
-                        urna molestie at elementum eu.
+                        Volutpat maecenas volutpat blandit aliquam. Adipiscing
+                        enim eu turpis egestas pretium aenean pharetra magna
+                        Morbi leo urna molestie at elementum eu.
                       </li>
                     </ul>
 
                     <p>
-                      Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus. Semper auctor neque vitae tempus. Magnis dis
-                      parturient montes nascetur ridiculus mus. A condimentum vitae sapien pellentesque habitant morbi tristique. Duis ut diam quam nulla
-                      porttitor.
+                      Venenatis a condimentum vitae sapien pellentesque habitant
+                      morbi tristique senectus. Semper auctor neque vitae
+                      tempus. Magnis dis parturient montes nascetur ridiculus
+                      mus. A condimentum vitae sapien pellentesque habitant
+                      morbi tristique. Duis ut diam quam nulla porttitor.
                     </p>
                   </div>
                 </div>
@@ -386,8 +399,10 @@ myChart();
                       </div>
 
                       <div class="text-subtitle-1 my-2">
-                        Congue mauris rhoncus aenean vel elit. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Aliquet nec
-                        ullamcorper sit amet risus nullam eget felis.
+                        Congue mauris rhoncus aenean vel elit. Elit scelerisque
+                        mauris pellentesque pulvinar pellentesque habitant.
+                        Aliquet nec ullamcorper sit amet risus nullam eget
+                        felis.
                       </div>
 
                       <div class="text-subtitle-1">
@@ -421,8 +436,8 @@ myChart();
                         </div>
 
                         <div class="text-h6 primary--text pl-2">
-                          <div class="text-subtitle-1">Previous Post</div>Photos of Jeep models that will change
-                          your mood
+                          <div class="text-subtitle-1">Previous Post</div>
+                          Photos of Jeep models that will change your mood
                         </div>
                       </div>
                     </v-col>
@@ -430,8 +445,8 @@ myChart();
                     <v-col cols="12" md="6" lg="4">
                       <div class="d-flex align-center text-right">
                         <div class="text-h6 primary--text pr-2">
-                          <div class="text-subtitle-1">Next Post</div>What do I need to know to start learning
-                          JavaScript?
+                          <div class="text-subtitle-1">Next Post</div>
+                          What do I need to know to start learning JavaScript?
                         </div>
 
                         <div>
@@ -440,7 +455,7 @@ myChart();
                       </div>
                     </v-col>
                   </v-row>
-                </div>
+                </div> -->
               </v-card-text>
             </v-card>
           </div>
@@ -460,7 +475,7 @@ myChart();
 export default {
   name: "Category",
   components: {
-    siderbar: () => import("@/components/details/sidebar")
-  }
+    siderbar: () => import("@/components/details/sidebar"),
+  },
 };
 </script>
