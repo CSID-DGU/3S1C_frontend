@@ -131,9 +131,13 @@
                           <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
                         -->
-                        <v-btn v-for="tag in tags" color="accent" to="category" class="pa-3 ma-1"
-                          ></v-btn
-                        >
+                        <v-btn
+                          v-for="tag in tags"
+                          :key="tag.tagName"
+                          color="accent"
+                          to="category"
+                          class="pa-3 ma-1"
+                        ></v-btn>
                       </v-card-text>
                     </v-card>
                   </div>
@@ -254,6 +258,7 @@ export default {
     return {
       // TODO : mock api
       items: [],
+      tags: [],
       gender: {
         info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
         ratio: 0,
@@ -298,6 +303,9 @@ export default {
         { keyword: "dancer", gender: { info: "남", ratio: 70 } },
       ];
     },
+    loadTags() {
+      this.tags = [{ tagName: "tag1" }, { tagName: "tag2" }];
+    },
   },
   mounted() {
     this.getGender();
@@ -305,6 +313,7 @@ export default {
     this.getHvyCmt();
     this.getSummary();
     this.loadItems();
+    this.loadTags();
   },
 };
 </script>
