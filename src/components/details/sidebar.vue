@@ -6,7 +6,7 @@
       <v-divider></v-divider>
 
       <div>
-        <v-row v-for="i in 5" :key="i" class="py-2">
+        <v-row v-for="i in 3" :key="i" class="py-2">
           <v-col cols="12" md="6" lg="5">
             <v-card height="100%" flat>
               <v-img
@@ -19,7 +19,7 @@
 
           <v-col>
             <div>
-              <v-btn depressed color="accent" small>TRAVEL</v-btn>
+              <v-btn depressed color="accent" small>태그 or 설명</v-btn>
 
               <h3 class="text-h6 font-weight-bold primary--text py-3">
                 What do | need to know to start learning JavaScript?
@@ -39,17 +39,17 @@
     </div>
 
     <div class="pt-4">
-      <h3 class="text-h5 font-weight-medium pb-4">Category</h3>
+      <h3 class="text-h5 font-weight-medium pb-4">Recent News</h3>
 
       <v-divider></v-divider>
 
-      <v-card color="accent" dark flat v-for="i in 5" :key="i" class="my-4">
+      <v-card color="accent" dark flat v-for="i in 3" :key="i" class="my-4">
         <v-card-text
           class="d-flex justify-space-between align-center white--text"
         >
-          <h6 class="text-h6">Travel</h6>
+          <h6 class="text-h6">최신 뉴스 속보 or 댓글이 가장 많은 뉴스 기사</h6>
 
-          <div class="text-h6">47</div>
+          <div class="text-h6">댓글 수 {n}</div>
         </v-card-text>
       </v-card>
     </div>
