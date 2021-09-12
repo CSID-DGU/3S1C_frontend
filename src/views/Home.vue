@@ -19,17 +19,18 @@
           src="https://images-workbench.99static.com/Rh-3PTyZljv9zwCbgEiI_0d3iWg=/http://s3.amazonaws.com/projects-files/110/11020/1102080/233549a5-4006-4aa6-9e59-761c218a2232.gif"
           gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
           :aspect-ratio="16 / 9"
-          height="500px"
+          height="300px"
           dark
         >
           <v-card-text class="fill-height d-flex align-center">
             <v-row class="flex-column">
               <v-col cols="12" md="12" lg="12" xl="12">
                 <h2
-                  class="text-h3 text-center text-h2 white--text-center ma-12"
+                  class="text-h3 text-center text-h2 white--text-center ma-8"
                   style="background: rgba(220, 220, 220, 0.3); color: white"
                 >
-                  "Team 3S1C's News-Comment Analyzer"
+                  <br />
+                  "Team 3S1C's News-Comment Analyzer"<br /><br />
                 </h2>
               </v-col>
             </v-row>
@@ -72,6 +73,7 @@
                             style="
                               background: rgba(255, 255, 255, 0.3);
                               color: white;
+                              border-radius: 16px;
                             "
                           >
                             <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
