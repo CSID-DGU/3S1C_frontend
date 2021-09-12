@@ -113,9 +113,9 @@
                             :size="80"
                             :width="15"
                             color="orange"
-                            :value="item.hvyCmt.ratio"
+                            :value="item.heavyComment.ratio"
                           >
-                            {{ item.hvyCmt.info }}
+                            {{ item.heavyComment.info }}
                           </v-progress-circular>
                         </div>
 
@@ -267,7 +267,7 @@ export default {
         info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
         ratio: 0,
       },
-      hvyCmt: {
+      heavyComment: {
         info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
         ratio: 0,
       },
@@ -289,9 +289,9 @@ export default {
       this.age.info = "30대";
       this.age.ratio = 25;
     },
-    getHvyCmt() {
-      this.hvyCmt.info = "의심";
-      this.hvyCmt.ratio = 50;
+    getHeavyComment() {
+      this.heavyComment.info = "의심";
+      this.heavyComment.ratio = 50;
     },
     getSummary() {
       this.summary.content =
@@ -308,10 +308,10 @@ export default {
     },
   },
   mounted() {
-    this.getGender();
-    this.getAges();
-    this.getHvyCmt();
-    this.getSummary();
+    //this.getGender();
+    //this.getAges();
+    //this.getHeavyComment();
+    //this.getSummary();
     this.loadItems();
     this.loadTags();
   },
