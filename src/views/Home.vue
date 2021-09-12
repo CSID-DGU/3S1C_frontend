@@ -122,15 +122,6 @@
                         <div class="text-body-1 py-4">
                           {{ item.summary.content }}
                         </div>
-                        <!--
-                        <div class="d-flex align-center">
-                          <v-avatar color="accent" size="36">
-                            <v-icon dark>mdi-feather</v-icon>
-                          </v-avatar>
-
-                          <div class="pl-2">Yan Lee · 22 July 2019</div>
-                        </div>
-                        -->
                         <v-btn
                           v-for="tag in tags"
                           :key="tag.tagName"
