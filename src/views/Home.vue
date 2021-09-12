@@ -123,12 +123,14 @@
                           {{ item.summary.content }}
                         </div>
                         <v-btn
-                          v-for="tag in tags"
+                          v-for="tag in item.tags"
                           :key="tag.tagName"
                           color="accent"
                           to="category"
                           class="pa-3 ma-1"
-                        ></v-btn>
+                        >
+                          {{ '#'+tag.tagName }}
+                        </v-btn>
                       </v-card-text>
                     </v-card>
                   </div>
@@ -290,8 +292,62 @@ export default {
     },
     loadItems() {
       this.items = [
-        { keyword: "singer", gender: { info: "여", ratio: 30 } },
-        { keyword: "dancer", gender: { info: "남", ratio: 70 } },
+        //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
+        {
+          keyword: "singer",
+          gender: { info: "여", ratio: 30 },
+          age: { info: "30대", ratio: 25 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+        },
       ];
     },
     loadTags() {
