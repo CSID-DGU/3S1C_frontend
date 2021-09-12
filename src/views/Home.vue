@@ -45,7 +45,13 @@
           <div class="pt-16">
             <h2 class="text-h4 font-weight-bold pb-4">Today's hot issue</h2>
             <v-row>
-              <v-col cols="10" md="6" lg="4" v-for="i in 6" :key="i">
+              <v-col
+                cols="10"
+                md="6"
+                lg="4"
+                v-for="item in items"
+                :key="item.keyword"
+              >
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="50"
@@ -77,7 +83,7 @@
                             "
                           >
                             <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
-                            #keyword
+                            {{ item.keyword }}
                           </div>
                         </v-card-text>
                       </v-img>
@@ -87,11 +93,11 @@
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            :value="gender.ratio"
+                            :value="item.gender.ratio"
                             :text="text"
                             color="red"
                           >
-                            {{ gender.info }}
+                            {{ item.gender.info }}
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
@@ -99,9 +105,9 @@
                             :size="80"
                             :width="15"
                             color="teal"
-                            :value="age.ratio"
+                            :value="item.age.ratio"
                           >
-                            {{ age.info }}
+                            {{ item.age.info }}
                           </v-progress-circular>
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
@@ -109,30 +115,24 @@
                             :size="80"
                             :width="15"
                             color="orange"
-                            :value="hvyCmt.ratio"
+                            :value="item.heavyComment.ratio"
                           >
-                            {{ hvyCmt.info }}
+                            {{ item.heavyComment.info }}
                           </v-progress-circular>
                         </div>
 
                         <div class="text-body-1 py-4">
-                          {{ summary.content }}
+                          {{ item.summary.content }}
                         </div>
-                        <!--
-                        <div class="d-flex align-center">
-                          <v-avatar color="accent" size="36">
-                            <v-icon dark>mdi-feather</v-icon>
-                          </v-avatar>
-
-                          <div class="pl-2">Yan Lee · 22 July 2019</div>
-                        </div>
-                        -->
-                        <v-btn color="accent" to="category" class="pa-3 ma-1"
-                          >#아이유</v-btn
+                        <v-btn
+                          v-for="tag in item.tags"
+                          :key="tag.tagName"
+                          color="accent"
+                          to="category"
+                          class="pa-3 ma-1"
                         >
-                        <v-btn color="accent" to="category" class="pa-3 ma-1"
-                          >#데헷</v-btn
-                        >
+                          {{ '#'+tag.tagName }}
+                        </v-btn>
                       </v-card-text>
                     </v-card>
                   </div>
@@ -252,6 +252,8 @@ export default {
   data() {
     return {
       // TODO : mock api
+      items: [],
+      tags: [],
       gender: {
         info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
         ratio: 0,
@@ -260,7 +262,7 @@ export default {
         info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
         ratio: 0,
       },
-      hvyCmt: {
+      heavyComment: {
         info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
         ratio: 0,
       },
@@ -282,20 +284,85 @@ export default {
       this.age.info = "30대";
       this.age.ratio = 25;
     },
-    getHvyCmt() {
-      this.hvyCmt.info = "의심";
-      this.hvyCmt.ratio = 50;
+    getHeavyComment() {
+      this.heavyComment.info = "의심";
+      this.heavyComment.ratio = 50;
     },
     getSummary() {
       this.summary.content =
         "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
     },
+    loadItems() {
+      this.items = [
+        //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
+        {
+          keyword: "singer",
+          gender: { info: "여", ratio: 30 },
+          age: { info: "30대", ratio: 25 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+        },
+        {
+          keyword: "dancer",
+          gender: { info: "남", ratio: 70 },
+          age: { info: "20대", ratio: 40 },
+          heavyComment: { info: "의심", ratio: 50 },
+          summary: {
+            content:
+              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
+          },
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+        },
+      ];
+    },
+    loadTags() {
+      this.tags = [{ tagName: "tag1" }, { tagName: "tag2" }];
+    },
   },
   mounted() {
-    this.getGender();
-    this.getAges();
-    this.getHvyCmt();
-    this.getSummary();
+    //this.getGender();
+    //this.getAges();
+    //this.getHeavyComment();
+    //this.getSummary();
+    this.loadItems();
+    this.loadTags();
   },
 };
 </script>
