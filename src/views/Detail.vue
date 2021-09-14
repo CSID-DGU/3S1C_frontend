@@ -182,6 +182,7 @@ myChart();
                           align="center"
                           justify="center"
                         >
+                          <bar />
                           <v-scale-transition>
                             <v-icon
                               v-if="active"
@@ -461,7 +462,6 @@ myChart();
           </div>
         </div>
       </v-col>
-
       <v-col>
         <div>
           <siderbar />
@@ -472,10 +472,12 @@ myChart();
 </template>
 
 <script>
+import Bar from "@/components/details/bar.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
+    Bar,
   },
 };
 </script>
