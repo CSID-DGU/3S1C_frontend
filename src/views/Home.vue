@@ -131,7 +131,7 @@
                           to="category"
                           class="pa-3 ma-1"
                         >
-                          {{ '#'+tag.tagName }}
+                          {{ "#" + tag.tagName }}
                         </v-btn>
                       </v-card-text>
                     </v-card>
@@ -142,7 +142,7 @@
           </div>
 
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4">Featured</h2>
+            <h2 class="text-h4 font-weight-bold pb-4">Latest Topics</h2>
 
             <v-row>
               <v-col cols="6" lg="4" v-for="i in 3" :key="i">
@@ -190,10 +190,10 @@
           </div>
 
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold">Latest Posts</h2>
+            <h2 class="text-h4 font-weight-bold">Special Analysis</h2>
 
             <div>
-              <v-row v-for="i in 6" :key="i" class="py-4">
+              <v-row v-for="i in 2" :key="i" class="py-4">
                 <v-col cols="12" md="4">
                   <v-card flat height="100%">
                     <v-img
@@ -315,7 +315,7 @@ export default {
             content:
               "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
           },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
         },
         {
           keyword: "dancer",
@@ -348,7 +348,7 @@ export default {
             content:
               "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
           },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" },{tagName:"tag3"}],
+          tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
         },
       ];
     },
