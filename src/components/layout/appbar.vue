@@ -5,6 +5,7 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      absolute
       color="primary"
       dark
     >
@@ -42,12 +43,14 @@
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       color="white"
       elevate-on-scroll
+      absolute
+      align="center"
     >
-      <v-container :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }">
+      <v-container :class="{ 'px-0': !$vuetify.breakpoint.xlAndUp }">
         <v-row
           align="center"
           justify="space-between"
-          :no-gutters="!$vuetify.breakpoint.smAndUp"
+          :no-gutters="!$vuetify.breakpoint.xlAndUp"
         >
           <v-col class="d-flex align-center">
             <v-app-bar-nav-icon
@@ -64,7 +67,7 @@
             </v-toolbar-title>
           </v-col>
 
-          <v-col v-if="$vuetify.breakpoint.smAndUp">
+          <v-col>
             <v-btn
               v-for="(item, i) in barItems"
               :key="i"
@@ -104,19 +107,19 @@ export default {
     drawer: null,
     barItems: [
       {
-        title: "Home",
+        title: "Main",
         to: "/",
       },
       {
-        title: "Menu1",
+        title: "Keywords",
         to: "/category",
       },
       {
-        title: "Menu2",
+        title: "Comments",
         to: "/detail",
       },
       {
-        title: "Menu3",
+        title: "Statistics",
         to: "/authors",
       },
     ],
