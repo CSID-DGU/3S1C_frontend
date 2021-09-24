@@ -5,7 +5,7 @@
         <div>
           <div>
             <div class="my-2">
-              <h2 class="text-h4 font-weight-bold">Our Authors</h2>
+              <h2 class="text-h4 font-weight-bold">Team 3S1C</h2>
             </div>
 
             <v-row>
