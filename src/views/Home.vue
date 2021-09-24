@@ -276,6 +276,15 @@ export default {
     };
   },
   methods: {
+    fetchData() {
+      axios.get('http://3.35.115.140:8080/api/real-time-popularaity')
+        .then(function(res){
+          console.log(res);
+        })
+        .catch(function(err){
+          console.log(err);
+        })
+    },
     getGender() {
       this.gender.info = "여";
       this.gender.ratio = 30;
