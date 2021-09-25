@@ -244,6 +244,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -277,7 +278,8 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('http://3.35.115.140:8080/api/real-time-popularaity')
+	console.log('data');
+      axios.get('http://3.35.115.140:8083/api/data')
         .then(function(res){
           console.log(res);
         })
@@ -370,7 +372,8 @@ export default {
     //this.getAges();
     //this.getHeavyComment();
     //this.getSummary();
-    this.loadItems();
+    this.fetchData();
+	this.loadItems();
     this.loadTags();
   },
 };
