@@ -193,11 +193,11 @@
             <h2 class="text-h4 font-weight-bold">Special Analysis</h2>
 
             <div>
-              <v-row v-for="i in 2" :key="i" class="py-4">
+              <v-row v-for="i in 1" :key="i" class="py-4">
                 <v-col cols="12" md="4">
-                  <v-card flat height="100%">
+                  <v-card flat height="100%" to="/color_psycology">
                     <v-img
-                      src="https://cdn.pixabay.com/photo/2021/01/27/06/54/nova-scotia-duck-tolling-retriever-5953883_1280.jpg"
+                      src="//live.staticflickr.com/65535/48590142126_d95bf68d6c_n.jpg"
                       :aspect-ratio="16 / 9"
                       height="100%"
                     ></v-img>
@@ -206,26 +206,30 @@
 
                 <v-col>
                   <div>
-                    <v-btn depressed color="accent">TRAVEL</v-btn>
+                    <v-btn depressed color="accent">데이터와 심리</v-btn>
 
-                    <h3 class="text-h4 font-weight-bold pt-3">
-                      Ut enim blandit volutpat maecenas volutpat blandit
-                    </h3>
+                    <v-card flat height="100%" to="/color_psycology">
+                      <h3 class="text-h4 font-weight-bold pt-3">
+                        키워드 관련 이미지의 색채 심리학적 분류와 댓글 감성분석
+                      </h3>
 
-                    <p class="text-h6 font-weight-regular pt-3 text--secondary">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
+                      <p
+                        class="text-h6 font-weight-regular pt-3 text--secondary"
+                      >
+                        마케팅, 심리치료 분야에서 널리 활용되는 '색채심리학'과
+                        댓글 분석 결과로 나타난 인터넷 사용자의 '감성 분포'를
+                        비교해 인터넷에 노출되는 키워드의 색채와 실제 유저의
+                        감성 사이의 상관관계를 알아봅니다.
+                      </p>
 
-                    <div class="d-flex align-center">
-                      <v-avatar color="accent" size="36">
-                        <v-icon dark>mdi-feather</v-icon>
-                      </v-avatar>
+                      <div class="d-flex align-center">
+                        <v-avatar color="accent" size="36">
+                          <v-icon dark>mdi-feather</v-icon>
+                        </v-avatar>
 
-                      <div class="pl-2">Yan Lee · 03 Jan 2019</div>
-                    </div>
+                        <div class="pl-2">김경민</div>
+                      </div>
+                    </v-card>
                   </div>
                 </v-col>
               </v-row>
