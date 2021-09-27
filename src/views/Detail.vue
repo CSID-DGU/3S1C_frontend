@@ -120,6 +120,8 @@ myChart();
 
                 <div class="text-h4 font-weight-bold primary--text pt-4">
                   <h4>{gender}에 따른 키워드 관심도</h4>
+                  <!-- test code -->
+                  <h4>이 페이지는 {{ id }}번째 카드의 상세정보입니다</h4>
                 </div>
 
                 <div class="text-body-1 pt-4">
@@ -478,6 +480,9 @@ export default {
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
+  },
+  props: {
+    id: Number,
   },
 };
 </script>
