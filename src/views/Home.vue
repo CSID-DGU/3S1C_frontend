@@ -328,6 +328,7 @@ export default {
       this.items = [
         //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
         {
+          id: 0,
           keyword: "singer",
           gender: { info: "여", ratio: 30 },
           age: { info: "30대", ratio: 25 },
@@ -339,6 +340,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 1,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -350,6 +352,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
         },
         {
+          id: 2,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -361,6 +364,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 3,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -372,6 +376,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 4,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
