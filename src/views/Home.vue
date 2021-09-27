@@ -49,7 +49,7 @@
                 md="6"
                 lg="4"
                 v-for="item in items"
-                :key="item.keyword"
+                :key="item.id"
               >
                 <v-hover
                   v-slot:default="{ hover }"
@@ -62,8 +62,9 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
-                      to="/detail"
+                      :to="{ name: 'Detail', params: { id: item.id } }"
                     >
+                      {{ item.id }}
                       <v-img
                         src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
                         :aspect-ratio="16 / 9"
@@ -394,6 +395,11 @@ export default {
     //this.getSummary();
     this.loadItems();
     this.loadTags();
+  },
+  computed: {
+    getItemId(id) {
+      return Number(id);
+    },
   },
 };
 </script>
