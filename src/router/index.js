@@ -27,6 +27,11 @@ const routes = [
     path: '/authors',
     name: 'Authors',
     component: () => import("@/views/Authors.vue"),
+  },
+  {
+    path: '/color',
+    name: 'Color',
+    component: () => import("@/views/ColorDetail.vue"),
   }
 ]
 

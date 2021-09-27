@@ -65,6 +65,7 @@
                       :to="{ name: 'Detail', params: { id: item.id } }"
                     >
                       {{ item.id }}
+
                       <v-img
                         src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
                         :aspect-ratio="16 / 9"
@@ -236,7 +237,7 @@
                         </div>
                       </template>
                     </vue-word-cloud> -->
-                    <v-card flat height="100%" to="/color_psycology">
+                    <v-card flat height="100%" to="/color">
                       <h3 class="text-h4 font-weight-bold pt-3">
                         키워드 관련 이미지의 색채 심리학적 분류와 댓글 감성분석
                       </h3>
