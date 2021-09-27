@@ -1,4 +1,3 @@
-
 <style>
 @font-face {
   font-family: "MAPO";
@@ -151,7 +150,7 @@
                     src="https://cdn.pixabay.com/photo/2019/10/29/14/46/landscape-4587079_1280.jpg"
                     :aspect-ratio="16 / 9"
                     gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
-                    height="600px"
+                    height="200px"
                     class="elevation-2 fill-height"
                   >
                     <div
@@ -163,13 +162,13 @@
                       "
                     >
                       <v-card-text>
-                        <v-btn color="accent">ANIMALS</v-btn>
+                        <v-btn color="accent">Rank {{ i }}</v-btn>
                       </v-card-text>
 
-                      <v-card-text>
+                      <v-card-text class="align-center">
                         <div
-                          class="text-h5 py-3 font-weight-bold"
-                          style="line-height: 1.2"
+                          class="text-h5 py-2 font-weight-bold"
+                          style="line-height: 1.1"
                         >
                           15 things I have always wondered about birds
                         </div>
@@ -179,7 +178,7 @@
                             <v-icon dark>mdi-feather</v-icon>
                           </v-avatar>
 
-                          <div class="pl-2">Yan Lee · 03 Jan 2019</div>
+                          <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
                         </div>
                       </v-card-text>
                     </div>
