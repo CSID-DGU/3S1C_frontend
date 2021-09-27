@@ -386,7 +386,7 @@ export default {
     //this.getHeavyComment();
     //this.getSummary();
     //this.loadItems();
-    cosole.log(this.items);
+    console.log(this.items);
   },
 };
 </script>
