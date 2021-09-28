@@ -64,7 +64,7 @@
                       hover
                       :to="{ name: 'Detail', params: { id: item.id } }"
                     >
-                      {{ item.id }}
+                      <!--{{ item.id }}-->
 
                       <v-img
                         src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
