@@ -149,41 +149,66 @@
               <v-col cols="6" lg="4" v-for="i in 3" :key="i">
                 <v-card flat dark>
                   <v-img
-                    src="https://cdn.pixabay.com/photo/2019/10/29/14/46/landscape-4587079_1280.jpg"
+                    src=""
                     :aspect-ratio="16 / 9"
-                    gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
+                    gradient="to top, rgba(255,232,172,.6), rgba(225,232,252,.1)"
                     height="200px"
-                    class="elevation-2 fill-height"
+                    class="elevation-2 fill-height color-white"
                   >
-                    <div
+                    <!-- <div
                       class="
                         d-flex
                         flex-column
                         justify-space-between
                         fill-height
                       "
-                    >
-                      <v-card-text>
-                        <v-btn color="accent">Rank {{ i }}</v-btn>
-                      </v-card-text>
+                    > -->
+                    <v-card-text class="pb-1">
+                      <v-btn color="accent">Rank {{ i }}</v-btn>
+                    </v-card-text>
 
-                      <v-card-text class="align-center">
-                        <div
-                          class="text-h5 py-2 font-weight-bold"
-                          style="line-height: 1.1"
-                        >
-                          15 things I have always wondered about birds
-                        </div>
+                    <vue-word-cloud
+                      class="ma-0"
+                      style="height: 120px"
+                      :words="[
+                        ['대통령', 14],
+                        ['문재인', 7],
+                        ['홍준표', 4],
+                        ['노조', 2],
+                        ['민주당', 1],
+                        ['이재명', 5],
+                        ['나라', 4],
+                        ['코로나', 6],
+                      ]"
+                      :color="
+                        ([, weight]) =>
+                          weight > 10
+                            ? 'white'
+                            : weight > 5
+                            ? 'silver'
+                            : 'antiquewhite'
+                      "
+                      font-family="serif"
+                      font-weight="bold"
+                      font-size-ratio="10"
+                    />
+                    <!--<v-card-text class="align-center">
+                      <div
+                        class="text-h5 py-2 font-weight-bold"
+                        style="line-height: 1.1"
+                      >
+                        15 things I have always wondered about birds
+                      </div>
 
-                        <div class="d-flex align-center">
-                          <v-avatar color="accent" size="36">
-                            <v-icon dark>mdi-feather</v-icon>
-                          </v-avatar>
+                      <div class="d-flex align-center">
+                        <v-avatar color="accent" size="36">
+                          <v-icon dark>mdi-feather</v-icon>
+                        </v-avatar>
 
-                          <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
-                        </div>
-                      </v-card-text>
-                    </div>
+                        <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
+                      </div>
+                    </v-card-text>-->
+                    <!--</div>-->
                   </v-img>
                 </v-card>
               </v-col>
@@ -208,24 +233,7 @@
                 <v-col>
                   <div>
                     <v-btn depressed color="accent">데이터와 심리</v-btn>
-                    <vue-word-cloud
-                      style="height: 480px; width: 640px"
-                      :words="[
-                        ['romance', 19],
-                        ['horror', 3],
-                        ['fantasy', 7],
-                        ['adventure', 3],
-                      ]"
-                      :color="
-                        ([, weight]) =>
-                          weight > 10
-                            ? 'DeepPink'
-                            : weight > 5
-                            ? 'RoyalBlue'
-                            : 'Indigo'
-                      "
-                      font-family="Roboto"
-                    />
+
                     <!-- <vue-word-cloud :words="words">
                       <template slot-scope="{ text, weight, word }">
                         <div
