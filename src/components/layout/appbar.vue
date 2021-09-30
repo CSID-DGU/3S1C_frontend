@@ -62,8 +62,8 @@
               class="font-weight-bold text-h5 primary--text"
               @click="$router.push('/')"
             >
-              <v-icon large color="primary">mdi-feather</v-icon>Hero
-              <span class="accent--text">UI</span>
+              <v-icon large color="primary">mdi-bar_chart</v-icon>오늘의
+              <span class="accent--text">목소리</span>
             </v-toolbar-title>
           </v-col>
 

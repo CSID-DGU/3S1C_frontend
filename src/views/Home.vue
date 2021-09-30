@@ -1,4 +1,3 @@
-
 <style>
 @font-face {
   font-family: "MAPO";
@@ -50,7 +49,7 @@
                 md="6"
                 lg="4"
                 v-for="item in items"
-                :key="item.keyword"
+                :key="item.id"
               >
                 <v-hover
                   v-slot:default="{ hover }"
@@ -63,8 +62,10 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
-                      to="/detail"
+                      :to="{ name: 'Detail', params: { id: item.id } }"
                     >
+                      <!--{{ item.id }}-->
+
                       <v-img
                         src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
                         :aspect-ratio="16 / 9"
@@ -148,41 +149,66 @@
               <v-col cols="6" lg="4" v-for="i in 3" :key="i">
                 <v-card flat dark>
                   <v-img
-                    src="https://cdn.pixabay.com/photo/2019/10/29/14/46/landscape-4587079_1280.jpg"
+                    src=""
                     :aspect-ratio="16 / 9"
-                    gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
-                    height="600px"
-                    class="elevation-2 fill-height"
+                    gradient="to top, rgba(255,232,172,.6), rgba(225,232,252,.1)"
+                    height="200px"
+                    class="elevation-2 fill-height color-white"
                   >
-                    <div
+                    <!-- <div
                       class="
                         d-flex
                         flex-column
                         justify-space-between
                         fill-height
                       "
-                    >
-                      <v-card-text>
-                        <v-btn color="accent">ANIMALS</v-btn>
-                      </v-card-text>
+                    > -->
+                    <v-card-text class="pb-1">
+                      <v-btn color="accent">Rank {{ i }}</v-btn>
+                    </v-card-text>
 
-                      <v-card-text>
-                        <div
-                          class="text-h5 py-3 font-weight-bold"
-                          style="line-height: 1.2"
-                        >
-                          15 things I have always wondered about birds
-                        </div>
+                    <vue-word-cloud
+                      class="ma-0"
+                      style="height: 120px"
+                      :words="[
+                        ['대통령', 14],
+                        ['문재인', 7],
+                        ['홍준표', 4],
+                        ['노조', 2],
+                        ['민주당', 1],
+                        ['이재명', 5],
+                        ['나라', 4],
+                        ['코로나', 6],
+                      ]"
+                      :color="
+                        ([, weight]) =>
+                          weight > 10
+                            ? 'white'
+                            : weight > 5
+                            ? 'silver'
+                            : 'antiquewhite'
+                      "
+                      font-family="serif"
+                      font-weight="bold"
+                      font-size-ratio="10"
+                    />
+                    <!--<v-card-text class="align-center">
+                      <div
+                        class="text-h5 py-2 font-weight-bold"
+                        style="line-height: 1.1"
+                      >
+                        15 things I have always wondered about birds
+                      </div>
 
-                        <div class="d-flex align-center">
-                          <v-avatar color="accent" size="36">
-                            <v-icon dark>mdi-feather</v-icon>
-                          </v-avatar>
+                      <div class="d-flex align-center">
+                        <v-avatar color="accent" size="36">
+                          <v-icon dark>mdi-feather</v-icon>
+                        </v-avatar>
 
-                          <div class="pl-2">Yan Lee · 03 Jan 2019</div>
-                        </div>
-                      </v-card-text>
-                    </div>
+                        <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
+                      </div>
+                    </v-card-text>-->
+                    <!--</div>-->
                   </v-img>
                 </v-card>
               </v-col>
@@ -193,11 +219,11 @@
             <h2 class="text-h4 font-weight-bold">Special Analysis</h2>
 
             <div>
-              <v-row v-for="i in 2" :key="i" class="py-4">
+              <v-row v-for="i in 1" :key="i" class="py-4">
                 <v-col cols="12" md="4">
-                  <v-card flat height="100%">
+                  <v-card flat height="100%" to="/color_psycology">
                     <v-img
-                      src="https://cdn.pixabay.com/photo/2021/01/27/06/54/nova-scotia-duck-tolling-retriever-5953883_1280.jpg"
+                      src="//live.staticflickr.com/65535/48590142126_d95bf68d6c_n.jpg"
                       :aspect-ratio="16 / 9"
                       height="100%"
                     ></v-img>
@@ -206,26 +232,41 @@
 
                 <v-col>
                   <div>
-                    <v-btn depressed color="accent">TRAVEL</v-btn>
+                    <v-btn depressed color="accent">데이터와 심리</v-btn>
 
-                    <h3 class="text-h4 font-weight-bold pt-3">
-                      Ut enim blandit volutpat maecenas volutpat blandit
-                    </h3>
+                    <!-- <vue-word-cloud :words="words">
+                      <template slot-scope="{ text, weight, word }">
+                        <div
+                          :title="weight"
+                          style="cursor: pointer"
+                          @click="onWordClick(word)"
+                        >
+                          {{ text }}
+                        </div>
+                      </template>
+                    </vue-word-cloud> -->
+                    <v-card flat height="100%" to="/color">
+                      <h3 class="text-h4 font-weight-bold pt-3">
+                        키워드 관련 이미지의 색채 심리학적 분류와 댓글 감성분석
+                      </h3>
 
-                    <p class="text-h6 font-weight-regular pt-3 text--secondary">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
+                      <p
+                        class="text-h6 font-weight-regular pt-3 text--secondary"
+                      >
+                        마케팅, 심리치료 분야에서 널리 활용되는 '색채심리학'과
+                        댓글 분석 결과로 나타난 인터넷 사용자의 '감성 분포'를
+                        비교해 인터넷에 노출되는 키워드의 색채와 실제 유저의
+                        감성 사이의 상관관계를 알아봅니다.
+                      </p>
 
-                    <div class="d-flex align-center">
-                      <v-avatar color="accent" size="36">
-                        <v-icon dark>mdi-feather</v-icon>
-                      </v-avatar>
+                      <div class="d-flex align-center">
+                        <v-avatar color="accent" size="36">
+                          <v-icon dark>mdi-feather</v-icon>
+                        </v-avatar>
 
-                      <div class="pl-2">Yan Lee · 03 Jan 2019</div>
-                    </div>
+                        <div class="pl-2">김경민</div>
+                      </div>
+                    </v-card>
                   </div>
                 </v-col>
               </v-row>
@@ -296,6 +337,7 @@ export default {
       this.items = [
         //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
         {
+          id: 0,
           keyword: "singer",
           gender: { info: "여", ratio: 30 },
           age: { info: "30대", ratio: 25 },
@@ -307,6 +349,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 1,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -318,6 +361,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
         },
         {
+          id: 2,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -329,6 +373,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 3,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -340,6 +385,7 @@ export default {
           tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
         },
         {
+          id: 4,
           keyword: "dancer",
           gender: { info: "남", ratio: 70 },
           age: { info: "20대", ratio: 40 },
@@ -363,6 +409,11 @@ export default {
     //this.getSummary();
     this.loadItems();
     this.loadTags();
+  },
+  computed: {
+    getItemId(id) {
+      return Number(id);
+    },
   },
 };
 </script>
