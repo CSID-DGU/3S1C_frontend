@@ -184,7 +184,7 @@ myChart();
                           align="center"
                           justify="center"
                         >
-                          <bar />
+                          <component :is="currentChart"></component>
                           <v-scale-transition>
                             <v-icon
                               v-if="active"
@@ -475,14 +475,30 @@ myChart();
 
 <script>
 import Bar from "@/components/details/bar.vue";
+import lineChart from "@/components/details/line.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
+    lineChart,
   },
   props: {
     id: Number,
+  },
+  computed: {
+    currentChart() {
+      console.log(this.cnt);
+      console.log(this.chartArray[this.cnt]);
+      //return "line-chart";
+      return this.chartArray[this.cnt++];
+    },
+  },
+  data() {
+    return {
+      cnt: 0,
+      chartArray: ["line-chart", "bar"],
+    };
   },
 };
 </script>
