@@ -3,8 +3,18 @@ import cv2
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
+colors = ((0, 0, 0, "검은색"), (255, 0, 0, "빨간색"), (0, 255, 0, "연두색"), (0, 0, 255, "파란색"),
+          (255, 165, 0, "주황색"), (255, 255, 0, "노란색"), (128, 0, 128, "보라색"),
+          (255, 51, 153, "분홍색"), (165, 42, 42, "갈색"), (255, 255, 255, "흰색"),
+          (128, 128, 128, "회색"), (210, 180, 140, "황갈색"), (255, 255, 240, "상아색"),
+          (0, 255, 255, "옥색"), (0, 0, 128, "남색"), (0, 128, 0, "초록색"),
+          (128, 0, 0, "고동색"), (0, 128, 128, "암청색"), (0, 255, 255, "하늘색"))
+
+def nearest_color(subjects, query):
+    return min(subjects, key=lambda subjects: sum((s - q) ** 2 for s, q in zip(subjects, query)))
+
 #TODO : 웹에서 이미지 경로로 바로 가져오는 기능
-image = cv2.imread('C:/Users/Mando/Desktop/iutest.jpg')  #현재는 파일 절대경로로 탐색
+image = cv2.imread('C:/Users/Mando/Desktop/drunkendrive.jpg')  #현재는 파일 절대경로로 탐색
 
 print(image.shape)
 
@@ -18,8 +28,14 @@ k = 3
 clt = KMeans(n_clusters = k)
 clt.fit(image)
 
+ary = []
+
 for center in clt.cluster_centers_:
     print(center)
+    ary.append(center)
+#print(ary)
+for i in ary:
+    print(nearest_color(colors, i))
 
 def centroid_histogram(clt):
     numLabels = np.arange(0, len(np.unique(clt.labels_)) + 1)
