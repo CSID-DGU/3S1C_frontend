@@ -1,5 +1,6 @@
 [
     {
+        "_comment": "문자열은 keyword, 숫자는 weight",
         "element": [
             [
                 "대통령",
