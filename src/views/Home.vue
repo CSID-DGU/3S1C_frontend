@@ -192,23 +192,6 @@
                       font-weight="bold"
                       font-size-ratio="10"
                     />
-                    <!--<v-card-text class="align-center">
-                      <div
-                        class="text-h5 py-2 font-weight-bold"
-                        style="line-height: 1.1"
-                      >
-                        15 things I have always wondered about birds
-                      </div>
-
-                      <div class="d-flex align-center">
-                        <v-avatar color="accent" size="36">
-                          <v-icon dark>mdi-feather</v-icon>
-                        </v-avatar>
-
-                        <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
-                      </div>
-                    </v-card-text>-->
-                    <!--</div>-->
                   </v-img>
                 </v-card>
               </v-col>
