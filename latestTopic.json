@@ -1,6 +1,6 @@
 [
     {
-        "_comment": "문자열은 keyword, 숫자는 weight",
+        "_comment": "메인 페이지 latestTopic 카드에 띄울 wordcloud -> 문자열은 keyword, 숫자는 weight",
         "element": [
             [
                 "대통령",
