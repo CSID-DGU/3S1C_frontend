@@ -84,53 +84,37 @@
                     </v-flex>
                     <v-container>
                 </v-sheet> -->
-                <!--Stats Card-->
-
-                <div class="row">
-                  <div
-                    class="col-md-6 col-xl-3"
-                    v-for="stats in statsCards"
-                    :key="stats.title"
-                  >
-                    <line-chart>
-                      <div
-                        class="icon-big text-center"
-                        :class="`icon-${stats.type}`"
-                        slot="header"
-                      >
-                        <i :class="stats.icon"></i>
-                      </div>
-                      <div class="numbers" slot="content">
-                        <p>{{ stats.title }}</p>
-                        {{ stats.value }}
-                      </div>
-                      <div class="stats" slot="footer">
-                        <i :class="stats.footerIcon"></i>
-                        {{ stats.footerText }}
-                      </div>
-                    </line-chart>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <bar></bar>
-                    <!-- <chart-card
-                      title="Users behavior"
-                      sub-title="24 Hours performance"
-                      :chart-data="usersChart.data"
-                      :chart-options="usersChart.options"
-                    > -->
-                    <span slot="footer">
-                      <i class="ti-reload"></i> Updated 3 minutes ago
-                    </span>
-                    <div slot="legend">
-                      <i class="fa fa-circle text-info"></i> Open
-                      <i class="fa fa-circle text-danger"></i> Click
-                      <i class="fa fa-circle text-warning"></i> Click Second
-                      Time
-                    </div>
-                  </div>
-                </div>
+                <v-card></v-card>
+                <v-container fluid>
+                  <v-row dense>
+                    <v-col
+                      v-for="card in cards"
+                      :key="card.title"
+                      :cols="card.flex"
+                    >
+                      <v-card>
+                        <v-card-title> 성별 </v-card-title>
+                        <v-card-text
+                          >성별차트
+                          <!-- <bar></bar> -->
+                          <component :is="Bar"></component>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn icon>
+                            <v-icon>mdi-heart</v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon>mdi-bookmark</v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon>mdi-share-variant</v-icon>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
                 <div class="py-2">
                   <v-alert
                     class="font-italic text-h6 text-center"
@@ -186,12 +170,16 @@
 <script>
 import Bar from "@/components/details/bar.vue";
 import lineChart from "@/components/details/line.vue";
+import ChartCard from "@/components/ChartCard.vue";
+import Card from "@/components/Card.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
     lineChart,
+    ChartCard,
+    Card,
   },
   props: {
     id: Number,
@@ -240,6 +228,26 @@ export default {
           value: "+45",
           footerText: "Updated now",
           footerIcon: "ti-reload",
+        },
+      ],
+      cards: [
+        {
+          title: "Pre-fab homes",
+          src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
+          flex: 12,
+          chartType: "<bar></bar>",
+        },
+        {
+          title: "Favorite road trips",
+          src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
+          flex: 6,
+          chartType: "<line-chart></line-chart>",
+        },
+        {
+          title: "Best airlines",
+          src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
+          flex: 6,
+          chartType: "<line-chart></line-chart>",
         },
       ],
     };
