@@ -60,14 +60,52 @@
       <v-divider></v-divider>
 
       <div class="pt-4">
-        <div class="d-flex align-center mb-6" v-for="i in 4" :key="i">
+        <div class="d-flex align-center mb-6">
           <v-avatar color="accent" size="64">
-            <v-icon dark x-large>mdi-feather</v-icon>
+            <v-img
+              src="https://avatars.githubusercontent.com/u/22465452?v=4"
+            ></v-img>
           </v-avatar>
 
           <div class="pl-2">
-            <div class="text-h6">Each team member name</div>
-            <div class="text-subtitle-1">contribution of themselves</div>
+            <div class="text-h6 font-weight-bold">2015112088 김경민</div>
+            <div class="text-subtitle-1">gpffna777@naver.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/70712696?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2016112277 한주민</div>
+            <div class="text-subtitle-1">europejumin@gmail.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/71250502?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2018113343 권용재</div>
+            <div class="text-subtitle-1">dydwo2324@gmail.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/37470041?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2018113576 탄성호</div>
+            <div class="text-subtitle-1">leski@naver.com</div>
           </div>
         </div>
       </div>

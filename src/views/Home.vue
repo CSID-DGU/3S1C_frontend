@@ -192,23 +192,6 @@
                       font-weight="bold"
                       font-size-ratio="10"
                     />
-                    <!--<v-card-text class="align-center">
-                      <div
-                        class="text-h5 py-2 font-weight-bold"
-                        style="line-height: 1.1"
-                      >
-                        15 things I have always wondered about birds
-                      </div>
-
-                      <div class="d-flex align-center">
-                        <v-avatar color="accent" size="36">
-                          <v-icon dark>mdi-feather</v-icon>
-                        </v-avatar>
-
-                        <div class="pl-2 ma-2">Yan Lee · 03 Jan 2019</div>
-                      </div>
-                    </v-card-text>-->
-                    <!--</div>-->
                   </v-img>
                 </v-card>
               </v-col>
@@ -221,7 +204,7 @@
             <div>
               <v-row v-for="i in 1" :key="i" class="py-4">
                 <v-col cols="12" md="4">
-                  <v-card flat height="100%" to="/color_psycology">
+                  <v-card flat height="100%" to="/color">
                     <v-img
                       src="//live.staticflickr.com/65535/48590142126_d95bf68d6c_n.jpg"
                       :aspect-ratio="16 / 9"
@@ -233,18 +216,6 @@
                 <v-col>
                   <div>
                     <v-btn depressed color="accent">데이터와 심리</v-btn>
-
-                    <!-- <vue-word-cloud :words="words">
-                      <template slot-scope="{ text, weight, word }">
-                        <div
-                          :title="weight"
-                          style="cursor: pointer"
-                          @click="onWordClick(word)"
-                        >
-                          {{ text }}
-                        </div>
-                      </template>
-                    </vue-word-cloud> -->
                     <v-card flat height="100%" to="/color">
                       <h3 class="text-h4 font-weight-bold pt-3">
                         키워드 관련 이미지의 색채 심리학적 분류와 댓글 감성분석

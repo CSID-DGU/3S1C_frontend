@@ -5,6 +5,7 @@
         <div>
           <div>
             <v-card flat color="transparent">
+              <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체-->
               <v-img
                 src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
                 :aspect-ratio="21 / 4"
@@ -35,9 +36,8 @@
 
               <v-card-text>
                 <div class="text-h4 font-weight-bold primary--text pt-4">
-                  <h4>{gender}에 따른 키워드 관심도</h4>
                   <!-- test code -->
-                  <h4>이 페이지는 {{ id }}번째 카드의 상세정보입니다</h4>
+                  <h4>이 페이지는 {{ id + 1 }}번째 카드의 상세정보입니다</h4>
                 </div>
 
                 <div class="text-body-1 pt-4">
@@ -45,11 +45,12 @@
                   결과"
                 </div>
                 <!-- <v-sheet
+
                   class="mx-auto my-5"
-                  color="#f8f9fe"
+                  color="#fefefe"
                   style="
-                    background: rgba(235, 240, 255, 0.3);
-                    border-radius: 16px;
+                    background: rgba(245, 245, 255, 0.3);
+                    border-radius: 10px;
                   "
                 >
                   <v-container>
@@ -59,8 +60,9 @@
                       :key="n"
                     >
                       <v-card
-                        :color="active ? '#FEE8FE' : '#FFFFFF'"
+                        :color="active ? '#FAF5FE' : '#FFFFFF'"
                         class="ma-4"
+                        style="border-radius: 10px"
                         height="600"
                         width="800"
                         @click="toggle"
@@ -251,6 +253,7 @@ export default {
           chartType: "LineChart",
         },
       ],
+
     };
   },
 };
