@@ -29,13 +29,16 @@ clt = KMeans(n_clusters = k)
 clt.fit(image)
 
 ary = []
-
 for center in clt.cluster_centers_:
-    print(center)
+    #print(center)
     ary.append(center)
-#print(ary)
+
+resultColorSet = []
 for i in ary:
-    print(nearest_color(colors, i))
+    resultColorSet.append(nearest_color(colors, i))
+
+#print(ary)
+print(resultColorSet)
 
 def centroid_histogram(clt):
     numLabels = np.arange(0, len(np.unique(clt.labels_)) + 1)
@@ -46,7 +49,6 @@ def centroid_histogram(clt):
 
     # return the histogram
     return hist
-
 
 hist = centroid_histogram(clt)
 print(hist)
@@ -71,10 +73,14 @@ def plot_colors(hist, centroids):
 
 bar = plot_colors(hist, clt.cluster_centers_)
 
-
 # show our color bart
 #TODO : 데이터로 저장 or 시각화 컴포넌트에 넘겨주기 필요
 plt.figure()
 plt.axis("off")
 plt.imshow(bar)
 plt.show()
+
+#DB로 보낼 것들
+#ary(추출된 색상 RGB코드)
+#hist(추출된 색상의 구성비율)
+#resultColorSet(ary 각 값에 가까운 색상)
