@@ -96,8 +96,9 @@
                         <v-card-title> 성별 </v-card-title>
                         <v-card-text
                           >성별차트
-                          <!-- <bar></bar> -->
-                          <component :is="Bar"></component>
+                          <div>
+                            <component :is="card.chartType" />
+                          </div>
                         </v-card-text>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -169,7 +170,7 @@
 
 <script>
 import Bar from "@/components/details/bar.vue";
-import lineChart from "@/components/details/line.vue";
+import LineChart from "@/components/details/line.vue";
 import ChartCard from "@/components/ChartCard.vue";
 import Card from "@/components/Card.vue";
 export default {
@@ -177,7 +178,7 @@ export default {
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
-    lineChart,
+    LineChart,
     ChartCard,
     Card,
   },
@@ -235,19 +236,19 @@ export default {
           title: "Pre-fab homes",
           src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
           flex: 12,
-          chartType: "<bar></bar>",
+          chartType: "Bar",
         },
         {
           title: "Favorite road trips",
           src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
           flex: 6,
-          chartType: "<line-chart></line-chart>",
+          chartType: "LineChart",
         },
         {
           title: "Best airlines",
           src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
           flex: 6,
-          chartType: "<line-chart></line-chart>",
+          chartType: "LineChart",
         },
       ],
     };
