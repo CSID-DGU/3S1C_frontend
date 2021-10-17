@@ -126,30 +126,6 @@ myChart();
                   "평균 댓글 작성자 성비, 인구 통계, 타 키워드 대비 성비 분석
                   결과"
                 </div>
-
-                <!-- <canvas id="myChart"></canvas> -->
-
-                <!-- <div class="d-flex align-center justify-space-between">
-                  <div class="d-flex align-center">
-                    <v-avatar color="accent" size="36">
-                      <v-icon dark>mdi-feather</v-icon>
-                    </v-avatar>
-
-                    <div class="pl-2 text-body-1">Yan Lee · 22 July 2019</div>
-                  </div>
-
-                  <div class="d-flex align-center">
-                    <div>
-                      <v-chip small color="transparent">
-                        <v-icon left>mdi-eye</v-icon>1.4k
-                      </v-chip>
-
-                      <v-chip small color="transparent">
-                        <v-icon left>mdi-comment-outline</v-icon>7 Comment
-                      </v-chip>
-                    </div>
-                  </div>
-                </div> -->
                 <v-sheet
                   class="mx-auto my-5"
                   color="#f8f9fe"

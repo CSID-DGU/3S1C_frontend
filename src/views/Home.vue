@@ -95,10 +95,11 @@
                             :width="15"
                             :value="item.gender.ratio"
                             :text="text"
-                            color="red"
+                            :color="item.gender.color"
                           >
                             {{ item.gender.info }}
                           </v-progress-circular>
+
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
@@ -109,6 +110,8 @@
                           >
                             {{ item.age.info }}
                           </v-progress-circular>
+                        </div>
+                        <!--
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
@@ -122,7 +125,7 @@
                         </div>
 
                         <div class="text-body-1 py-4">
-                          {{ item.summary.content }}
+                          {{ item.summary }}
                         </div>
                         <v-btn
                           v-for="tag in item.tags"
@@ -132,7 +135,7 @@
                           class="pa-3 ma-1"
                         >
                           {{ "#" + tag.tagName }}
-                        </v-btn>
+                        </v-btn> -->
                       </v-card-text>
                     </v-card>
                   </div>
@@ -254,23 +257,8 @@ export default {
   data() {
     return {
       // TODO : mock api
-      items: [],
-      tags: [],
-      gender: {
-        info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      age: {
-        info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      heavyComment: {
-        info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      summary: {
-        content: "", //요약문
-      },
+      items: {},
+      loading: true,
       //female: 30,
       //male: 70,
       //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
@@ -280,113 +268,64 @@ export default {
   methods: {
     fetchData() {
       const self = this;
-      console.log("data");
-      axios
-        .get("/api/join")
+      return axios
+        .get("/api/real-time-popularity")
         .then(function (res) {
           self.items = JSON.parse(JSON.stringify(res.data));
-          console.log(self.items);
         })
         .catch(function (err) {
           console.log(err);
+        })
+        .finally(function () {
+          self.loading = false;
+          console.log("loading");
         });
     },
     getGender() {
-      this.itms.foreach((x) => {
-        if (x.female >= 50) {
+      for (let idx in this.items) {
+        let x = this.items[idx];
+        if (x.gender.female >= 0.5) {
           x.gender.info = "여";
-          x.gender.ratio = x.female;
+          x.gender.ratio = x.gender.female * 100;
+          x.gender.color = "red";
         } else {
           x.gender.info = "남";
-          x.gender.ratio = x.male;
+          x.gender.ratio = x.gender.male * 100;
+          x.gender.color = "blue";
         }
-      });
+      }
     },
     getAges() {
-      this.items.foreach((x) => {
+      for (let idx in this.items) {
+        let x = this.items[idx];
         // TODO : 추후
-        x.age.info = _.max(Object.keys(x), (val) => x[val]);
-        x.age.ratio = _.max(...x);
-      });
-      console.log(this.items);
+        x.age.info = _.max(Object.keys(x.age), (val) => x.age[val]);
+        x.age.ratio = _.max(...x.age);
+      }
     },
-    getHeavyComment() {
-      this.heavyComment.info = "의심";
-      this.heavyComment.ratio = 50;
-    },
-    getSummary() {
-      this.summary.content =
-        "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
-    },
-    loadItems() {
-      console.log(this.items);
-      this.items[0].push(
-        //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
-        {
-          gender: { info: "여", ratio: 30 },
-          age: { info: "30대", ratio: 25 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
+    getSentiment() {
+      for (let x in this.data) {
+        if (x.positive >= 0.5) {
+          x.gender.info = "긍정";
+          x.gender.ratio = x.positive;
+        } else {
+          x.gender.info = "부정";
+          x.gender.ratio = x.negative;
         }
-      );
-      console.log(this.items);
-      // {
-      //   gender: { info: "남", ratio: 70 },
-      //   age: { info: "20대", ratio: 40 },
-      //   heavyComment: { info: "의심", ratio: 50 },
-      //   summary: {
-      //     content:
-      //       "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-      //   },
-      //   tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
-      // },
-      // {
-      //   keyword: "dancer",
-      //   gender: { info: "남", ratio: 70 },
-      //   age: { info: "20대", ratio: 40 },
-      //   heavyComment: { info: "의심", ratio: 50 },
-      //   summary: {
-      //     content:
-      //       "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-      //   },
-      //   tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
-      // },
-      // {
-      //   gender: { info: "남", ratio: 70 },
-      //   age: { info: "20대", ratio: 40 },
-      //   heavyComment: { info: "의심", ratio: 50 },
-      //   summary: {
-      //     content:
-      //       "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-      //   },
-      //   tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
-      // },
-      // {
-      //   gender: { info: "남", ratio: 70 },
-      //   age: { info: "20대", ratio: 40 },
-      //   heavyComment: { info: "의심", ratio: 50 },
-      //   summary: {
-      //     content:
-      //       "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-      //   },
-      //   tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
-      // },
+      }
     },
   },
-  created() {
-    this.fetchData();
+  async created() {
+    await this.fetchData();
+    this.getGender();
+    this.getAges();
   },
   mounted() {
     //this.getGender();
-    this.getAges();
+    //console.log(this.loading);
     //this.getHeavyComment();
     //this.getSummary();
     //this.loadItems();
-    console.log(this.items);
   },
 };
 </script>
