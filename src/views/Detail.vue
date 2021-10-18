@@ -79,8 +79,7 @@
                               color="white"
                               size="48"
                             ></v-icon>
-                            <!--v-text="'mdi-close-circle-outline'"-->
-                <!-- </v-scale-transition>
+                </v-scale-transition>
                         </v-row>
                       </v-card>
                     </v-flex>
