@@ -191,7 +191,7 @@ export default {
       console.log(this.cnt);
       console.log(this.chartArray[this.cnt]);
       //return "line-chart";
-      return this.chartArray[this.cnt++];
+      //return this.chartArray[this.cnt++];
     },
   },
   data() {
@@ -252,7 +252,6 @@ export default {
           chartType: "LineChart",
         },
       ],
-
     };
   },
 };

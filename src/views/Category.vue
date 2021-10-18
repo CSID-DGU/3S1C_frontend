@@ -5,9 +5,11 @@
         <div>
           <div>
             <div>
-              <h2 class="text-h4 font-weight-bold">ANIMAL</h2>
+              <h2 class="text-h4 font-weight-bold">개별 뉴스 댓글 분석</h2>
 
-              <h4 class="text-h6">Some category description goes here</h4>
+              <h4 class="text-h6">
+                오늘의 '댓글 많은 뉴스'에 대한 '개별 분석 페이지'입니다.
+              </h4>
             </div>
 
             <v-divider class="my-4"></v-divider>

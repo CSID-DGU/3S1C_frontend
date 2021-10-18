@@ -107,21 +107,21 @@ export default {
     drawer: null,
     barItems: [
       {
-        title: "Main",
+        title: "Keyword",
         to: "/",
       },
       {
-        title: "Keywords",
+        title: "News",
         to: "/category",
       },
       {
-        title: "Comments",
+        title: "QnA",
         to: "/detail",
       },
-      {
-        title: "Statistics",
-        to: "/authors",
-      },
+      // {
+      //   title: "Statistics",
+      //   to: "/authors",
+      // },
     ],
   }),
 };
