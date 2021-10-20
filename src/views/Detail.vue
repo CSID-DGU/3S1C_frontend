@@ -79,8 +79,7 @@
                               color="white"
                               size="48"
                             ></v-icon>
-                            <!--v-text="'mdi-close-circle-outline'"-->
-                <!-- </v-scale-transition>
+                </v-scale-transition>
                         </v-row>
                       </v-card>
                     </v-flex>
@@ -192,7 +191,7 @@ export default {
       console.log(this.cnt);
       console.log(this.chartArray[this.cnt]);
       //return "line-chart";
-      return this.chartArray[this.cnt++];
+      //return this.chartArray[this.cnt++];
     },
   },
   data() {
@@ -253,7 +252,6 @@ export default {
           chartType: "LineChart",
         },
       ],
-
     };
   },
 };
