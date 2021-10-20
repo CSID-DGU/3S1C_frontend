@@ -1,82 +1,3 @@
-<!--<script>
-export default {
-  data: () => ({
-    skill: 20,
-    knowledge: 33,
-    power: 78,
-  }),
-};
-</script> -->
-
-<!--  chartjs test but it doesn't work!!
-<script>
-import Chart from "chart.js";
-var ctx = document.getElementById("myChart").getContext("2d");
-var myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
-myChart();
-
-/* eslint-disable no-unused-vars */
-// import Chart from "chart.js";
-// import planetChartData from "./chart-data.js";
-// export default {
-//   data() {
-//     return {
-//       planetChartData: planetChartData,
-//     };
-//   },
-//   method: {
-//     createChart(chartId, chartData) {
-//       const ctx = document.getElementById(chartId);
-//       const myChart = new Chart(ctx, {
-//         type: chartData.type,
-//         data: chartData.data,
-//         options: chartData.options,
-//       });
-//     },
-//   },
-//   mounted() {
-//     this.createChart("planet-chart", this.planetChartData);
-//   },
-// };
-/* eslint-disable no-unused-vars */
-</script>
--->
-
 <template>
   <div>
     <v-row>
@@ -108,8 +29,6 @@ myChart();
                       border-radius: 16px;
                     "
                   >
-                    <!--font-size: 5vh; 로 동적 폰트 시도했지만 실패-->
-                    <!--TODO : 키워드 API로 가져오기-->
                     #keyword
                   </div>
                 </v-card-text>
@@ -125,7 +44,8 @@ myChart();
                   "평균 댓글 작성자 성비, 인구 통계, 타 키워드 대비 성비 분석
                   결과"
                 </div>
-                <v-sheet
+                <!-- <v-sheet
+
                   class="mx-auto my-5"
                   color="#fefefe"
                   style="
@@ -133,17 +53,11 @@ myChart();
                     border-radius: 10px;
                   "
                 >
-                  <v-slide-group
-                    v-model="model"
-                    class="pa-4"
-                    center-active
-                    show-arrows=""
-                    mandatory
-                  >
-                    <v-slide-item
+                  <v-container>
+                    <v-layout wrap row>
+                    <v-flex
                       v-for="n in 5"
                       :key="n"
-                      v-slot="{ active, toggle }"
                     >
                       <v-card
                         :color="active ? '#FAF5FE' : '#FFFFFF'"
@@ -158,7 +72,7 @@ myChart();
                           align="center"
                           justify="center"
                         >
-                          <bar />
+                          <component :is="currentChart"></component>
                           <v-scale-transition>
                             <v-icon
                               v-if="active"
@@ -166,13 +80,44 @@ myChart();
                               size="48"
                             ></v-icon>
                             <!--v-text="'mdi-close-circle-outline'"-->
-                          </v-scale-transition>
+                <!-- </v-scale-transition>
                         </v-row>
                       </v-card>
-                    </v-slide-item>
-                  </v-slide-group>
-                </v-sheet>
-
+                    </v-flex>
+                    <v-container>
+                </v-sheet> -->
+                <v-card></v-card>
+                <v-container fluid>
+                  <v-row dense>
+                    <v-col
+                      v-for="card in cards"
+                      :key="card.title"
+                      :cols="card.flex"
+                    >
+                      <v-card>
+                        <v-card-title> 성별 </v-card-title>
+                        <v-card-text
+                          >성별차트
+                          <div>
+                            <component :is="card.chartType" />
+                          </div>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn icon>
+                            <v-icon>mdi-heart</v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon>mdi-bookmark</v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon>mdi-share-variant</v-icon>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
                 <div class="py-2">
                   <v-alert
                     class="font-italic text-h6 text-center"
@@ -227,26 +172,88 @@ myChart();
 
 <script>
 import Bar from "@/components/details/bar.vue";
+import LineChart from "@/components/details/line.vue";
+import ChartCard from "@/components/ChartCard.vue";
+import Card from "@/components/Card.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
+    LineChart,
+    ChartCard,
+    Card,
   },
   props: {
     id: Number,
   },
+  computed: {
+    currentChart() {
+      console.log(this.cnt);
+      console.log(this.chartArray[this.cnt]);
+      //return "line-chart";
+      return this.chartArray[this.cnt++];
+    },
+  },
   data() {
     return {
-      // TODO : mock api
-      statAges: {
-        ten: { male: 51.5, ratio: 16.5 },
-        twenty: { male: 52.9, ratio: 13.3 },
-        thirty: { male: 52.2, ratio: 13.5 },
-        fourty: { male: 50.9, ratio: 15.6 },
-        fifty: { male: 50.1, ratio: 16.3 },
-        sixty: { male: 44.0, ratio: 24.6 },
-      },
+      cnt: 0,
+      chartArray: ["line-chart", "bar"],
+      statsCards: [
+        {
+          type: "warning",
+          icon: "ti-server",
+          title: "Capacity",
+          value: "105GB",
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+        },
+        {
+          type: "success",
+          icon: "ti-wallet",
+          title: "Revenue",
+          value: "$1,345",
+          footerText: "Last day",
+          footerIcon: "ti-calendar",
+        },
+        {
+          type: "danger",
+          icon: "ti-pulse",
+          title: "Errors",
+          value: "23",
+          footerText: "In the last hour",
+          footerIcon: "ti-timer",
+        },
+        {
+          type: "info",
+          icon: "ti-twitter-alt",
+          title: "Followers",
+          value: "+45",
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+        },
+      ],
+      cards: [
+        {
+          title: "Pre-fab homes",
+          src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
+          flex: 12,
+          chartType: "Bar",
+        },
+        {
+          title: "Favorite road trips",
+          src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
+          flex: 6,
+          chartType: "LineChart",
+        },
+        {
+          title: "Best airlines",
+          src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
+          flex: 6,
+          chartType: "LineChart",
+        },
+      ],
+
     };
   },
 };
