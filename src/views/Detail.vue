@@ -190,7 +190,7 @@ export default {
     currentChart() {
       console.log(this.cnt);
       console.log(this.chartArray[this.cnt]);
-      //return "line-chart";
+      return "line-chart";
       //return this.chartArray[this.cnt++];
     },
   },
