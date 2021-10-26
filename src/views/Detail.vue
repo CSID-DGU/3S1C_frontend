@@ -44,8 +44,7 @@
                   "평균 댓글 작성자 성비, 인구 통계, 타 키워드 대비 성비 분석
                   결과"
                 </div>
-                <!-- <v-sheet
-
+                <v-sheet
                   class="mx-auto my-5"
                   color="#fefefe"
                   style="

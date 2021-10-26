@@ -96,10 +96,11 @@
                             :width="15"
                             :value="item.gender.ratio"
                             :text="text"
-                            color="red"
+                            :color="item.gender.color"
                           >
                             {{ item.gender.info }}
                           </v-progress-circular>
+
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
@@ -110,6 +111,8 @@
                           >
                             {{ item.age.info }}
                           </v-progress-circular>
+                        </div>
+                        <!--
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
@@ -123,7 +126,7 @@
                         </div>
 
                         <div class="text-body-1 py-4">
-                          {{ item.summary.content }}
+                          {{ item.summary }}
                         </div>
                         <v-btn
                           v-for="tag in item.tags"
@@ -133,7 +136,7 @@
                           class="pa-3 ma-1"
                         >
                           {{ "#" + tag.tagName }}
-                        </v-btn>
+                        </v-btn> -->
                       </v-card-text>
                     </v-card>
                   </div>
@@ -256,6 +259,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import _ from "lodash";
 export default {
   name: "Home",
   components: {
@@ -264,23 +269,8 @@ export default {
   data() {
     return {
       // TODO : mock api
-      items: [],
-      tags: [],
-      gender: {
-        info: "", //댓글을 더 많이 작성한 성별 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      age: {
-        info: "", //댓글을 가장 많이 작성한 연령 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      heavyComment: {
-        info: "", //헤비 댓글러 비율 또는 평균 대비 특이 케이스
-        ratio: 0,
-      },
-      summary: {
-        content: "", //요약문
-      },
+      items: {},
+      loading: true,
       //female: 30,
       //male: 70,
       //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
@@ -288,17 +278,53 @@ export default {
     };
   },
   methods: {
+    fetchData() {
+      const self = this;
+      return axios
+        .get("/api/real-time-popularity")
+        .then(function (res) {
+          self.items = JSON.parse(JSON.stringify(res.data));
+        })
+        .catch(function (err) {
+          console.log(err);
+        })
+        .finally(function () {
+          self.loading = false;
+          console.log("loading");
+        });
+    },
     getGender() {
-      this.gender.info = "여";
-      this.gender.ratio = 30;
+      for (let idx in this.items) {
+        let x = this.items[idx];
+        if (x.gender.female >= 0.5) {
+          x.gender.info = "여";
+          x.gender.ratio = x.gender.female * 100;
+          x.gender.color = "red";
+        } else {
+          x.gender.info = "남";
+          x.gender.ratio = x.gender.male * 100;
+          x.gender.color = "blue";
+        }
+      }
     },
     getAges() {
-      this.age.info = "30대";
-      this.age.ratio = 25;
+      for (let idx in this.items) {
+        let x = this.items[idx];
+        // TODO : 추후
+        x.age.info = _.max(Object.keys(x.age), (val) => x.age[val]);
+        x.age.ratio = _.max(...x.age);
+      }
     },
-    getHeavyComment() {
-      this.heavyComment.info = "의심";
-      this.heavyComment.ratio = 50;
+    getSentiment() {
+      for (let x in this.data) {
+        if (x.positive >= 0.5) {
+          x.gender.info = "긍정";
+          x.gender.ratio = x.positive;
+        } else {
+          x.gender.info = "부정";
+          x.gender.ratio = x.negative;
+        }
+      }
     },
     getSummary() {
       this.summary.content =
@@ -373,13 +399,17 @@ export default {
       this.tags = [{ tagName: "tag1" }, { tagName: "tag2" }];
     },
   },
+  async created() {
+    await this.fetchData();
+    this.getGender();
+    this.getAges();
+  },
   mounted() {
     //this.getGender();
-    //this.getAges();
+    //console.log(this.loading);
     //this.getHeavyComment();
     //this.getSummary();
-    this.loadItems();
-    this.loadTags();
+    //this.loadItems();
   },
   computed: {
     getItemId(id) {
