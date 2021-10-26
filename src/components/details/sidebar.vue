@@ -55,19 +55,57 @@
     </div>
 
     <div class="pt-4">
-      <h3 class="text-h5 font-weight-medium pb-4">Top Authors</h3>
+      <h3 class="text-h5 font-weight-medium pb-4">Contribute</h3>
 
       <v-divider></v-divider>
 
       <div class="pt-4">
-        <div class="d-flex align-center mb-6" v-for="i in 5" :key="i">
+        <div class="d-flex align-center mb-6">
           <v-avatar color="accent" size="64">
-            <v-icon dark x-large>mdi-feather</v-icon>
+            <v-img
+              src="https://avatars.githubusercontent.com/u/22465452?v=4"
+            ></v-img>
           </v-avatar>
 
           <div class="pl-2">
-            <div class="text-h6">Yan Lee</div>
-            <div class="text-subtitle-1">47 Articles</div>
+            <div class="text-h6 font-weight-bold">2015112088 김경민</div>
+            <div class="text-subtitle-1">gpffna777@naver.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/70712696?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2016112277 한주민</div>
+            <div class="text-subtitle-1">europejumin@gmail.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/71250502?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2018113343 권용재</div>
+            <div class="text-subtitle-1">dydwo2324@gmail.com</div>
+          </div>
+        </div>
+        <div class="d-flex align-center mb-6">
+          <v-avatar color="accent" size="64">
+            <v-img
+              src="https://avatars.githubusercontent.com/u/37470041?v=4"
+            ></v-img>
+          </v-avatar>
+
+          <div class="pl-2">
+            <div class="text-h6 font-weight-bold">2018113576 탄성호</div>
+            <div class="text-subtitle-1">leski@naver.com</div>
           </div>
         </div>
       </div>
@@ -86,19 +124,19 @@
     </div>
 
     <div class="pt-4">
-      <h3 class="text-h5 font-weight-medium pb-4">Newsletter</h3>
+      <h3 class="text-h5 font-weight-medium pb-4">QnA</h3>
 
       <v-divider></v-divider>
 
       <v-text-field
-        label="Your email adress"
+        label="type your question or suggestion"
         solo
-        type="email"
+        type="text"
         outlined
         flat
         class="pt-4"
       ></v-text-field>
-      <v-btn color="accent" block large>Subscrbe</v-btn>
+      <v-btn color="accent" block large>Commit</v-btn>
     </div>
   </div>
 </template>
