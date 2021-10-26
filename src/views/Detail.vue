@@ -54,36 +54,35 @@
                 >
                   <v-container>
                     <v-layout wrap row>
-                    <v-flex
-                      v-for="n in 5"
-                      :key="n"
-                    >
-                      <v-card
-                        :color="active ? '#FAF5FE' : '#FFFFFF'"
-                        class="ma-4"
-                        style="border-radius: 10px"
-                        height="600"
-                        width="800"
-                        @click="toggle"
-                      >
-                        <v-row
-                          class="fill-height"
-                          align="center"
-                          justify="center"
+                      <v-flex v-for="n in 5" :key="n">
+                        <v-card
+                          :color="active ? '#FAF5FE' : '#FFFFFF'"
+                          class="ma-4"
+                          style="border-radius: 10px"
+                          height="600"
+                          width="800"
+                          @click="toggle"
                         >
-                          <component :is="currentChart"></component>
-                          <v-scale-transition>
-                            <v-icon
-                              v-if="active"
-                              color="white"
-                              size="48"
-                            ></v-icon>
-                </v-scale-transition>
-                        </v-row>
-                      </v-card>
-                    </v-flex>
-                    <v-container>
-                </v-sheet> -->
+                          <v-row
+                            class="fill-height"
+                            align="center"
+                            justify="center"
+                          >
+                            <component :is="currentChart"></component>
+                            <v-scale-transition>
+                              <v-icon
+                                v-if="active"
+                                color="white"
+                                size="48"
+                              ></v-icon>
+                            </v-scale-transition>
+                          </v-row>
+                        </v-card>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-sheet>
+                -->
                 <v-card></v-card>
                 <v-container fluid>
                   <v-row dense>
