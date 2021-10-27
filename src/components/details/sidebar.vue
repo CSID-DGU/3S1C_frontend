@@ -1,26 +1,33 @@
 <template>
   <div>
     <div>
-      <h3 class="text-h5 font-weight-medium pb-4">Cumulative Statistics</h3>
+      <h3 class="text-h4 font-weight-bold pb-4">Cumulative Statistics</h3>
 
       <v-divider></v-divider>
 
       <div>
-        <v-row v-for="i in 5" :key="i" class="py-2">
-          <v-col cols="12" md="6" lg="5">
-            <v-card height="100%" flat> </v-card>
-          </v-col>
-
-          <v-col>
-            <div>
-              <v-btn depressed color="text-h6 accent font-weight-bold" small>{{
-                title[i - 1]
-              }}</v-btn>
-
-              <h3 class="text-h3 font-weight-bold primary--text py-3">
-                {{ output[i - 1] }}
-              </h3>
-            </div>
+        <v-row v-for="i in 5" :key="i">
+          <v-col cols="12" md="12" lg="12">
+            <v-card height="100%" flat elevation="2">
+              <v-col>
+                <div>
+                  <v-btn depressed color="text-h5 accent font-weight-bold">{{
+                    title[i - 1]
+                  }}</v-btn>
+                  <h3
+                    class="
+                      pt-2
+                      text-center text-h1
+                      font-weight-bold
+                      primary--text
+                    "
+                  >
+                    {{ output[i - 1] }}
+                  </h3>
+                  <h2 class="text-right">증감량</h2>
+                </div>
+              </v-col>
+            </v-card>
           </v-col>
         </v-row>
       </div>
@@ -44,9 +51,7 @@
 
     <div class="pt-4">
       <h3 class="text-h5 font-weight-medium pb-4">Contribute</h3>
-
       <v-divider></v-divider>
-
       <div class="pt-4">
         <div class="d-flex align-center mb-6">
           <v-avatar color="accent" size="64">
@@ -99,7 +104,7 @@
       </div>
     </div>
 
-    <div class="pt-4">
+    <!-- <div class="pt-4">
       <h3 class="text-h5 font-weight-medium pb-4">Tags</h3>
 
       <v-divider></v-divider>
@@ -109,7 +114,7 @@
           <v-chip color="accent">#Images</v-chip>
         </v-col>
       </v-row>
-    </div>
+    </div> -->
 
     <div class="pt-4">
       <h3 class="text-h5 font-weight-medium pb-4">QnA</h3>
