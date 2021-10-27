@@ -283,11 +283,13 @@ export default {
         .get("/api/real-time-popularity")
         .then(function (res) {
           self.items = JSON.parse(JSON.stringify(res.data));
+          self.getGender();
+          self.getAges();
+          self.getSentiment();
         })
         .catch(function (err) {
           console.log(err);
-        })
-
+        });
     },
     getGender() {
       for (let idx in this.items) {
