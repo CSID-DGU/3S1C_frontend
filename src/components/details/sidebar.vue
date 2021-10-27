@@ -6,32 +6,20 @@
       <v-divider></v-divider>
 
       <div>
-        <v-row v-for="i in 3" :key="i" class="py-2">
+        <v-row v-for="i in 5" :key="i" class="py-2">
           <v-col cols="12" md="6" lg="5">
-            <v-card height="100%" flat>
-              <v-img
-                src="https://dimg.donga.com/wps/NEWS/IMAGE/2021/01/17/104953245.2.jpg"
-                :aspect-ratio="16 / 9"
-                height="100%"
-              ></v-img>
-            </v-card>
+            <v-card height="100%" flat> </v-card>
           </v-col>
 
           <v-col>
             <div>
-              <v-btn depressed color="accent" small>태그 or 설명</v-btn>
+              <v-btn depressed color="text-h6 accent font-weight-bold" small>{{
+                title[i - 1]
+              }}</v-btn>
 
-              <h3 class="text-h6 font-weight-bold primary--text py-3">
-                What do | need to know to start learning JavaScript?
+              <h3 class="text-h3 font-weight-bold primary--text py-3">
+                {{ output[i - 1] }}
               </h3>
-
-              <div class="d-flex align-center">
-                <v-avatar color="accent" size="24">
-                  <v-icon dark small>mdi-feather</v-icon>
-                </v-avatar>
-
-                <div class="pl-2">Yan Lee · 03 Jan 2019</div>
-              </div>
             </div>
           </v-col>
         </v-row>
@@ -140,3 +128,105 @@
     </div>
   </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      title: [
+        "누적 댓글 수",
+        "누적 기사 수",
+        "누적 작성자 수",
+        "최다 언급 단어",
+        "1인최다 댓글/일",
+      ],
+      totalComment: "",
+      totalArticle: "",
+      totalUser: "",
+      mostKeyword: "",
+      mostcommentUser: "",
+      heavyUser: "",
+      output: [],
+    };
+  },
+  methods: {
+    fetchTotalComment() {
+      const self = this;
+      return axios
+        .get("/api/analysis/total-number-comments")
+        .then(function (res) {
+          self.totalComment = res.data;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    fetchTotalArticle() {
+      const self = this;
+      return axios
+        .get("/api/analysis/total-number-news")
+        .then(function (res) {
+          self.totalArticle = res.data;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    fetchTotalUser() {
+      const self = this;
+      return (
+        axios
+          //! api 고쳐지면 주석 원복하기
+          .get("/api/analysis/total-number-writers")
+          .then(function (res) {
+            self.totalUser = res.data;
+            //self.totalUser = res.data.wholeWriters;
+          })
+          .catch(function (err) {
+            console.log(err);
+          })
+      );
+    },
+    fetchMostKeyword() {
+      const self = this;
+      // TODO : api 추가 작업 필요
+      return axios
+        .get("/api/real-time-popularity/cumulative-statics")
+        .then(function (res) {
+          self.mostWord = res.data;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    fetchHeavyUser() {
+      const self = this;
+      // TODO : api 추가 작업 필요
+      return axios
+        .get("/api/analysis/users/heavy-user")
+        .then(function (res) {
+          self.heavyUser = res.data;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    Initialize() {
+      this.output.push(this.totalComment);
+      this.output.push(this.totalArticle);
+      this.output.push(this.totalUser);
+      this.output.push(this.mostKeyword);
+      this.output.push(this.heavyUser);
+    },
+  },
+  async created() {
+    Promise.all([
+      this.fetchTotalComment(),
+      this.fetchTotalArticle(),
+      this.fetchTotalUser(),
+      this.fetchMostKeyword(),
+      this.fetchHeavyUser(),
+    ]).then(() => this.Initialize());
+  },
+};
+</script>
