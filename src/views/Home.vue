@@ -94,11 +94,11 @@
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            :value="item.gender.ratio"
+                            :value="item.genderRatio.ratio"
                             :text="text"
-                            :color="item.gender.color"
+                            :color="item.genderRatio.color"
                           >
-                            {{ item.gender.info }}
+                            {{ item.genderRatio.info }}
                           </v-progress-circular>
 
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
@@ -107,24 +107,23 @@
                             :size="80"
                             :width="15"
                             color="teal"
-                            :value="item.age.ratio"
+                            :value="item.ageRatio.ratio"
                           >
-                            {{ item.age.info }}
+                            {{ item.ageRatio.info }}
                           </v-progress-circular>
-                        </div>
-                        <!--
+
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            color="orange"
-                            :value="item.heavyComment.ratio"
+                            :color="item.sentiment.color"
+                            :value="item.sentiment.ratio"
                           >
-                            {{ item.heavyComment.info }}
+                            {{ item.sentiment.info }}
                           </v-progress-circular>
                         </div>
-
+                        <!--
                         <div class="text-body-1 py-4">
                           {{ item.summary }}
                         </div>
@@ -284,23 +283,25 @@ export default {
         .get("/api/real-time-popularity")
         .then(function (res) {
           self.items = JSON.parse(JSON.stringify(res.data));
+          self.getGender();
+          self.getAges();
+          self.getSentiment();
         })
         .catch(function (err) {
           console.log(err);
-        })
-
+        });
     },
     getGender() {
       for (let idx in this.items) {
         let x = this.items[idx];
-        if (x.gender.female >= 0.5) {
-          x.gender.info = "여";
-          x.gender.ratio = x.gender.female * 100;
-          x.gender.color = "red";
+        if (x.genderRatio.female >= 0.5) {
+          x.genderRatio.info = "여";
+          x.genderRatio.ratio = x.genderRatio.female * 100;
+          x.genderRatio.color = "#ff1493";
         } else {
-          x.gender.info = "남";
-          x.gender.ratio = x.gender.male * 100;
-          x.gender.color = "blue";
+          x.genderRatio.info = "남";
+          x.genderRatio.ratio = x.genderRatio.male * 100;
+          x.genderRatio.color = "#0000CD";
         }
       }
     },
@@ -308,18 +309,25 @@ export default {
       for (let idx in this.items) {
         let x = this.items[idx];
         // TODO : 추후
-        x.age.info = _.max(Object.keys(x.age), (val) => x.age[val]);
-        x.age.ratio = _.max(...x.age);
+        const maxValue = _.max(Object.values(x.ageRatio));
+        x.ageRatio.info = Object.keys(x.ageRatio).find(
+          (key) => x.ageRatio[key] === maxValue
+        );
+        x.ageRatio.info += "대";
+        x.ageRatio.ratio = maxValue * 100;
       }
     },
     getSentiment() {
-      for (let x in this.data) {
-        if (x.positive >= 0.5) {
-          x.gender.info = "긍정";
-          x.gender.ratio = x.positive;
+      for (let idx in this.items) {
+        let x = this.items[idx];
+        if (x.sentiment.positive >= 50) {
+          x.sentiment.info = "긍정";
+          x.sentiment.ratio = x.sentiment.positive;
+          x.sentiment.color = "blue";
         } else {
-          x.gender.info = "부정";
-          x.gender.ratio = x.negative;
+          x.sentiment.info = "부정";
+          x.sentiment.ratio = x.sentiment.negative;
+          x.sentiment.color = "red";
         }
       }
     },
@@ -327,87 +335,14 @@ export default {
       this.summary.content =
         "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
     },
-    loadItems() {
-      this.items = [
-        //[TODO] 추후 heavy comment는 %값을 받아와서 의심여부는 client에서 생성해주도록 수정
-        {
-          id: 0,
-          keyword: "singer",
-          gender: { info: "여", ratio: 30 },
-          age: { info: "30대", ratio: 25 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
-        },
-        {
-          id: 1,
-          keyword: "dancer",
-          gender: { info: "남", ratio: 70 },
-          age: { info: "20대", ratio: 40 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
-        },
-        {
-          id: 2,
-          keyword: "dancer",
-          gender: { info: "남", ratio: 70 },
-          age: { info: "20대", ratio: 40 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
-        },
-        {
-          id: 3,
-          keyword: "dancer",
-          gender: { info: "남", ratio: 70 },
-          age: { info: "20대", ratio: 40 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }],
-        },
-        {
-          id: 4,
-          keyword: "dancer",
-          gender: { info: "남", ratio: 70 },
-          age: { info: "20대", ratio: 40 },
-          heavyComment: { info: "의심", ratio: 50 },
-          summary: {
-            content:
-              "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.",
-          },
-          tags: [{ tagName: "tag1" }, { tagName: "tag2" }, { tagName: "tag3" }],
-        },
-      ];
-    },
     loadTags() {
       this.tags = [{ tagName: "tag1" }, { tagName: "tag2" }];
     },
   },
   async created() {
     await this.fetchData();
-    this.getGender();
-    this.getAges();
   },
-  mounted() {
-    //this.getGender();
-    //console.log(this.loading);
-    //this.getHeavyComment();
-    //this.getSummary();
-    //this.loadItems();
-  },
+  mounted() {},
   computed: {
     getItemId(id) {
       return Number(id);
