@@ -94,11 +94,11 @@
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            :value="item.gender.ratio"
+                            :value="item.genderRatio.ratio"
                             :text="text"
-                            :color="item.gender.color"
+                            :color="item.genderRatio.color"
                           >
-                            {{ item.gender.info }}
+                            {{ item.genderRatio.info }}
                           </v-progress-circular>
 
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
@@ -107,24 +107,23 @@
                             :size="80"
                             :width="15"
                             color="teal"
-                            :value="item.age.ratio"
+                            :value="item.ageRatio.ratio"
                           >
-                            {{ item.age.info }}
+                            {{ item.ageRatio.info }}
                           </v-progress-circular>
-                        </div>
-                        <!--
+
                           <slot>&nbsp;&nbsp;&nbsp;&nbsp;</slot>
                           <v-progress-circular
                             :rotate="180"
                             :size="80"
                             :width="15"
-                            color="orange"
-                            :value="item.heavyComment.ratio"
+                            :color="item.sentiment.color"
+                            :value="item.sentiment.ratio"
                           >
-                            {{ item.heavyComment.info }}
+                            {{ item.sentiment.info }}
                           </v-progress-circular>
                         </div>
-
+                        <!--
                         <div class="text-body-1 py-4">
                           {{ item.summary }}
                         </div>
@@ -293,14 +292,14 @@ export default {
     getGender() {
       for (let idx in this.items) {
         let x = this.items[idx];
-        if (x.gender.female >= 0.5) {
-          x.gender.info = "여";
-          x.gender.ratio = x.gender.female * 100;
-          x.gender.color = "red";
+        if (x.genderRatio.female >= 0.5) {
+          x.genderRatio.info = "여";
+          x.genderRatio.ratio = x.genderRatio.female * 100;
+          x.genderRatio.color = "#ff1493";
         } else {
-          x.gender.info = "남";
-          x.gender.ratio = x.gender.male * 100;
-          x.gender.color = "blue";
+          x.genderRatio.info = "남";
+          x.genderRatio.ratio = x.genderRatio.male * 100;
+          x.genderRatio.color = "#0000CD";
         }
       }
     },
@@ -308,18 +307,25 @@ export default {
       for (let idx in this.items) {
         let x = this.items[idx];
         // TODO : 추후
-        x.age.info = _.max(Object.keys(x.age), (val) => x.age[val]);
-        x.age.ratio = _.max(...x.age);
+        const maxValue = _.max(Object.values(x.ageRatio));
+        x.ageRatio.info = Object.keys(x.ageRatio).find(
+          (key) => x.ageRatio[key] === maxValue
+        );
+        x.ageRatio.info += "대";
+        x.ageRatio.ratio = maxValue * 100;
       }
     },
     getSentiment() {
-      for (let x in this.data) {
-        if (x.positive >= 0.5) {
-          x.gender.info = "긍정";
-          x.gender.ratio = x.positive;
+      for (let idx in this.items) {
+        let x = this.items[idx];
+        if (x.sentiment.positive >= 50) {
+          x.sentiment.info = "긍정";
+          x.sentiment.ratio = x.sentiment.positive;
+          x.sentiment.color = "blue";
         } else {
-          x.gender.info = "부정";
-          x.gender.ratio = x.negative;
+          x.sentiment.info = "부정";
+          x.sentiment.ratio = x.sentiment.negative;
+          x.sentiment.color = "red";
         }
       }
     },
