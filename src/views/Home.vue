@@ -288,10 +288,7 @@ export default {
         .catch(function (err) {
           console.log(err);
         })
-        .finally(function () {
-          self.loading = false;
-          console.log("loading");
-        });
+
     },
     getGender() {
       for (let idx in this.items) {
