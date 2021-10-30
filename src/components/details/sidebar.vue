@@ -24,7 +24,12 @@
                   >
                     {{ output[i - 1] }}
                   </h3>
-                  <h2 class="text-right">증감량</h2>
+                  <h2 class="text-right">
+                    {{ changed[i - 1] }}
+                    <a v-if="changed[i - 1]">
+                      <v-icon large color="red">mdi-trending-up</v-icon>
+                    </a>
+                  </h2>
                 </div>
               </v-col>
             </v-card>
