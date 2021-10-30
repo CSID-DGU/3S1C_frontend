@@ -24,7 +24,12 @@
                   >
                     {{ output[i - 1] }}
                   </h3>
-                  <h2 class="text-right">증감량</h2>
+                  <h2 class="text-right">
+                    {{ changed[i - 1] }}
+                    <a v-if="changed[i - 1]">
+                      <v-icon large color="red">mdi-trending-up</v-icon>
+                    </a>
+                  </h2>
                 </div>
               </v-col>
             </v-card>
@@ -151,54 +156,38 @@ export default {
       mostKeyword: "",
       mostcommentUser: "",
       heavyUser: "",
+      todayComment: "",
+      todayArticle: "",
+      todayUser: "",
       output: [],
+      changed: [],
     };
   },
   methods: {
-    fetchTotalComment() {
+    fetchTotalData() {
       const self = this;
       return axios
-        .get("/api/analysis/total-number-comments")
+        .get("/api/analysis/cumulative-statistics")
         .then(function (res) {
-          self.totalComment = res.data;
+          const data = res.data;
+          self.totalComment = data.hist_comments;
+          self.totalArticle = data.hist_news;
+          self.totalUser = data.hist_writers;
+          self.todayComment = data.today_comments;
+          self.todayArticle = data.today_news;
+          self.todayUser = data.today_writers;
         })
         .catch(function (err) {
           console.log(err);
         });
-    },
-    fetchTotalArticle() {
-      const self = this;
-      return axios
-        .get("/api/analysis/total-number-news")
-        .then(function (res) {
-          self.totalArticle = res.data;
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    },
-    fetchTotalUser() {
-      const self = this;
-      return (
-        axios
-          //! api 고쳐지면 주석 원복하기
-          .get("/api/analysis/total-number-writers")
-          .then(function (res) {
-            self.totalUser = res.data;
-            //self.totalUser = res.data.wholeWriters;
-          })
-          .catch(function (err) {
-            console.log(err);
-          })
-      );
     },
     fetchMostKeyword() {
       const self = this;
-      // TODO : api 추가 작업 필요
       return axios
-        .get("/api/real-time-popularity/cumulative-statics")
+        .get("/api/real-time-popularity")
         .then(function (res) {
-          self.mostWord = res.data;
+          const data = res.data;
+          self.mostKeyword = data.find((x) => x.ranks === 1).keyword;
         })
         .catch(function (err) {
           console.log(err);
@@ -210,7 +199,19 @@ export default {
       return axios
         .get("/api/analysis/users/heavy-user")
         .then(function (res) {
-          self.heavyUser = res.data;
+          self.heavyUser = res.data.content[0].commentsNumber;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    ComparePreviosData() {
+      const self = this;
+      // TODO : api 추가 작업 필요
+      return axios
+        .get("/api/analysis/users/heavy-user")
+        .then(function (res) {
+          self.heavyUser = res.data.content[0].commentsNumber;
         })
         .catch(function (err) {
           console.log(err);
@@ -222,13 +223,15 @@ export default {
       this.output.push(this.totalUser);
       this.output.push(this.mostKeyword);
       this.output.push(this.heavyUser);
+
+      this.changed.push(this.todayComment);
+      this.changed.push(this.todayArticle);
+      this.changed.push(this.todayUser);
     },
   },
   async created() {
     Promise.all([
-      this.fetchTotalComment(),
-      this.fetchTotalArticle(),
-      this.fetchTotalUser(),
+      this.fetchTotalData(),
       this.fetchMostKeyword(),
       this.fetchHeavyUser(),
     ]).then(() => this.Initialize());
