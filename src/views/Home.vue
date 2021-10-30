@@ -76,7 +76,12 @@
                       >
                         <v-card-text>
                           <div
-                            class="text-center text-h3 white--text-center ma-8"
+                            class="
+                              text-center text-h2
+                              white--text-center
+                              ma-8
+                              font-weight-bold
+                            "
                             style="
                               background: rgba(255, 255, 255, 0.3);
                               color: white;
@@ -123,19 +128,18 @@
                             {{ item.sentiment.info }}
                           </v-progress-circular>
                         </div>
-                        <!--
                         <div class="text-body-1 py-4">
-                          {{ item.summary }}
+                          {{ item.brifNews.slice(0, 70) + "..." }}
                         </div>
                         <v-btn
-                          v-for="tag in item.tags"
-                          :key="tag.tagName"
+                          v-for="t in item.tag"
+                          :key="t"
                           color="accent"
                           to="category"
                           class="pa-3 ma-1"
                         >
-                          {{ "#" + tag.tagName }}
-                        </v-btn> -->
+                          {{ "#" + t }}
+                        </v-btn>
                       </v-card-text>
                     </v-card>
                   </div>
@@ -330,13 +334,6 @@ export default {
           x.sentiment.color = "red";
         }
       }
-    },
-    getSummary() {
-      this.summary.content =
-        "키워드와 관련된 기사 중 일부를 발췌하여 요약된 문장으로 간단하게 보여줍니다.";
-    },
-    loadTags() {
-      this.tags = [{ tagName: "tag1" }, { tagName: "tag2" }];
     },
   },
   async created() {
