@@ -155,12 +155,18 @@ export default {
     };
   },
   methods: {
-    fetchTotalComment() {
+    fetchTotalData() {
       const self = this;
       return axios
-        .get("/api/analysis/total-number-comments")
+        .get("/api/analysis/cumulative-statistics")
         .then(function (res) {
-          self.totalComment = res.data;
+          const data = res.data;
+          self.totalComment = data.hist_comments;
+          self.totalArticle = data.hist_news;
+          self.totalUser = data.hist_writers;
+          self.todayComment = data.today_comments;
+          self.todayArticle = data.today_news;
+          self.todayUser = data.today_writers;
         })
         .catch(function (err) {
           console.log(err);
