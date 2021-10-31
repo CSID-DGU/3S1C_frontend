@@ -29,7 +29,7 @@
                       border-radius: 16px;
                     "
                   >
-                    #keyword
+                    # {{ keyword }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -151,6 +151,14 @@
                         뭔가... 뭔가 차트같은 것이 있는 것이와요 hawawa
                       </b>
                     </v-alert>
+                    <div class="text-h6">
+                      <b>관련기사</b>
+                      <ul>
+                        <li v-for="article in relatedArticles" :key="article">
+                          <a :href="article.url">{{ article.newsTitle }}</a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </v-card-text>
@@ -168,6 +176,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Bar from "@/components/details/bar.vue";
 import LineChart from "@/components/details/line.vue";
 import ChartCard from "@/components/ChartCard.vue";
@@ -182,7 +191,10 @@ export default {
     Card,
   },
   props: {
-    id: Number,
+    keyword: {
+      type: String,
+      default: "",
+    },
   },
   computed: {
     currentChart() {
@@ -194,6 +206,7 @@ export default {
   },
   data() {
     return {
+      relatedArticles: [],
       cnt: 0,
       chartArray: ["line-chart", "bar"],
       statsCards: [
@@ -251,6 +264,22 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    fetchData() {
+      const self = this;
+      return axios
+        .get(`/api/keywords/${self.keyword}/related-articles`)
+        .then(function (res) {
+          self.relatedArticles = JSON.parse(JSON.stringify(res.data));
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+  },
+  async created() {
+    await this.fetchData();
   },
 };
 </script>
