@@ -47,9 +47,12 @@
         <v-card-text
           class="d-flex justify-space-between align-center white--text"
         >
-          <h6 class="text-h6">최신 뉴스 속보 or 댓글이 가장 많은 뉴스 기사</h6>
+          <h6 class="text-h6">{{ hottestNews[i - 1].title }}</h6>
 
-          <div class="text-h6">댓글 수 {n}</div>
+          <div class="text-h6">
+            <v-icon>mdi-comment-edit</v-icon>
+            {{ hottestNews[i - 1].numOfComments }}
+          </div>
         </v-card-text>
       </v-card>
     </div>
@@ -159,6 +162,7 @@ export default {
       todayComment: "",
       todayArticle: "",
       todayUser: "",
+      hottestNews: "",
       output: [],
       changed: [],
     };
@@ -228,12 +232,21 @@ export default {
       this.changed.push(this.todayArticle);
       this.changed.push(this.todayUser);
     },
+    GetHottestNews() {
+      const self = this;
+      return axios
+        .get("/api/analysis/having-many-comments")
+        .then(function (res) {
+          self.hottestNews = res.data;
+        });
+    },
   },
   async created() {
     Promise.all([
       this.fetchTotalData(),
       this.fetchMostKeyword(),
       this.fetchHeavyUser(),
+      this.GetHottestNews(),
     ]).then(() => this.Initialize());
   },
 };
