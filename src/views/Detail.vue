@@ -36,10 +36,56 @@
 
               <v-card-text>
                 <div class="text-h4 font-weight-bold primary--text pt-4">
-                  <!-- TODO : 설명 넣기 -->
-                  <h4>이 페이지는 {{ id + 1 }}번째 카드의 상세정보입니다</h4>
+                  <v-card
+                    :color="active ? '#FAF5FE' : '#FFFFFF'"
+                    class="ma-4"
+                    style="border-radius: 10px"
+                    @click="toggle"
+                  >
+                    <h4 class="pt-4" align="center">
+                      뉴스 댓글 분석 서비스 '오늘의 목소리'는
+                    </h4>
+                    <h4 align="center">
+                      최근 작성된 네이버 뉴스의 댓글에서 핵심 키워드와 함께
+                    </h4>
+                    <h4 class="pb-4" align="center">
+                      관련된 댓글 사용자들의 메타 데이터를 수집합니다
+                    </h4>
+                  </v-card>
                 </div>
-                Rank{{ rank }} Mention {{ mentions }}
+
+                <v-card
+                  :color="active ? '#FAF5FE' : '#FFFFFF'"
+                  class="ma-4"
+                  style="border-radius: 10px"
+                  @click="toggle"
+                >
+                  <v-col style="height: 140px">
+                    <div>
+                      <div class="px-2 py-2" style="float: left; width: 50%">
+                        <v-btn
+                          color="#067EDB"
+                          block
+                          large
+                          class="text-h3 text-weight-bold white--text"
+                          style="height: 100px"
+                          >Rank {{ rank }}
+                        </v-btn>
+                      </div>
+                      <div class="px-2 py-2" style="float: left; width: 50%">
+                        <v-btn
+                          color="#067EDB"
+                          block
+                          large
+                          class="text-h3 text-weight-bold white--text"
+                          style="height: 100px"
+                          >Mentions {{ mentions }}
+                        </v-btn>
+                      </div>
+                    </div>
+                  </v-col>
+                </v-card>
+
                 <v-sheet
                   class="mx-auto my-5"
                   color="#fefefe"
@@ -126,6 +172,13 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
 
+                <v-card
+                  :color="active ? '#FAF5FE' : '#FFFFFF'"
+                  class="ma-4"
+                  style="border-radius: 10px"
+                  @click="toggle"
+                >
+                </v-card>
                 <div>
                   <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
@@ -137,41 +190,79 @@
                     </v-col>
                   </v-row>
                   <div class="py-2">
+                    <v-btn depressed color="text-h5 accent font-weight-bold"
+                      >워드클라우드</v-btn
+                    >
+                    <v-card
+                      :color="active ? '#FAF5FE' : '#FFFFFF'"
+                      class="ma-4"
+                      style="border-radius: 10px"
+                      @click="toggle"
+                    >
+                      <v-col style="height: 330px">
+                        <div>
+                          <vue-word-cloud
+                            class="ma-0 my-4"
+                            style="height: 300px"
+                            :words="wordcloud"
+                            :color="
+                              ([, weight]) =>
+                                //TODO : weight 최대값 기준으로 20% 단위로 끊어서 색상 변경
+                                weight > 200
+                                  ? 'navy'
+                                  : weight > 160
+                                  ? '#556B2F'
+                                  : weight > 120
+                                  ? '#daa520'
+                                  : weight > 80
+                                  ? '#2F4F4F'
+                                  : weight > 40
+                                  ? '#4169E1'
+                                  : '#ffa07a'
+                            "
+                            font-family="serif"
+                            font-weight="bold"
+                            font-size-ratio="10"
+                          />
+                        </div>
+                      </v-col>
+                    </v-card>
+                    <!-- TODO : 색 변경하기 배경넣기 -->
+
                     <v-alert
-                      class="font-italic text-h6 text-center"
+                      class="ma-4 font-italic text-h6 text-center"
                       border="left"
                       colored-border
                       color="accent"
                     >
-                      <b id="차트에 간단한 해설">
-                        뭔가... 뭔가 차트같은 것이 있는 것이와요 hawawa
-                      </b>
+                      <b>
+                        워드 클라우드는 현재 키워드와 함께 언급된 키워드를
+                        보여줍니다</b
+                      >
                     </v-alert>
-                    <b>워드클라우드</b>
-                    <!-- TODO : 색 변경하기 배경넣기 -->
-                    <vue-word-cloud
-                      class="ma-0"
-                      style="height: 120px"
-                      :words="wordcloud"
-                      :color="
-                        ([, weight]) =>
-                          weight > 10
-                            ? 'white'
-                            : weight > 5
-                            ? 'silver'
-                            : 'antiquewhite'
-                      "
-                      font-family="serif"
-                      font-weight="bold"
-                      font-size-ratio="10"
-                    />
+
                     <div class="text-h6">
-                      <b>관련기사</b>
-                      <ul>
-                        <li v-for="article in relatedArticles" :key="article">
-                          <a :href="article.url">{{ article.newsTitle }}</a>
-                        </li>
-                      </ul>
+                      <v-btn depressed color="text-h5 accent font-weight-bold"
+                        >관련기사</v-btn
+                      >
+                      <v-card
+                        :color="active ? '#FAF5FE' : '#FFFFFF'"
+                        class="ma-4"
+                        style="border-radius: 10px"
+                        @click="toggle"
+                      >
+                        <v-col style="height: 150px">
+                          <ul class="ma-2">
+                            <li
+                              class="ma-2 font-weight-bold"
+                              v-for="article in relatedArticles"
+                              :key="article"
+                            >
+                              <a :href="article.url">{{ article.newsTitle }}</a>
+                            </li>
+                          </ul>
+                        </v-col>
+                      </v-card>
                     </div>
                   </div>
                 </div>
