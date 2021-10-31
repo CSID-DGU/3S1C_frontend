@@ -30,6 +30,7 @@
                     "
                   >
                     # {{ keyword }}
+                    {{ this.chartdata }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -40,7 +41,8 @@
                   <h4>이 페이지는 {{ id + 1 }}번째 카드의 상세정보입니다</h4>
                 </div>
                 Rank{{ rank }} Mention {{ mentions }}
-                <v-sheet
+
+                <!-- <v-sheet
                   class="mx-auto my-5"
                   color="#fefefe"
                   style="
@@ -77,22 +79,26 @@
                       </v-flex>
                     </v-layout>
                   </v-container>
-                </v-sheet>
+                </v-sheet> -->
                 -->
                 <v-card></v-card>
                 <v-container fluid>
                   <v-row dense>
-                    <v-col
-                      v-for="card in cards"
-                      :key="card.title"
-                      :cols="card.flex"
-                    >
+                    <v-col v-for="i in 3" :key="i">
                       <v-card>
-                        <v-card-title> 성별 </v-card-title>
-                        <v-card-text
-                          >성별차트
+                        <v-card-title> 성별 분포 </v-card-title>
+                        <v-card-text>
                           <div>
-                            <component :is="card.chartType" />
+                            <!-- <component
+                              :is="card.chartType"
+                              v-if="loaded"
+                              :chartdata="chartdata"
+                            /> -->
+                            <bar
+                              v-if="loaded"
+                              :chartdata="chartdata"
+                              :options="options"
+                            />
                           </div>
                         </v-card-text>
                         <v-card-actions>
@@ -193,17 +199,17 @@
 import axios from "axios";
 import _ from "lodash";
 import Bar from "@/components/details/bar.vue";
-import LineChart from "@/components/details/line.vue";
-import ChartCard from "@/components/ChartCard.vue";
-import Card from "@/components/Card.vue";
+// import LineChart from "@/components/details/line.vue";
+// import ChartCard from "@/components/ChartCard.vue";
+// import Card from "@/components/Card.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
-    LineChart,
-    ChartCard,
-    Card,
+    // LineChart,
+    // ChartCard,
+    // Card,
   },
   props: {
     keyword: {
@@ -228,60 +234,8 @@ export default {
       mentions: 0,
       rank: 0,
       chartArray: ["line-chart", "bar"],
-      statsCards: [
-        {
-          type: "warning",
-          icon: "ti-server",
-          title: "Capacity",
-          value: "105GB",
-          footerText: "Updated now",
-          footerIcon: "ti-reload",
-        },
-        {
-          type: "success",
-          icon: "ti-wallet",
-          title: "Revenue",
-          value: "$1,345",
-          footerText: "Last day",
-          footerIcon: "ti-calendar",
-        },
-        {
-          type: "danger",
-          icon: "ti-pulse",
-          title: "Errors",
-          value: "23",
-          footerText: "In the last hour",
-          footerIcon: "ti-timer",
-        },
-        {
-          type: "info",
-          icon: "ti-twitter-alt",
-          title: "Followers",
-          value: "+45",
-          footerText: "Updated now",
-          footerIcon: "ti-reload",
-        },
-      ],
-      cards: [
-        {
-          title: "Pre-fab homes",
-          src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
-          flex: 12,
-          chartType: "Bar",
-        },
-        {
-          title: "Favorite road trips",
-          src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-          flex: 6,
-          chartType: "LineChart",
-        },
-        {
-          title: "Best airlines",
-          src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
-          flex: 6,
-          chartType: "LineChart",
-        },
-      ],
+      loaded: false,
+      chartdata: {},
     };
   },
   methods: {
@@ -337,6 +291,27 @@ export default {
       this.fetchWordCloud(),
       this.fetchRankData(),
     ]).then(() => this.reformWordCloud());
+  },
+  async mounted() {
+    this.loaded = false;
+    try {
+      const { data } = await axios.get(
+        `/api/keywords/${this.keyword}/gender-ratio`
+      );
+      this.chartdata = {
+        labels: ["남성", "여성"],
+        datasets: [
+          {
+            label: "data One",
+            backgroundColor: ["blue", "red"],
+            data: [data.male * 100, data.female * 100],
+          },
+        ],
+      };
+      this.loaded = true;
+    } catch (e) {
+      console.error(e);
+    }
   },
 };
 </script>
