@@ -62,7 +62,10 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
-                      :to="{ name: 'Detail', params: { id: item.id } }"
+                      :to="{
+                        name: 'Detail',
+                        params: { keyword: item.keyword },
+                      }"
                     >
                       <!--{{ item.id }}-->
 

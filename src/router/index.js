@@ -16,11 +16,11 @@ const routes = [
     component: () => import("@/views/Category.vue"),
   },
   {
-    path: '/detail/:id',
+    path: '/detail/:keyword',
     name: 'Detail',
     component: () => import("@/views/Detail.vue"),
     props: route => ({
-      id: Number(route.params.id)
+      keyword: route.params.keyword
     })
   },
   {
