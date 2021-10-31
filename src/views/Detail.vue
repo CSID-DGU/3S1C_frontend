@@ -36,14 +36,10 @@
 
               <v-card-text>
                 <div class="text-h4 font-weight-bold primary--text pt-4">
-                  <!-- test code -->
+                  <!-- TODO : 설명 넣기 -->
                   <h4>이 페이지는 {{ id + 1 }}번째 카드의 상세정보입니다</h4>
                 </div>
-
-                <div class="text-body-1 pt-4">
-                  "평균 댓글 작성자 성비, 인구 통계, 타 키워드 대비 성비 분석
-                  결과"
-                </div>
+                Rank{{ rank }} Mention {{ mentions }}
                 <v-sheet
                   class="mx-auto my-5"
                   color="#fefefe"
@@ -152,6 +148,7 @@
                       </b>
                     </v-alert>
                     <b>워드클라우드</b>
+                    <!-- TODO : 색 변경하기 배경넣기 -->
                     <vue-word-cloud
                       class="ma-0"
                       style="height: 120px"
@@ -228,6 +225,8 @@ export default {
       wordCloud: [],
       tmp: [],
       cnt: 0,
+      mentions: 0,
+      rank: 0,
       chartArray: ["line-chart", "bar"],
       statsCards: [
         {
@@ -297,6 +296,19 @@ export default {
           console.log(err);
         });
     },
+    fetchRankData() {
+      const self = this;
+      return axios
+        .get(`/api/keywords/${self.keyword}/ranks-mentions`)
+        .then(function (res) {
+          const data = JSON.parse(JSON.stringify(res.data));
+          self.mentions = data.Mentions;
+          self.rank = data.Rank;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
     fetchWordCloud() {
       const self = this;
       return axios
@@ -320,9 +332,11 @@ export default {
     },
   },
   async created() {
-    Promise.all([this.fetchData(), this.fetchWordCloud()]).then(() =>
-      this.reformWordCloud()
-    );
+    Promise.all([
+      this.fetchData(),
+      this.fetchWordCloud(),
+      this.fetchRankData(),
+    ]).then(() => this.reformWordCloud());
   },
 };
 </script>
