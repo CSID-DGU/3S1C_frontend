@@ -30,7 +30,7 @@
                     "
                   >
                     # {{ keyword }}
-                    {{ this.chartdata }}
+                    {{ this.avgData }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -87,80 +87,39 @@
                   </v-col>
                 </v-card>
 
-                <v-sheet
-                  class="mx-auto my-5"
-                  color="#fefefe"
-                  style="
-                    background: rgba(245, 245, 255, 0.3);
-                    border-radius: 10px;
-                  "
-                >
-                  <v-container>
-                    <v-layout wrap row>
-                      <v-flex v-for="n in 5" :key="n">
-                        <v-card
-                          :color="active ? '#FAF5FE' : '#FFFFFF'"
-                          class="ma-4"
-                          style="border-radius: 10px"
-                          height="600"
-                          width="800"
-                          @click="toggle"
-                        >
-                          <v-row
-                            class="fill-height"
-                            align="center"
-                            justify="center"
-                          >
-                            <component :is="currentChart"></component>
-                            <v-scale-transition>
-                              <v-icon
-                                v-if="active"
-                                color="white"
-                                size="48"
-                              ></v-icon>
-                            </v-scale-transition>
-                          </v-row>
-                        </v-card>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-sheet> -->
-                -->
-                <v-card></v-card>
                 <v-container fluid>
-                  <v-row dense>
-                    <v-col v-for="i in 3" :key="i">
-                      <v-card>
-                        <v-card-title> 성별 분포 </v-card-title>
-                        <v-card-text>
-                          <div>
-                            <!-- <component
-                              :is="card.chartType"
-                              v-if="loaded"
-                              :chartdata="chartdata"
-                            /> -->
-                            <bar
-                              v-if="loaded"
-                              :chartdata="chartdata"
-                              :options="options"
-                            />
-                          </div>
-                        </v-card-text>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn icon>
-                            <v-icon>mdi-heart</v-icon>
-                          </v-btn>
-                          <v-btn icon>
-                            <v-icon>mdi-bookmark</v-icon>
-                          </v-btn>
-                          <v-btn icon>
-                            <v-icon>mdi-share-variant</v-icon>
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-col>
-                  </v-row>
+                  <v-card>
+                    <v-card-title> 성별 분포 </v-card-title>
+                    <v-card-text>
+                      <bar
+                        v-if="loaded"
+                        :chartdata="chartdata"
+                        :options="options"
+                      />
+                      <bar
+                        v-if="avgLoaded"
+                        :chartdata="avgData"
+                        :options="options"
+                      />
+                      <bar
+                        v-if="loaded"
+                        :chartdata="chartdata"
+                        :options="options"
+                      />
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn icon>
+                        <v-icon>mdi-heart</v-icon>
+                      </v-btn>
+                      <v-btn icon>
+                        <v-icon>mdi-bookmark</v-icon>
+                      </v-btn>
+                      <v-btn icon>
+                        <v-icon>mdi-share-variant</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
                 </v-container>
                 <div class="py-2">
                   <v-alert
@@ -325,7 +284,9 @@ export default {
       rank: 0,
       chartArray: ["line-chart", "bar"],
       loaded: false,
+      avgLoaded: false,
       chartdata: {},
+      avgData: {},
     };
   },
   methods: {
@@ -374,12 +335,32 @@ export default {
         this.tmp[key].mentions,
       ]);
     },
+    async fetchAvgData() {
+      try {
+        this.avgLoaded = false;
+        const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
+        this.avgData = {
+          labels: ["남성", "여성"],
+          datasets: [
+            {
+              label: "data Two",
+              backgroundColor: ["blue", "red"],
+              data: [Math.ceil(data.avg_male), Math.ceil(data.avg_female)],
+            },
+          ],
+        };
+        this.avgLoaded = true;
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
   async created() {
     Promise.all([
       this.fetchData(),
       this.fetchWordCloud(),
       this.fetchRankData(),
+      this.fetchAvgData(),
     ]).then(() => this.reformWordCloud());
   },
   async mounted() {
