@@ -151,6 +151,23 @@
                         뭔가... 뭔가 차트같은 것이 있는 것이와요 hawawa
                       </b>
                     </v-alert>
+                    <b>워드클라우드</b>
+                    <vue-word-cloud
+                      class="ma-0"
+                      style="height: 120px"
+                      :words="wordcloud"
+                      :color="
+                        ([, weight]) =>
+                          weight > 10
+                            ? 'white'
+                            : weight > 5
+                            ? 'silver'
+                            : 'antiquewhite'
+                      "
+                      font-family="serif"
+                      font-weight="bold"
+                      font-size-ratio="10"
+                    />
                     <div class="text-h6">
                       <b>관련기사</b>
                       <ul>
@@ -177,6 +194,7 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash";
 import Bar from "@/components/details/bar.vue";
 import LineChart from "@/components/details/line.vue";
 import ChartCard from "@/components/ChartCard.vue";
@@ -207,6 +225,8 @@ export default {
   data() {
     return {
       relatedArticles: [],
+      wordCloud: [],
+      tmp: [],
       cnt: 0,
       chartArray: ["line-chart", "bar"],
       statsCards: [
@@ -277,9 +297,32 @@ export default {
           console.log(err);
         });
     },
+    fetchWordCloud() {
+      const self = this;
+      return axios
+        .get(`/api/keywords/${self.keyword}/wordcloud`)
+        .then(function (res) {
+          self.wordcloud = JSON.parse(JSON.stringify(res.data));
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    },
+    reformWordCloud() {
+      this.tmp = _.map(
+        this.wordcloud,
+        _.partialRight(_.pick, ["relkeywordsId.content", "mentions"])
+      );
+      this.wordcloud = Object.keys(this.tmp).map((key) => [
+        this.tmp[key].relkeywordsId.content,
+        this.tmp[key].mentions,
+      ]);
+    },
   },
   async created() {
-    await this.fetchData();
+    Promise.all([this.fetchData(), this.fetchWordCloud()]).then(() =>
+      this.reformWordCloud()
+    );
   },
 };
 </script>
