@@ -113,8 +113,7 @@
                       />
                       <bar
                         style="float: right; width: 33%"
-                        v-if="loaded"
-                        :chartdata="chartdata"
+                        :chartdata="statGender"
                         :options="options"
                       />
                     </v-card-text>
@@ -409,6 +408,55 @@ export default {
       avgLoaded: false,
       chartdata: {},
       avgData: {},
+      //statistic data set
+      statGender: {
+        datasets: [
+          {
+            label: "남성",
+            backgroundColor: "blue",
+            data: [50.3],
+          },
+          {
+            label: "여성",
+            backgroundColor: "red",
+            data: [49.7],
+          },
+        ],
+      },
+      statAge: {
+        datasets: [
+          {
+            label: "10대",
+            backgroundColor: "black",
+            data: 16.5,
+          },
+          {
+            label: "20대",
+            backgroundColor: "blue",
+            data: 13.4,
+          },
+          {
+            label: "30대",
+            backgroundColor: "red",
+            data: 13.5,
+          },
+          {
+            label: "40대",
+            backgroundColor: "orange",
+            data: 15.6,
+          },
+          {
+            label: "50대",
+            backgroundColor: "grey",
+            data: 16.3,
+          },
+          {
+            label: "60대",
+            backgroundColor: "green",
+            data: 24.6,
+          },
+        ],
+      },
       // age graph test
       ageData: {},
       ageLoaded: false,
