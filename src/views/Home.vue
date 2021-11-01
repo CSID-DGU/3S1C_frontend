@@ -64,7 +64,10 @@
                       hover
                       :to="{
                         name: 'Detail',
-                        params: { keyword: item.keyword },
+                        params: {
+                          keyword: item.keyword,
+                          sentiment: item.sentiment,
+                        },
                       }"
                     >
                       <!--{{ item.id }}-->
