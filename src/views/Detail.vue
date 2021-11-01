@@ -535,13 +535,13 @@ export default {
     },
   },
   async created() {
-    Promise.all([
-      this.fetchData(),
-      this.fetchWordCloud(),
-      this.fetchRankData(),
-      this.fetchAges(),
-      this.fetchAvgData(),
-    ]).then(() => this.reformWordCloud());
+    this.fetchData();
+
+    this.fetchRankData();
+    this.fetchAges();
+    this.fetchAvgData();
+    await this.fetchWordCloud();
+    this.reformWordCloud();
   },
   async mounted() {
     this.loaded = false;
