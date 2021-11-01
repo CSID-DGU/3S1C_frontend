@@ -423,7 +423,7 @@ export default {
           labels: ["남성", "여성"],
           datasets: [
             {
-              label: "data Two",
+              label: ["남성", "여성"],
               backgroundColor: ["blue", "red"],
               data: [Math.ceil(data.avg_male), Math.ceil(data.avg_female)],
             },
@@ -453,7 +453,7 @@ export default {
         labels: ["남성", "여성"],
         datasets: [
           {
-            label: "data One",
+            label: ["남성", "여성"],
             backgroundColor: ["blue", "red"],
             data: [data.male * 100, data.female * 100],
           },
