@@ -274,6 +274,7 @@
                       >워드클라우드</v-btn
                     >
                     <v-card
+                      v-if="test2"
                       :color="active ? '#FAF5FE' : '#FFFFFF'"
                       class="ma-4"
                       style="border-radius: 10px"
@@ -408,6 +409,9 @@ export default {
       avgLoaded: false,
       chartdata: {},
       avgData: {},
+      // age graph test
+      ageData: {},
+      ageLoaded: false,
       //test data
       test1: false,
       test2: false,
@@ -451,7 +455,6 @@ export default {
         });
     },
     reformWordCloud() {
-      this.test2 = true;
       this.tmp = _.map(
         this.wordcloud,
         _.partialRight(_.pick, ["relkeywordsId.content", "mentions"])
@@ -460,22 +463,72 @@ export default {
         this.tmp[key].relkeywordsId.content,
         this.tmp[key].mentions,
       ]);
+      this.test2 = true;
     },
     async fetchAvgData() {
       try {
         this.avgLoaded = false;
         const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
         this.avgData = {
-          labels: ["남성", "여성"],
           datasets: [
             {
-              label: ["남성", "여성"],
-              backgroundColor: ["blue", "red"],
-              data: [Math.ceil(data.avg_male), Math.ceil(data.avg_female)],
+              label: "남성",
+              backgroundColor: "blue",
+              data: [Math.ceil(data.avg_male)],
+            },
+            {
+              label: "여성",
+              backgroundColor: "red",
+              data: [Math.ceil(data.avg_female)],
             },
           ],
         };
         this.avgLoaded = true;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async fetchAges() {
+      try {
+        this.ageLoaded = false;
+        const { data } = await axios.get(
+          `/api/keywords/${this.keyword}/age-ratio`
+        );
+        this.ageData = {
+          datasets: [
+            {
+              label: "10대",
+              backgroundColor: "black",
+              data: [data["10"] * 100],
+            },
+            {
+              label: "20대",
+              backgroundColor: "blue",
+              data: [data["20"] * 100],
+            },
+            {
+              label: "30대",
+              backgroundColor: "red",
+              data: [data["30"] * 100],
+            },
+            {
+              label: "40대",
+              backgroundColor: "orange",
+              data: [data["40"] * 100],
+            },
+            {
+              label: "50대",
+              backgroundColor: "grey",
+              data: [data["50"] * 100],
+            },
+            {
+              label: "60대",
+              backgroundColor: "green",
+              data: [data["60"] * 100],
+            },
+          ],
+        };
+        this.ageLoaded = true;
       } catch (e) {
         console.error(e);
       }
@@ -486,6 +539,7 @@ export default {
       this.fetchData(),
       this.fetchWordCloud(),
       this.fetchRankData(),
+      this.fetchAges(),
       this.fetchAvgData(),
     ]).then(() => this.reformWordCloud());
   },
@@ -496,12 +550,16 @@ export default {
         `/api/keywords/${this.keyword}/gender-ratio`
       );
       this.chartdata = {
-        labels: ["남성", "여성"],
         datasets: [
           {
-            label: ["남성", "여성"],
-            backgroundColor: ["blue", "red"],
-            data: [data.male * 100, data.female * 100],
+            label: "남성",
+            backgroundColor: "blue",
+            data: [data.male * 100],
+          },
+          {
+            label: "여성",
+            backgroundColor: "red",
+            data: [data.female * 100],
           },
         ],
       };
