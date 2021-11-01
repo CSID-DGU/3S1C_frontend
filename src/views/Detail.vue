@@ -1,14 +1,15 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="9" lg="9" xl="9">
+      <v-col cols="10" lg="10" xl="10">
         <div>
           <div>
             <v-card flat color="transparent">
               <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체-->
               <v-img
+                class="mx-6"
                 src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
-                :aspect-ratio="21 / 4"
+                :aspect-ratio="21 / 3.5"
                 :position="top"
                 gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                 style="border-radius: 16px"
@@ -18,7 +19,7 @@
                     class="
                       text-center
                       font-weight-bold
-                      text-h3
+                      text-h2
                       white--text-center
                       ma-10
                       pa-5
@@ -89,7 +90,7 @@
                 </v-card>
 
                 <v-container fluid>
-                  <v-card height="550px" class="ma-1">
+                  <v-card height="570px" class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 성별 비교</v-btn
@@ -112,8 +113,7 @@
                       />
                       <bar
                         style="float: right; width: 33%"
-                        v-if="loaded"
-                        :chartdata="chartdata"
+                        :chartdata="statGender"
                         :options="options"
                       />
                     </v-card-text>
@@ -174,7 +174,7 @@
                 <v-divider class="my-4"></v-divider>
 
                 <v-container fluid>
-                  <v-card height="550px" class="ma-1">
+                  <v-card height="570px" class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 연령대 비교</v-btn
@@ -187,19 +187,18 @@
                         style="float: left; width: 33%"
                         v-if="ageLoaded"
                         :chartdata="ageData"
-                        :options="options"
+                        :options="options4age"
                       />
                       <bar
                         style="float: left; width: 33%"
                         v-if="ageLoaded"
                         :chartdata="ageData"
-                        :options="options"
+                        :options="options4age"
                       />
                       <bar
                         style="float: right; width: 33%"
-                        v-if="ageLoaded"
-                        :chartdata="ageData"
-                        :options="options"
+                        :chartdata="statAge"
+                        :options="options4age"
                       />
                     </v-card-text>
                     <v-col>
@@ -256,11 +255,31 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
                 <div>
-                  <doughnut :chartdata="sentimentChartData" />
-                  <doughnut
-                    :chartdata="halfDoghnut"
-                    :options="sentimentOptions"
-                  />
+                  <v-container fluid>
+                    <v-card height="660px" class="ma-1">
+                      <div class="pa-2">
+                        <v-btn depressed color="text-h5 accent font-weight-bold"
+                          >키워드 감성 분석</v-btn
+                        >
+                      </div>
+                      <v-card-actions>
+                        <doughnut
+                          style="float: left; width: 50%"
+                          :chartdata="sentimentChartData"
+                          :options="sentOption"
+                          :width="300"
+                          :height="300"
+                        />
+
+                        <doughnut
+                          style="float: left; width: 50%"
+                          :chartdata="halfDoghnut"
+                          :options="sentimentOptions"
+                        />
+                      </v-card-actions>
+                    </v-card>
+                  </v-container>
+                  <v-divider class="my-4"></v-divider>
                   <radar />
                   <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
@@ -411,6 +430,11 @@ export default {
   },
   data() {
     return {
+      sentOption: {
+        layout: { padding: { left: "200px" } },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
       relatedArticles: [],
       wordCloud: [],
       tmp: [],
@@ -422,6 +446,57 @@ export default {
       avgLoaded: false,
       chartdata: {},
       avgData: {},
+      //statistic data set
+      statGender: {
+        labels: ["성비"],
+        datasets: [
+          {
+            label: "남성",
+            backgroundColor: "blue",
+            data: [50.3],
+          },
+          {
+            label: "여성",
+            backgroundColor: "red",
+            data: [49.7],
+          },
+        ],
+      },
+      statAge: {
+        labels: ["연령대"],
+        datasets: [
+          {
+            label: "10대",
+            backgroundColor: "black",
+            data: [16.5],
+          },
+          {
+            label: "20대",
+            backgroundColor: "blue",
+            data: [13.4],
+          },
+          {
+            label: "30대",
+            backgroundColor: "red",
+            data: [13.5],
+          },
+          {
+            label: "40대",
+            backgroundColor: "orange",
+            data: [15.6],
+          },
+          {
+            label: "50대",
+            backgroundColor: "grey",
+            data: [16.3],
+          },
+          {
+            label: "60대",
+            backgroundColor: "green",
+            data: [24.6],
+          },
+        ],
+      },
       // age graph test
       ageData: {},
       ageLoaded: false,
@@ -436,6 +511,22 @@ export default {
               ticks: { min: 0, max: 100, beginAtZero: true },
             },
           ],
+        },
+        legend: {
+          display: false,
+        },
+      },
+      options4age: {
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              ticks: { min: 0, max: 50, beginAtZero: true },
+            },
+          ],
+        },
+        legend: {
+          display: false,
         },
       },
       halfDoghnut: {
@@ -459,6 +550,7 @@ export default {
             borderWidth: 5,
           },
         ],
+        radius: "100%",
       },
       sentimentPoint: {
         labels: ["", "Purple", ""],
@@ -480,6 +572,8 @@ export default {
         ],
       },
       sentimentOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
         rotation: 1 * Math.PI,
         circumference: 1 * Math.PI,
         legend: {
@@ -510,6 +604,7 @@ export default {
             hoverBorderColor: ["#000080", "#DC143C"],
           },
         ],
+        radius: "100%",
       };
     },
     fetchData() {
@@ -564,6 +659,7 @@ export default {
         this.avgLoaded = false;
         const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
         this.avgData = {
+          labels: ["성비"],
           datasets: [
             {
               label: "남성",
@@ -589,6 +685,7 @@ export default {
           `/api/keywords/${this.keyword}/age-ratio`
         );
         this.ageData = {
+          labels: ["연령대"],
           datasets: [
             {
               label: "10대",
@@ -644,6 +741,7 @@ export default {
         `/api/keywords/${this.keyword}/gender-ratio`
       );
       this.chartdata = {
+        labels: ["성비"],
         datasets: [
           {
             label: "남성",
