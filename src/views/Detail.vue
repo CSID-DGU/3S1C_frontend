@@ -273,6 +273,20 @@
                     </v-card>
                   </v-container>
                   <v-divider class="my-4"></v-divider>
+                  <doughnut :chartdata="sentimentChartData" />
+                  <doughnut
+                    :chartdata="halfDoghnut"
+                    :options="sentimentOptions"
+                  />
+                  <!-- <v-row class="mx-1 my-5" style="height: 500px">
+                    <v-col
+                      cols="12"
+                      lg="12"
+                      xl="12"
+                      style="background: #eeefff"
+                    >
+                    </v-col>
+                  </v-row> -->
                   <div>
                     <v-btn
                       class="mx-5"
@@ -508,6 +522,63 @@ export default {
           display: false,
         },
       },
+      halfDoghnut: {
+        labels: ["Red", "Orange", "Green"],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [33, 33, 33, 0],
+            backgroundColor: [
+              "rgba(231, 76, 60, 1)",
+              "rgba(255, 164, 46, 1)",
+              "rgba(46, 204, 113, 1)",
+              "rgba(255,255,255,1)",
+            ],
+            width: 40,
+            borderColor: [
+              "rgba(255, 255, 255 ,1)",
+              "rgba(255, 255, 255 ,1)",
+              "rgba(255, 255, 255 ,1)",
+            ],
+            borderWidth: 5,
+          },
+        ],
+      },
+      sentimentPoint: {
+        labels: ["", "Purple", ""],
+        datasets: [
+          {
+            data: [88.5, 1, 10.5],
+            backgroundColor: [
+              "rgba(0,0,0,0)",
+              "rgba(255,255,255,1)",
+              "rgba(0,0,0,0)",
+            ],
+            borderColor: [
+              "rgba(0, 0, 0 ,0)",
+              "rgba(46, 204, 113, 1)",
+              "rgba(0, 0, 0 ,0)",
+            ],
+            borderWidth: 3,
+          },
+        ],
+      },
+      sentimentOptions: {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        cutoutPercentage: 95,
+        elements: {
+          center: {
+            text: "headfadf", //set as you wish
+          },
+        },
+      },
       sentimentChartData: {},
     };
   },
@@ -646,7 +717,6 @@ export default {
   },
   async created() {
     this.fetchData();
-
     this.fetchRankData();
     this.fetchAges();
     this.fetchAvgData();
