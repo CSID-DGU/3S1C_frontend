@@ -261,6 +261,7 @@
                     :chartdata="halfDoghnut"
                     :options="sentimentOptions"
                   />
+                  <radar />
                   <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
                       cols="12"
@@ -378,14 +379,14 @@ import Bar from "@/components/details/bar.vue";
 // import ChartCard from "@/components/ChartCard.vue";
 // import Card from "@/components/Card.vue";
 import Doughnut from "@/components/details/doughnut.vue";
-// import Radar from "@/components/details/radar.vue";
+import Radar from "@/components/details/radar.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
     Doughnut,
-    // Radar,
+    Radar,
     // LineChart,
     // ChartCard,
     // Card,
