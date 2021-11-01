@@ -463,6 +463,16 @@ export default {
       //test data
       test1: false,
       test2: false,
+      options: {
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              ticks: { min: 0, max: 100, beginAtZero: true },
+            },
+          ],
+        },
+      },
     };
   },
   methods: {
