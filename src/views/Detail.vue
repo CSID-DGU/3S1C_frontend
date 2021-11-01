@@ -255,16 +255,24 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
                 <div>
-                  <doughnut :chartdata="sentimentChartData" />
-                  <!-- <v-row class="mx-1 my-5" style="height: 500px">
-                    <v-col
-                      cols="12"
-                      lg="12"
-                      xl="12"
-                      style="background: #eeefff"
-                    >
-                    </v-col>
-                  </v-row> -->
+                  <v-container fluid>
+                    <v-card height="570px" class="ma-1">
+                      <div class="pa-2">
+                        <v-btn depressed color="text-h5 accent font-weight-bold"
+                          >키워드 감성 분석</v-btn
+                        >
+                      </div>
+                      <v-card-actions class="pa-4">
+                        <doughnut
+                          class="ma-5 pa-5"
+                          style="float: left; width: 33%"
+                          :chartdata="sentimentChartData"
+                          :options="sentOption"
+                        />
+                      </v-card-actions>
+                    </v-card>
+                  </v-container>
+                  <v-divider class="my-4"></v-divider>
                   <div>
                     <v-btn
                       class="mx-5"
@@ -405,6 +413,7 @@ export default {
   },
   data() {
     return {
+      sentOption: { layout: { padding: { left: "200px" } } },
       relatedArticles: [],
       wordCloud: [],
       tmp: [],
@@ -514,6 +523,7 @@ export default {
             hoverBorderColor: ["#000080", "#DC143C"],
           },
         ],
+        radius: "50%",
       };
     },
     fetchData() {
