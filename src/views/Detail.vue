@@ -31,8 +31,7 @@
                   >
                     # {{ keyword }}
                     <!--test-->
-                    {{ test1 }} {{ test2 }}
-                    {{ this.avgData }}
+                    {{ sentiment }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -257,6 +256,7 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
                 <div>
+                  <doughnut :chartdata="sentimentChartData" />
                   <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
                       cols="12"
@@ -373,11 +373,15 @@ import Bar from "@/components/details/bar.vue";
 // import LineChart from "@/components/details/line.vue";
 // import ChartCard from "@/components/ChartCard.vue";
 // import Card from "@/components/Card.vue";
+import Doughnut from "@/components/details/doughnut.vue";
+// import Radar from "@/components/details/radar.vue";
 export default {
   name: "Category",
   components: {
     siderbar: () => import("@/components/details/sidebar"),
     Bar,
+    Doughnut,
+    // Radar,
     // LineChart,
     // ChartCard,
     // Card,
@@ -386,6 +390,10 @@ export default {
     keyword: {
       type: String,
       default: "",
+    },
+    sentiment: {
+      type: Object,
+      default: null,
     },
   },
   computed: {
@@ -425,9 +433,23 @@ export default {
           ],
         },
       },
+      sentimentChartData: {},
     };
   },
   methods: {
+    getSentimentData() {
+      this.sentimentChartData = {
+        labels: ["긍정", "부정"],
+        datasets: [
+          {
+            data: [this.sentiment.positive, this.sentiment.negative],
+            backgroundColor: ["Blue", "Red"],
+            hoverBackgroundColor: ["#000080", "#DC143C"],
+            hoverBorderColor: ["#000080", "#DC143C"],
+          },
+        ],
+      };
+    },
     fetchData() {
       const self = this;
       return axios
@@ -550,6 +572,7 @@ export default {
     this.fetchRankData();
     this.fetchAges();
     this.fetchAvgData();
+    this.getSentimentData();
     await this.fetchWordCloud();
     this.reformWordCloud();
   },

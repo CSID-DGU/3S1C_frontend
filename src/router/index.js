@@ -19,9 +19,7 @@ const routes = [
     path: '/detail/:keyword',
     name: 'Detail',
     component: () => import("@/views/Detail.vue"),
-    props: route => ({
-      keyword: route.params.keyword
-    })
+    props: true,
   },
   {
     path: '/authors',
