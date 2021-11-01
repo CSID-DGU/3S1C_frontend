@@ -90,63 +90,128 @@
                 </v-card>
 
                 <v-container fluid>
-                  <v-card>
-                    <v-card-title> 성별 분포 </v-card-title>
+                  <v-card height="500px" class="ma-1">
+                    <div class="pa-2">
+                      <v-btn depressed color="text-h5 accent font-weight-bold"
+                        >관심 성별 비교</v-btn
+                      >
+                    </div>
+                    <!--<v-card-title> 성별 분포 </v-card-title>-->
+                    <!--TODO : 데이터에 따라 라벨링하기-->
                     <v-card-text>
                       <bar
+                        style="float: left; width: 33%"
                         v-if="loaded"
                         :chartdata="chartdata"
                         :options="options"
                       />
                       <bar
+                        style="float: left; width: 33%"
                         v-if="avgLoaded"
                         :chartdata="avgData"
                         :options="options"
                       />
                       <bar
+                        style="float: right; width: 33%"
                         v-if="loaded"
                         :chartdata="chartdata"
                         :options="options"
                       />
                     </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn icon>
-                        <v-icon>mdi-heart</v-icon>
-                      </v-btn>
-                      <v-btn icon>
-                        <v-icon>mdi-bookmark</v-icon>
-                      </v-btn>
-                      <v-btn icon>
-                        <v-icon>mdi-share-variant</v-icon>
-                      </v-btn>
-                    </v-card-actions>
+                    <!--TODO : action 버튼 항상 v-card 오른쪽에 나오게하기-->
+                    <!--<div>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn icon>
+                          <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-bookmark</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-share-variant</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                    </div>-->
                   </v-card>
                 </v-container>
-                <div class="py-2">
+                <div>
                   <v-alert
-                    class="font-italic text-h6 text-center"
+                    class="ma-4 text-h6 text-center"
                     border="left"
                     colored-border
                     color="accent"
                   >
                     <b id="각 slide item마다 간단한 해설">
-                      {비교 준거} 대비 {성별}의 관심도가 {수치} 더 높은
+                      {비교 준거} 대비 {데이터}의 관심도가 {수치} 더 높은
                       키워드입니다.
                     </b>
                   </v-alert>
                 </div>
                 <v-divider class="my-4"></v-divider>
 
-                <v-card
-                  :color="active ? '#FAF5FE' : '#FFFFFF'"
-                  class="ma-4"
-                  style="border-radius: 10px"
-                  @click="toggle"
-                >
-                </v-card>
+                <v-container fluid>
+                  <v-card height="500px" class="ma-1">
+                    <div class="pa-2">
+                      <v-btn depressed color="text-h5 accent font-weight-bold"
+                        >관심 연령대 비교</v-btn
+                      >
+                    </div>
+                    <!--<v-card-title> 연령대 분포 </v-card-title>-->
+                    <!--TODO : 데이터에 따라 라벨링하기-->
+                    <v-card-text>
+                      <bar
+                        style="float: left; width: 33%"
+                        v-if="loaded"
+                        :chartdata="chartdata"
+                        :options="options"
+                      />
+                      <bar
+                        style="float: left; width: 33%"
+                        v-if="avgLoaded"
+                        :chartdata="avgData"
+                        :options="options"
+                      />
+                      <bar
+                        style="float: right; width: 33%"
+                        v-if="loaded"
+                        :chartdata="chartdata"
+                        :options="options"
+                      />
+                    </v-card-text>
+                    <!--TODO : action 버튼 항상 v-card 오른쪽에 나오게하기-->
+                    <!--<div>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn icon>
+                          <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-bookmark</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                          <v-icon>mdi-share-variant</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                    </div>-->
+                  </v-card>
+                </v-container>
                 <div>
-                  <v-row class="mx-1 my-5" style="height: 500px">
+                  <v-alert
+                    class="ma-4 text-h6 text-center mb-5"
+                    border="left"
+                    colored-border
+                    color="accent"
+                  >
+                    <b id="각 slide item마다 간단한 해설">
+                      {비교 준거} 대비 {데이터}의 관심도가 {수치} 더 높은
+                      키워드입니다.
+                    </b>
+                  </v-alert>
+                </div>
+                <v-divider class="my-4"></v-divider>
+                <div>
+                  <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
                       cols="12"
                       lg="12"
@@ -154,9 +219,12 @@
                       style="background: #eeefff"
                     >
                     </v-col>
-                  </v-row>
-                  <div class="py-2">
-                    <v-btn depressed color="text-h5 accent font-weight-bold"
+                  </v-row> -->
+                  <div>
+                    <v-btn
+                      class="mx-5"
+                      depressed
+                      color="text-h5 accent font-weight-bold"
                       >워드클라우드</v-btn
                     >
                     <v-card
@@ -196,7 +264,7 @@
                     <!-- TODO : 색 변경하기 배경넣기 -->
 
                     <v-alert
-                      class="ma-4 font-italic text-h6 text-center"
+                      class="ma-4 text-h6 text-center"
                       border="left"
                       colored-border
                       color="accent"
@@ -206,9 +274,14 @@
                         보여줍니다</b
                       >
                     </v-alert>
-
+                  </div>
+                  <v-divider class="my-4"></v-divider>
+                  <div>
                     <div class="text-h6">
-                      <v-btn depressed color="text-h5 accent font-weight-bold"
+                      <v-btn
+                        class="mx-5"
+                        depressed
+                        color="text-h5 accent font-weight-bold"
                         >관련기사</v-btn
                       >
                       <v-card
