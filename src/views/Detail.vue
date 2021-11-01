@@ -256,28 +256,29 @@
                 <v-divider class="my-4"></v-divider>
                 <div>
                   <v-container fluid>
-                    <v-card height="570px" class="ma-1">
+                    <v-card height="660px" class="ma-1">
                       <div class="pa-2">
                         <v-btn depressed color="text-h5 accent font-weight-bold"
                           >키워드 감성 분석</v-btn
                         >
                       </div>
-                      <v-card-actions class="pa-4">
+                      <v-card-actions>
                         <doughnut
-                          class="ma-5 pa-5"
-                          style="float: left; width: 33%"
+                          style="float: left; width: 50%"
                           :chartdata="sentimentChartData"
                           :options="sentOption"
+                        />
+
+                        <doughnut
+                          style="float: left; width: 50%"
+                          :chartdata="halfDoghnut"
+                          :options="sentimentOptions"
                         />
                       </v-card-actions>
                     </v-card>
                   </v-container>
                   <v-divider class="my-4"></v-divider>
-                  <doughnut :chartdata="sentimentChartData" />
-                  <doughnut
-                    :chartdata="halfDoghnut"
-                    :options="sentimentOptions"
-                  />
+
                   <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
                       cols="12"
@@ -543,6 +544,7 @@ export default {
             borderWidth: 5,
           },
         ],
+        radius: "30%",
       },
       sentimentPoint: {
         labels: ["", "Purple", ""],
@@ -594,7 +596,7 @@ export default {
             hoverBorderColor: ["#000080", "#DC143C"],
           },
         ],
-        radius: "50%",
+        radius: "30%",
       };
     },
     fetchData() {
