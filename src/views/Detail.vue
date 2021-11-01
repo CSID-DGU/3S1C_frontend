@@ -30,6 +30,8 @@
                     "
                   >
                     # {{ keyword }}
+                    <!--test-->
+                    {{ test1 }} {{ test2 }}
                     {{ this.avgData }}
                   </div>
                 </v-card-text>
@@ -287,6 +289,9 @@ export default {
       avgLoaded: false,
       chartdata: {},
       avgData: {},
+      //test data
+      test1: false,
+      test2: false,
     };
   },
   methods: {
@@ -320,12 +325,14 @@ export default {
         .get(`/api/keywords/${self.keyword}/wordcloud`)
         .then(function (res) {
           self.wordcloud = JSON.parse(JSON.stringify(res.data));
+          self.test1 = true;
         })
         .catch(function (err) {
           console.log(err);
         });
     },
     reformWordCloud() {
+      this.test2 = true;
       this.tmp = _.map(
         this.wordcloud,
         _.partialRight(_.pick, ["relkeywordsId.content", "mentions"])
