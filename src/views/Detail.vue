@@ -118,6 +118,30 @@
                         :options="options"
                       />
                     </v-card-text>
+
+                    <v-col>
+                      <v-row align="center" justify="space-around">
+                        <v-btn
+                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          color="indigo "
+                          outlined
+                          >이 키워드 평균</v-btn
+                        >
+                        <v-btn
+                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          color="indigo "
+                          outlined
+                          >오늘의 키워드 평균</v-btn
+                        >
+                        <v-btn
+                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          color="indigo "
+                          outlined
+                          >대한민국 평균</v-btn
+                        >
+                      </v-row>
+                    </v-col>
+
                     <!--TODO : action 버튼 항상 v-card 오른쪽에 나오게하기-->
                     <!--<div>
                       <v-card-actions>
