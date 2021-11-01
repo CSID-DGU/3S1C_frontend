@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" lg="12" xl="8">
+      <v-col cols="9" lg="9" xl="9">
         <div>
           <div>
             <v-card flat color="transparent">
@@ -90,7 +90,7 @@
                 </v-card>
 
                 <v-container fluid>
-                  <v-card height="500px" class="ma-1">
+                  <v-card height="550px" class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 성별 비교</v-btn
@@ -175,7 +175,7 @@
                 <v-divider class="my-4"></v-divider>
 
                 <v-container fluid>
-                  <v-card height="500px" class="ma-1">
+                  <v-card height="550px" class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 연령대 비교</v-btn
@@ -206,19 +206,19 @@
                     <v-col>
                       <v-row align="center" justify="space-around">
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold"
                           color="indigo "
                           outlined
                           >이 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold"
                           color="indigo "
                           outlined
                           >오늘의 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold"
                           color="indigo "
                           outlined
                           >대한민국 평균</v-btn

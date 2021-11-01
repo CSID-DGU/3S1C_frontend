@@ -39,7 +39,7 @@
     </div>
 
     <v-row>
-      <v-col cols="10" lg="10" xl="8">
+      <v-col cols="10" lg="10" xl="9">
         <div>
           <div class="pt-16">
             <h2 class="text-h4 font-weight-bold pb-4">Today's hot issue</h2>
