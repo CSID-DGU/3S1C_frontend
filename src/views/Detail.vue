@@ -5,13 +5,22 @@
         <div>
           <div>
             <v-card flat color="transparent">
-              <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체-->
+              <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체
               <v-img
                 class="mx-6"
                 src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
                 :aspect-ratio="21 / 3.5"
                 :position="top"
-                gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
+                gradient="to top, rgba(5,7,13,.9), rgba(0,5,7,.5)"
+                style="border-radius: 16px"
+              >
+              -->
+              <v-img
+                class="mx-6"
+                src="http://direct-data-analysis.co.uk/uploads/3/5/2/6/35268350/direct-data-analysis-of-data_orig.jpg"
+                :aspect-ratio="21 / 3.5"
+                :position="top"
+                gradient="to top, rgba(25,27,53,.9), rgba(0,5,7,.5)"
                 style="border-radius: 16px"
               >
                 <v-card-text>
@@ -19,7 +28,7 @@
                     class="
                       text-center
                       font-weight-bold
-                      text-h2
+                      text-h1
                       white--text-center
                       ma-10
                       pa-5
@@ -30,9 +39,10 @@
                       border-radius: 16px;
                     "
                   >
-                    # {{ keyword }}
-                    <!--test-->
+                    " {{ keyword }} "
+                    <!--test
                     {{ sentiment }}
+                    -->
                   </div>
                 </v-card-text>
               </v-img>
@@ -165,9 +175,11 @@
                     colored-border
                     color="accent"
                   >
+                    <!--TODO : 오늘 키워드 대비, 통계 자료 대비 수치의 차이를 눈에 잘 띄는 문구로 넣기-->
                     <b id="각 slide item마다 간단한 해설">
-                      {비교 준거} 대비 {데이터}의 관심도가 {수치} 더 높은
-                      키워드입니다.
+                      <h3>
+                        이 키워드는 '남성'이 더 관심을 가지는 키워드입니다.
+                      </h3>
                     </b>
                   </v-alert>
                 </div>
@@ -191,8 +203,8 @@
                       />
                       <bar
                         style="float: left; width: 33%"
-                        v-if="ageLoaded"
-                        :chartdata="ageData"
+                        v-if="avgAgeLoaded"
+                        :chartdata="avgAgeData"
                         :options="options4age"
                       />
                       <bar
@@ -248,15 +260,16 @@
                     color="accent"
                   >
                     <b id="각 slide item마다 간단한 해설">
-                      {비교 준거} 대비 {데이터}의 관심도가 {수치} 더 높은
-                      키워드입니다.
+                      <h3>
+                        이 키워드는 '50대'가 가장 관심을 가지는 키워드입니다.
+                      </h3>
                     </b>
                   </v-alert>
                 </div>
                 <v-divider class="my-4"></v-divider>
                 <div>
                   <v-container fluid>
-                    <v-card height="660px" class="ma-1">
+                    <v-card height="550px" class="ma-1">
                       <div class="pa-2">
                         <v-btn depressed color="text-h5 accent font-weight-bold"
                           >키워드 감성 분석</v-btn
@@ -264,23 +277,165 @@
                       </div>
                       <v-card-actions>
                         <doughnut
-                          style="float: left; width: 50%"
+                          style="float: left; width: 33%"
                           :chartdata="sentimentChartData"
                           :options="sentOption"
-                          :width="300"
-                          :height="300"
                         />
-
                         <doughnut
-                          style="float: left; width: 50%"
+                          style="float: left; width: 33%"
                           :chartdata="halfDoghnut"
                           :options="sentimentOptions"
                         />
+                        <!--TODO : 감정 강도 공식 
+                        더 많은 비율 감정/더 적은 비율 감정
+                        0~2 : 중립적
+                        2~6 : 일반적
+                        5~  : 편중적
+                        정하기 -> 데이터 바인딩-->
+                        <p
+                          style="
+                            position: absolute;
+                            left: 49.5%;
+                            transform: translate(-50%, 0);
+                            font-size: 75px;
+                            font-weight: bold;
+                            bottom: 38%;
+                          "
+                        >
+                          편중적
+                        </p>
+                        <v-card
+                          style="
+                            float: left;
+                            width: 33%;
+                            height: 100%;
+                            background: rgba(245, 245, 245, 0.5);
+                          "
+                        >
+                          <div
+                            style="
+                              font-weight: bold;
+                              font-size: 15px;
+                              text-align: center;
+                            "
+                          >
+                            <br />
+                            이 키워드는 오늘의 다른 이슈 키워드와 비교했을 때<br /><br />
+                            <h1>더 부정적인</h1>
+                            <br />
+                            키워드 입니다.
+                            <br />
+                          </div>
+                          <v-divider class="my-4"></v-divider>
+                          <div
+                            style="
+                              font-weight: bold;
+                              font-size: 15px;
+                              text-align: center;
+                            "
+                          >
+                            이 키워드에 대한 사람들의 감정은<br /><br />
+                            <h1>5.92배</h1>
+                            <br />
+                            치우쳐 있습니다.
+                            <br />
+                            &nbsp;
+                          </div>
+                        </v-card>
                       </v-card-actions>
+                      <v-col class="ma-4">
+                        <v-row align="center" justify="space-around">
+                          <v-btn
+                            class="text-h5 font-weight-bold"
+                            color="indigo "
+                            outlined
+                            >긍정 & 부정</v-btn
+                          >
+                          <v-btn
+                            class="text-h5 font-weight-bold"
+                            color="indigo "
+                            outlined
+                            >감정 강도</v-btn
+                          >
+                          <v-btn
+                            class="text-h5 font-weight-bold"
+                            color="indigo "
+                            outlined
+                            >&nbsp;&nbsp;그래프 해설&nbsp;&nbsp;</v-btn
+                          >
+                        </v-row>
+                      </v-col>
                     </v-card>
                   </v-container>
                   <v-divider class="my-4"></v-divider>
-                  <radar />
+                  <v-container fluid>
+                    <v-card height="550px" class="ma-1">
+                      <div class="pa-2">
+                        <v-btn depressed color="text-h5 accent font-weight-bold"
+                          >심층 감성 분석(beta)</v-btn
+                        >
+                      </div>
+                      <v-card-actions>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <radar />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <v-card
+                          class="mx-5 px-5"
+                          style="
+                            float: right;
+                            width: 60%;
+                            border-radius: 1px;
+                            background: rgba(245, 245, 245, 0.5);
+                          "
+                          height="400px"
+                        >
+                          <div
+                            style="
+                              font-weight: bold;
+                              font-size: 25px;
+                              text-align: center;
+                            "
+                          >
+                            <br />
+                            이 키워드를 주로 사용한 댓글 작성자는<br /><br /><br />
+                            <h1>격노</h1>
+                            <br /><br />
+                            을(를) 느꼈을 가능성이 높습니다.<br />
+                          </div>
+                          <v-divider class="my-4"></v-divider>
+                          <div
+                            style="
+                              font-weight: bold;
+                              font-size: 25px;
+                              text-align: center;
+                            "
+                          >
+                            <br /><br />
+                            *감정바퀴 이론은 영화 '인사이드 아웃'의 모티프가 된
+                            이론으로,<br />
+                            <br />
+                            감정이 '희로애락'보다 더 구체적으로 구성되어 있다고
+                            이야기합니다.<br /><br />본 서비스에서는 감정의
+                            강도와 혼합감정을 파악합니다.
+                          </div>
+                        </v-card>
+                      </v-card-actions>
+                      <v-col class="ma-4">
+                        <v-row align="center" justify="space-around">
+                          <v-btn
+                            class="text-h5 font-weight-bold"
+                            color="indigo "
+                            outlined
+                            >감정 표현 분포</v-btn
+                          >
+                        </v-row>
+                      </v-col>
+                    </v-card>
+                  </v-container>
+                  <v-divider class="my-4"></v-divider>
                   <!-- <v-row class="mx-1 my-5" style="height: 500px">
                     <v-col
                       cols="12"
@@ -500,9 +655,8 @@ export default {
       // age graph test
       ageData: {},
       ageLoaded: false,
-      //test data
-      test1: false,
-      test2: false,
+      avgAgeData: {},
+      avgAgeLoaded: false,
       options: {
         scales: {
           yAxes: [
@@ -534,20 +688,20 @@ export default {
         datasets: [
           {
             label: "# of Votes",
-            data: [33, 33, 33, 0],
+            data: [20, 40, 20, 20],
             backgroundColor: [
-              "rgba(231, 76, 60, 1)",
-              "rgba(255, 164, 46, 1)",
               "rgba(46, 204, 113, 1)",
+              "rgba(255, 164, 46, 1)",
+              "rgba(231, 76, 60, 1)",
               "rgba(255,255,255,1)",
             ],
-            width: 40,
+            backgroundWidth: 40,
             borderColor: [
               "rgba(255, 255, 255 ,1)",
               "rgba(255, 255, 255 ,1)",
               "rgba(255, 255, 255 ,1)",
             ],
-            borderWidth: 5,
+            borderWidth: 1,
           },
         ],
         radius: "100%",
@@ -582,7 +736,7 @@ export default {
         tooltip: {
           enabled: false,
         },
-        cutoutPercentage: 95,
+        cutoutPercentage: 90,
         elements: {
           center: {
             text: "headfadf", //set as you wish
@@ -724,11 +878,56 @@ export default {
         console.error(e);
       }
     },
+    async fetchAvgAges() {
+      try {
+        this.avgAgeLoaded = false;
+        const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
+        this.avgAgeData = {
+          labels: ["연령대"],
+          datasets: [
+            {
+              label: "10대",
+              backgroundColor: "black",
+              data: [Math.ceil(data.avg_tens)],
+            },
+            {
+              label: "20대",
+              backgroundColor: "blue",
+              data: [Math.ceil(data.avg_twenties)],
+            },
+            {
+              label: "30대",
+              backgroundColor: "red",
+              data: [Math.ceil(data.avg_thirties)],
+            },
+            {
+              label: "40대",
+              backgroundColor: "orange",
+              data: [Math.ceil(data.avg_fourties)],
+            },
+            {
+              label: "50대",
+              backgroundColor: "grey",
+              data: [Math.ceil(data.avg_fifties)],
+            },
+            {
+              label: "60대",
+              backgroundColor: "green",
+              data: [Math.ceil(data.avg_sixties)],
+            },
+          ],
+        };
+        this.avgAgeLoaded = true;
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
   async created() {
     this.fetchData();
     this.fetchRankData();
     this.fetchAges();
+    this.fetchAvgAges();
     this.fetchAvgData();
     this.getSentimentData();
     await this.fetchWordCloud();
