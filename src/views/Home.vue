@@ -70,12 +70,15 @@
                         },
                       }"
                     >
-                      <!--{{ item.id }}-->
+                      <!--{{ item.id }}
+                      
+                      http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG
+                      -->
 
                       <v-img
-                        src="http://image.genie.co.kr/Y/IMAGE/IMG_ARTIST/067/872/918/67872918_1616652768439_20_600x600.JPG"
+                        src="http://direct-data-analysis.co.uk/uploads/3/5/2/6/35268350/direct-data-analysis-of-data_orig.jpg"
                         :aspect-ratio="16 / 9"
-                        gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
+                        gradient="to top, rgba(25,32,32,.9), rgba(25,32,32,.5)"
                         height="150px"
                         class="elevation-2"
                         style="border-radius: 16px"
