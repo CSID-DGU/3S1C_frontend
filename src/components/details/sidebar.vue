@@ -11,13 +11,13 @@
             <v-card height="100%" flat elevation="2">
               <v-col>
                 <div>
-                  <v-btn depressed color="text-h5 accent font-weight-bold">{{
+                  <v-btn depressed color="text-h6 accent font-weight-bold">{{
                     title[i - 1]
                   }}</v-btn>
                   <h3
                     class="
                       pt-2
-                      text-center text-h1
+                      text-center text-h2
                       font-weight-bold
                       primary--text
                     "
