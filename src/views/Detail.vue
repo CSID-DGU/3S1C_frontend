@@ -114,7 +114,7 @@
                       />
                       <bar
                         style="float: left; width: 33%"
-                        v-if="avgLoaded"
+                        v-if="avgDataLoaded"
                         :chartdata="avgData"
                         :options="options"
                       />
@@ -200,7 +200,7 @@
                       />
                       <bar
                         style="float: left; width: 33%"
-                        v-if="avgAgeLoaded"
+                        v-if="avgDataLoaded"
                         :chartdata="avgAgeData"
                         :options="options4age"
                       />
@@ -588,7 +588,7 @@ export default {
       rank: 0,
       chartArray: ["line-chart", "bar"],
       loaded: false,
-      avgLoaded: false,
+      avgDataLoaded: false,
       chartdata: {},
       avgData: {},
       //statistic data set
@@ -668,7 +668,6 @@ export default {
       ageData: {},
       ageLoaded: false,
       avgAgeData: {},
-      avgAgeLoaded: false,
       options: {
         scales: {
           yAxes: [
@@ -859,30 +858,6 @@ export default {
       ]);
       this.test2 = true;
     },
-    async fetchAvgData() {
-      try {
-        this.avgLoaded = false;
-        const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
-        this.avgData = {
-          labels: ["성비"],
-          datasets: [
-            {
-              label: "남성",
-              backgroundColor: "blue",
-              data: [Math.ceil(data.avg_male)],
-            },
-            {
-              label: "여성",
-              backgroundColor: "red",
-              data: [Math.ceil(data.avg_female)],
-            },
-          ],
-        };
-        this.avgLoaded = true;
-      } catch (e) {
-        console.error(e);
-      }
-    },
     async fetchAges() {
       try {
         this.ageLoaded = false;
@@ -929,10 +904,25 @@ export default {
         console.error(e);
       }
     },
-    async fetchAvgAges() {
+    async fetchAvgData() {
       try {
-        this.avgAgeLoaded = false;
+        this.avgDataLoaded = false;
         const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
+        this.avgData = {
+          labels: ["성비"],
+          datasets: [
+            {
+              label: "남성",
+              backgroundColor: "blue",
+              data: [Math.ceil(data.avg_male)],
+            },
+            {
+              label: "여성",
+              backgroundColor: "red",
+              data: [Math.ceil(data.avg_female)],
+            },
+          ],
+        };
         this.avgAgeData = {
           labels: ["연령대"],
           datasets: [
@@ -968,7 +958,7 @@ export default {
             },
           ],
         };
-        this.avgAgeLoaded = true;
+        this.avgDataLoaded = true;
       } catch (e) {
         console.error(e);
       }
@@ -978,7 +968,6 @@ export default {
     this.fetchData();
     this.fetchRankData();
     this.fetchAges();
-    this.fetchAvgAges();
     this.fetchAvgData();
     this.getEmoticonAnalysis();
     this.getSentimentData();
