@@ -40,9 +40,6 @@
                     "
                   >
                     " {{ keyword }} "
-                    <!--test
-                    {{ sentiment }}
-                    -->
                   </div>
                 </v-card-text>
               </v-img>
@@ -302,7 +299,7 @@
                             bottom: 38%;
                           "
                         >
-                          편중적
+                          {{ intensity }}
                         </p>
                         <v-card
                           style="
@@ -575,16 +572,9 @@ export default {
       default: null,
     },
   },
-  computed: {
-    currentChart() {
-      console.log(this.cnt);
-      console.log(this.chartArray[this.cnt]);
-      return "line-chart";
-      //return this.chartArray[this.cnt++];
-    },
-  },
   data() {
     return {
+      intensity: "",
       sentOption: {
         layout: { padding: { left: "200px" } },
         responsive: true,
@@ -747,6 +737,19 @@ export default {
     };
   },
   methods: {
+    getEmotionIntensity() {
+      const major = _.max([this.sentiment.positive, this.sentiment.negative]);
+      const minor = _.min([this.sentiment.positive, this.sentiment.negative]);
+      const intensityValue = Math.floor(major / minor);
+
+      if (intensityValue <= 2) {
+        this.intensity = "중립적";
+      } else if (intensityValue <= 5) {
+        this.intensity = "일반적";
+      } else {
+        this.intensity = "편중적";
+      }
+    },
     getSentimentData() {
       this.sentimentChartData = {
         labels: ["긍정", "부정"],
@@ -935,6 +938,7 @@ export default {
   },
   async mounted() {
     this.loaded = false;
+    this.getEmotionIntensity();
     try {
       const { data } = await axios.get(
         `/api/keywords/${this.keyword}/gender-ratio`
