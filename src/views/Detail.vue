@@ -791,12 +791,12 @@ export default {
       const minor = _.min([this.sentiment.positive, this.sentiment.negative]);
       const intensityValue = Math.floor(major / minor);
 
-      if (intensityValue <= 2) {
+      if (intensityValue <= 1.1) {
         this.intensity = "중립적";
-      } else if (intensityValue <= 5) {
-        this.intensity = "일반적";
-      } else {
+      } else if (intensityValue <= 1.3) {
         this.intensity = "편중적";
+      } else {
+        this.intensity = "극단적";
       }
     },
     getSentimentData() {
