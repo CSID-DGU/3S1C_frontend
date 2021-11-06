@@ -40,7 +40,6 @@
                     "
                   >
                     " {{ keyword }} "
-                    {{ radarData }}
                   </div>
                 </v-card-text>
               </v-img>
