@@ -40,6 +40,7 @@
                     "
                   >
                     " {{ keyword }} "
+                    {{ radarData }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -375,7 +376,7 @@
                       <v-card-actions>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <radar />
+                        <radar :chartdata="radarData" v-if="loadedEmoticon" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -607,6 +608,28 @@ export default {
           },
         ],
       },
+      emoticon: {
+        happy: 0,
+        angry: 0,
+        sad: 0,
+        trust: 0,
+      },
+      radarData: {
+        labels: ["기쁨", "슬픔", "분노", "신뢰"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [],
+            fill: true,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgb(255, 99, 132)",
+            pointBackgroundColor: "rgb(255, 99, 132)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgb(255, 99, 132)",
+          },
+        ],
+      },
       statAge: {
         labels: ["연령대"],
         datasets: [
@@ -734,9 +757,35 @@ export default {
         },
       },
       sentimentChartData: {},
+      loadedEmoticon: false,
     };
   },
   methods: {
+    analysisDeepSentiment() {
+      //Math.log
+      //this.emoticon.happy
+    },
+    async getEmoticonAnalysis() {
+      this.loadedEmoticon = false;
+      try {
+        const { data } = await axios.get(
+          `/api/keywords/${this.keyword}/emoticon-analysis`
+        );
+        this.emoticon.happy = data.like;
+        this.emoticon.sad = data.sad;
+        this.emoticon.angry = data.angry;
+        this.emoticon.trust = data.warm;
+        this.radarData.datasets[0].data = [
+          Math.floor(Math.log(this.emoticon.happy)),
+          Math.floor(Math.log(this.emoticon.sad)),
+          Math.floor(Math.log(this.emoticon.angry)),
+          Math.floor(Math.log(this.emoticon.trust)),
+        ];
+      } catch (e) {
+        console.error(e);
+      }
+      this.loadedEmoticon = true;
+    },
     getEmotionIntensity() {
       const major = _.max([this.sentiment.positive, this.sentiment.negative]);
       const minor = _.min([this.sentiment.positive, this.sentiment.negative]);
@@ -932,6 +981,7 @@ export default {
     this.fetchAges();
     this.fetchAvgAges();
     this.fetchAvgData();
+    this.getEmoticonAnalysis();
     this.getSentimentData();
     await this.fetchWordCloud();
     this.reformWordCloud();
