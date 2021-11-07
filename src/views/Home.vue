@@ -88,7 +88,8 @@
                             class="
                               text-center text-h2
                               white--text-center
-                              ma-8
+                              ma-5
+                              pa-2
                               font-weight-bold
                             "
                             style="
@@ -213,7 +214,7 @@
             </v-row>
           </div>
 
-          <div class="pt-16">
+          <!-- <div class="pt-16">
             <h2 class="text-h4 font-weight-bold">Special Analysis</h2>
 
             <div>
@@ -257,7 +258,7 @@
                 </v-col>
               </v-row>
             </div>
-          </div>
+          </div> -->
         </div>
       </v-col>
 
