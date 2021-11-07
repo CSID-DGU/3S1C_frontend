@@ -40,9 +40,7 @@
                     "
                   >
                     " {{ keyword }} "
-                    <!--test
                     {{ sentiment }}
-                    -->
                   </div>
                 </v-card-text>
               </v-img>
@@ -112,12 +110,12 @@
                       <bar
                         style="float: left; width: 33%"
                         v-if="loaded"
-                        :chartdata="chartdata"
+                        :chartdata="genderRatio"
                         :options="options"
                       />
                       <bar
                         style="float: left; width: 33%"
-                        v-if="avgLoaded"
+                        v-if="avgDataLoaded"
                         :chartdata="avgData"
                         :options="options"
                       />
@@ -203,7 +201,7 @@
                       />
                       <bar
                         style="float: left; width: 33%"
-                        v-if="avgAgeLoaded"
+                        v-if="avgDataLoaded"
                         :chartdata="avgAgeData"
                         :options="options4age"
                       />
@@ -277,73 +275,38 @@
                       </div>
                       <v-card-actions>
                         <doughnut
-                          style="float: left; width: 33%"
+                          v-if="sentimentLoaded"
+                          style="float: left; width: 49%"
                           :chartdata="sentimentChartData"
                           :options="sentOption"
                         />
                         <doughnut
-                          style="float: left; width: 33%"
+                          v-if="sentimentLoaded"
+                          style="float: left; width: 50%"
                           :chartdata="halfDoghnut"
                           :options="sentimentOptions"
                         />
-                        <!--TODO : 감정 강도 공식 
+                      </v-card-actions>
+                      <!--TODO : 감정 강도 공식 
                         더 많은 비율 감정/더 적은 비율 감정
                         0~2 : 중립적
                         2~6 : 일반적
                         5~  : 편중적
                         정하기 -> 데이터 바인딩-->
-                        <p
-                          style="
-                            position: absolute;
-                            left: 49.5%;
-                            transform: translate(-50%, 0);
-                            font-size: 75px;
-                            font-weight: bold;
-                            bottom: 38%;
-                          "
-                        >
-                          편중적
-                        </p>
-                        <v-card
-                          style="
-                            float: left;
-                            width: 33%;
-                            height: 100%;
-                            background: rgba(245, 245, 245, 0.5);
-                          "
-                        >
-                          <div
-                            style="
-                              font-weight: bold;
-                              font-size: 15px;
-                              text-align: center;
-                            "
-                          >
-                            <br />
-                            이 키워드는 오늘의 다른 이슈 키워드와 비교했을 때<br /><br />
-                            <h1>더 부정적인</h1>
-                            <br />
-                            키워드 입니다.
-                            <br />
-                          </div>
-                          <v-divider class="my-4"></v-divider>
-                          <div
-                            style="
-                              font-weight: bold;
-                              font-size: 15px;
-                              text-align: center;
-                            "
-                          >
-                            이 키워드에 대한 사람들의 감정은<br /><br />
-                            <h1>5.92배</h1>
-                            <br />
-                            치우쳐 있습니다.
-                            <br />
-                            &nbsp;
-                          </div>
-                        </v-card>
-                      </v-card-actions>
-                      <v-col class="ma-4">
+                      <p
+                        style="
+                          position: absolute;
+                          left: 73.5%;
+                          transform: translate(-50%, 0);
+                          font-size: 75px;
+                          font-weight: bold;
+                          bottom: 38%;
+                        "
+                      >
+                        {{ intensity }}
+                      </p>
+
+                      <v-col class="ma-3">
                         <v-row align="center" justify="space-around">
                           <v-btn
                             class="text-h5 font-weight-bold"
@@ -356,12 +319,6 @@
                             color="indigo "
                             outlined
                             >감정 강도</v-btn
-                          >
-                          <v-btn
-                            class="text-h5 font-weight-bold"
-                            color="indigo "
-                            outlined
-                            >&nbsp;&nbsp;그래프 해설&nbsp;&nbsp;</v-btn
                           >
                         </v-row>
                       </v-col>
@@ -378,7 +335,7 @@
                       <v-card-actions>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <radar />
+                        <radar :chartdata="radarData" v-if="loadedEmoticon" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -462,6 +419,7 @@
                       <v-col style="height: 330px">
                         <div>
                           <vue-word-cloud
+                            v-if="wordcloudLoaded"
                             class="ma-0 my-4"
                             style="height: 300px"
                             :words="wordcloud"
@@ -538,7 +496,7 @@
       </v-col>
       <v-col>
         <div>
-          <siderbar />
+          <!-- <siderbar /> -->
         </div>
       </v-col>
     </v-row>
@@ -557,7 +515,7 @@ import Radar from "@/components/details/radar.vue";
 export default {
   name: "Category",
   components: {
-    siderbar: () => import("@/components/details/sidebar"),
+    // siderbar: () => import("@/components/details/sidebar"),
     Bar,
     Doughnut,
     Radar,
@@ -570,21 +528,10 @@ export default {
       type: String,
       default: "",
     },
-    sentiment: {
-      type: Object,
-      default: null,
-    },
-  },
-  computed: {
-    currentChart() {
-      console.log(this.cnt);
-      console.log(this.chartArray[this.cnt]);
-      return "line-chart";
-      //return this.chartArray[this.cnt++];
-    },
   },
   data() {
     return {
+      intensity: "",
       sentOption: {
         layout: { padding: { left: "200px" } },
         responsive: true,
@@ -598,9 +545,10 @@ export default {
       rank: 0,
       chartArray: ["line-chart", "bar"],
       loaded: false,
-      avgLoaded: false,
-      chartdata: {},
+      avgDataLoaded: false,
+      genderRatio: {},
       avgData: {},
+      a: {},
       //statistic data set
       statGender: {
         labels: ["성비"],
@@ -614,6 +562,28 @@ export default {
             label: "여성",
             backgroundColor: "red",
             data: [49.7],
+          },
+        ],
+      },
+      emoticon: {
+        happy: 0,
+        angry: 0,
+        sad: 0,
+        trust: 0,
+      },
+      radarData: {
+        labels: ["기쁨", "슬픔", "분노", "신뢰"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [],
+            fill: true,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgb(255, 99, 132)",
+            pointBackgroundColor: "rgb(255, 99, 132)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgb(255, 99, 132)",
           },
         ],
       },
@@ -654,9 +624,11 @@ export default {
       },
       // age graph test
       ageData: {},
+      sentimentLoaded: false,
+
+      wordcloudLoaded: false,
       ageLoaded: false,
       avgAgeData: {},
-      avgAgeLoaded: false,
       options: {
         scales: {
           yAxes: [
@@ -688,7 +660,7 @@ export default {
         datasets: [
           {
             label: "# of Votes",
-            data: [20, 40, 20, 20],
+            data: [0, 0, 0, 99],
             backgroundColor: [
               "rgba(46, 204, 113, 1)",
               "rgba(255, 164, 46, 1)",
@@ -744,22 +716,76 @@ export default {
         },
       },
       sentimentChartData: {},
+      loadedEmoticon: false,
     };
   },
   methods: {
-    getSentimentData() {
-      this.sentimentChartData = {
-        labels: ["긍정", "부정"],
-        datasets: [
-          {
-            data: [this.sentiment.positive, this.sentiment.negative],
-            backgroundColor: ["Blue", "Red"],
-            hoverBackgroundColor: ["#000080", "#DC143C"],
-            hoverBorderColor: ["#000080", "#DC143C"],
-          },
-        ],
-        radius: "100%",
-      };
+    analysisDeepSentiment() {
+      //Math.log
+      //this.emoticon.happy
+    },
+    async getEmoticonAnalysis() {
+      this.loadedEmoticon = false;
+      try {
+        const { data } = await axios.get(
+          `/api/keywords/${this.keyword}/emoticon-analysis`
+        );
+        this.emoticon.happy = data.like;
+        this.emoticon.sad = data.sad;
+        this.emoticon.angry = data.angry;
+        this.emoticon.trust = data.warm;
+        this.radarData.datasets[0].data = [
+          Math.floor(Math.log(this.emoticon.happy)),
+          Math.floor(Math.log(this.emoticon.sad)),
+          Math.floor(Math.log(this.emoticon.angry)),
+          Math.floor(Math.log(this.emoticon.trust)),
+        ];
+      } catch (e) {
+        console.error(e);
+      }
+      this.loadedEmoticon = true;
+    },
+    getEmotionIntensity() {
+      const major = _.max([this.sentiment.positive, this.sentiment.negative]);
+      const minor = _.min([this.sentiment.positive, this.sentiment.negative]);
+      const intensityValue = major / minor;
+
+      if (intensityValue <= 1.4) {
+        this.intensity = "균형적";
+        this.halfDoghnut.datasets[0].data = [33, 0, 0, 66];
+      } else if (intensityValue <= 2.4) {
+        //7:3
+        this.intensity = "편중적";
+        this.halfDoghnut.datasets[0].data = [33, 33, 0, 33];
+      } else {
+        this.intensity = "극단적";
+        this.halfDoghnut.datasets[0].data = [33, 33, 33];
+      }
+    },
+    async getSentimentData() {
+      this.sentimentLoaded = false;
+      try {
+        const { data } = await axios.get(
+          `/api/keywords/${this.keyword}/sentiment`
+        );
+        this.sentiment = data;
+        this.sentimentChartData = {
+          labels: ["긍정", "부정"],
+          datasets: [
+            {
+              data: [this.sentiment.positive, this.sentiment.negative],
+              backgroundColor: ["Blue", "Red"],
+              hoverBackgroundColor: ["#000080", "#DC143C"],
+              hoverBorderColor: ["#000080", "#DC143C"],
+            },
+          ],
+          radius: "100%",
+        };
+        this.getEmotionIntensity();
+        this.sentimentLoaded = true;
+      } catch (e) {
+        console.log(e);
+      }
     },
     fetchData() {
       const self = this;
@@ -786,12 +812,16 @@ export default {
         });
     },
     fetchWordCloud() {
+      this.wordcloudLoaded = false;
       const self = this;
       return axios
         .get(`/api/keywords/${self.keyword}/wordcloud`)
         .then(function (res) {
           self.wordcloud = JSON.parse(JSON.stringify(res.data));
           self.test1 = true;
+        })
+        .then(function () {
+          self.reformWordCloud();
         })
         .catch(function (err) {
           console.log(err);
@@ -807,30 +837,7 @@ export default {
         this.tmp[key].mentions,
       ]);
       this.test2 = true;
-    },
-    async fetchAvgData() {
-      try {
-        this.avgLoaded = false;
-        const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
-        this.avgData = {
-          labels: ["성비"],
-          datasets: [
-            {
-              label: "남성",
-              backgroundColor: "blue",
-              data: [Math.ceil(data.avg_male)],
-            },
-            {
-              label: "여성",
-              backgroundColor: "red",
-              data: [Math.ceil(data.avg_female)],
-            },
-          ],
-        };
-        this.avgLoaded = true;
-      } catch (e) {
-        console.error(e);
-      }
+      this.wordcloudLoaded = true;
     },
     async fetchAges() {
       try {
@@ -878,10 +885,25 @@ export default {
         console.error(e);
       }
     },
-    async fetchAvgAges() {
+    async fetchAvgData() {
       try {
-        this.avgAgeLoaded = false;
+        this.avgDataLoaded = false;
         const { data } = await axios.get(`/api/analysis/gender-age-statistics`);
+        this.avgData = {
+          labels: ["성비"],
+          datasets: [
+            {
+              label: "남성",
+              backgroundColor: "blue",
+              data: [Math.ceil(data.avg_male)],
+            },
+            {
+              label: "여성",
+              backgroundColor: "red",
+              data: [Math.ceil(data.avg_female)],
+            },
+          ],
+        };
         this.avgAgeData = {
           labels: ["연령대"],
           datasets: [
@@ -917,47 +939,50 @@ export default {
             },
           ],
         };
-        this.avgAgeLoaded = true;
+        this.avgDataLoaded = true;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getGenderRatio() {
+      try {
+        console.log("***********");
+        this.loaded = false;
+        const { data } = await axios.get(
+          `/api/keywords/${this.keyword}/gender-ratio`
+        );
+        this.genderRatio = {
+          labels: ["성비"],
+          datasets: [
+            {
+              label: "남성",
+              backgroundColor: "blue",
+              data: [data.male * 100],
+            },
+            {
+              label: "여성",
+              backgroundColor: "red",
+              data: [data.female * 100],
+            },
+          ],
+        };
+        this.loaded = true;
       } catch (e) {
         console.error(e);
       }
     },
   },
-  async created() {
+
+  created() {
     this.fetchData();
     this.fetchRankData();
+    this.getGenderRatio();
     this.fetchAges();
-    this.fetchAvgAges();
     this.fetchAvgData();
+    this.getEmoticonAnalysis();
     this.getSentimentData();
-    await this.fetchWordCloud();
-    this.reformWordCloud();
+    this.fetchWordCloud();
   },
-  async mounted() {
-    this.loaded = false;
-    try {
-      const { data } = await axios.get(
-        `/api/keywords/${this.keyword}/gender-ratio`
-      );
-      this.chartdata = {
-        labels: ["성비"],
-        datasets: [
-          {
-            label: "남성",
-            backgroundColor: "blue",
-            data: [data.male * 100],
-          },
-          {
-            label: "여성",
-            backgroundColor: "red",
-            data: [data.female * 100],
-          },
-        ],
-      };
-      this.loaded = true;
-    } catch (e) {
-      console.error(e);
-    }
-  },
+  async mounted() {},
 };
 </script>

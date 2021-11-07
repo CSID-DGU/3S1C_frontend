@@ -106,18 +106,18 @@ export default {
   data: () => ({
     drawer: null,
     barItems: [
-      {
-        title: "Keyword",
-        to: "/",
-      },
-      {
-        title: "News",
-        to: "/category",
-      },
-      {
-        title: "QnA",
-        to: "/detail",
-      },
+      // {
+      //   title: "Keyword",
+      //   to: "/",
+      // },
+      // {
+      //   title: "News",
+      //   to: "/category",
+      // },
+      // {
+      //   title: "QnA",
+      //   to: "/detail",
+      // },
       // {
       //   title: "Statistics",
       //   to: "/authors",
