@@ -66,7 +66,6 @@
                         name: 'Detail',
                         params: {
                           keyword: item.keyword,
-                          sentiment: item.sentiment,
                         },
                       }"
                     >
