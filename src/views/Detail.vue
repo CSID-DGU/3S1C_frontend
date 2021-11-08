@@ -5,16 +5,6 @@
         <div>
           <div>
             <v-card flat color="transparent">
-              <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체
-              <v-img
-                class="mx-6"
-                src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
-                :aspect-ratio="21 / 3.5"
-                :position="top"
-                gradient="to top, rgba(5,7,13,.9), rgba(0,5,7,.5)"
-                style="border-radius: 16px"
-              >
-              -->
               <v-img
                 class="mx-6"
                 src="http://direct-data-analysis.co.uk/uploads/3/5/2/6/35268350/direct-data-analysis-of-data_orig.jpg"
