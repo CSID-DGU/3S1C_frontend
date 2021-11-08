@@ -5,16 +5,6 @@
         <div>
           <div>
             <v-card flat color="transparent">
-              <!--TODO : 키워드에 맞는 이미지 가져오기 OR 배경 대체
-              <v-img
-                class="mx-6"
-                src="https://img7.yna.co.kr/mpic/YH/2019/11/19/MYH20191119008900038.jpg"
-                :aspect-ratio="21 / 3.5"
-                :position="top"
-                gradient="to top, rgba(5,7,13,.9), rgba(0,5,7,.5)"
-                style="border-radius: 16px"
-              >
-              -->
               <v-img
                 class="mx-6"
                 src="http://direct-data-analysis.co.uk/uploads/3/5/2/6/35268350/direct-data-analysis-of-data_orig.jpg"
@@ -104,7 +94,6 @@
                       >
                     </div>
                     <!--<v-card-title> 성별 분포 </v-card-title>-->
-                    <!--TODO : 데이터에 따라 라벨링하기-->
                     <v-card-text>
                       <bar
                         style="float: left; width: 33%"
@@ -172,10 +161,10 @@
                     colored-border
                     color="accent"
                   >
-                    <!--TODO : 오늘 키워드 대비, 통계 자료 대비 수치의 차이를 눈에 잘 띄는 문구로 넣기-->
                     <b id="각 slide item마다 간단한 해설">
                       <h3>
-                        이 키워드는 '남성'이 더 관심을 가지는 키워드입니다.
+                        이 키워드는 '{{ majorGender }}'이 더 관심을 가지는
+                        키워드입니다.
                       </h3>
                     </b>
                   </v-alert>
@@ -190,7 +179,6 @@
                       >
                     </div>
                     <!--<v-card-title> 연령대 분포 </v-card-title>-->
-                    <!--TODO : 데이터에 따라 라벨링하기-->
                     <v-card-text>
                       <bar
                         style="float: left; width: 33%"
@@ -256,9 +244,11 @@
                     colored-border
                     color="accent"
                   >
+                    <!--TODO : 연령 분포에 따라 가장 많이 나온 값 데이터바인딩 하기-->
                     <b id="각 slide item마다 간단한 해설">
                       <h3>
-                        이 키워드는 '50대'가 가장 관심을 가지는 키워드입니다.
+                        이 키워드는 '{{ majorAge }}대'가 가장 관심을 가지는
+                        키워드입니다.
                       </h3>
                     </b>
                   </v-alert>
@@ -286,12 +276,6 @@
                           :options="sentimentOptions"
                         />
                       </v-card-actions>
-                      <!--TODO : 감정 강도 공식 
-                        더 많은 비율 감정/더 적은 비율 감정
-                        0~2 : 중립적
-                        2~6 : 일반적
-                        5~  : 편중적
-                        정하기 -> 데이터 바인딩-->
                       <p
                         style="
                           position: absolute;
@@ -317,7 +301,8 @@
                             class="text-h5 font-weight-bold"
                             color="indigo "
                             outlined
-                            >감정 강도</v-btn
+                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;감정
+                            강도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</v-btn
                           >
                         </v-row>
                       </v-col>
@@ -444,8 +429,6 @@
                         </div>
                       </v-col>
                     </v-card>
-                    <!-- TODO : 색 변경하기 배경넣기 -->
-
                     <v-alert
                       class="ma-4 text-h6 text-center"
                       border="left"
@@ -495,7 +478,7 @@
       </v-col>
       <v-col>
         <div>
-          <!-- <siderbar /> -->
+          <siderbar />
         </div>
       </v-col>
     </v-row>
@@ -514,7 +497,7 @@ import Radar from "@/components/details/radar.vue";
 export default {
   name: "Category",
   components: {
-    // siderbar: () => import("@/components/details/sidebar"),
+    siderbar: () => import("@/components/details/sidebar"),
     Bar,
     Doughnut,
     Radar,
@@ -546,6 +529,8 @@ export default {
       loaded: false,
       avgDataLoaded: false,
       genderRatio: {},
+      majorGender: "",
+      majorAge: 0,
       avgData: {},
       a: {},
       //statistic data set
@@ -861,6 +846,7 @@ export default {
       ]);
       this.test2 = true;
       this.wordcloudLoaded = true;
+      this.$forceUpdate();
     },
     async fetchAges() {
       try {
@@ -903,6 +889,8 @@ export default {
             },
           ],
         };
+        const maxValue = _.max(Object.values(data));
+        this.majorAge = Object.keys(data).find((key) => data[key] === maxValue);
         this.ageLoaded = true;
       } catch (e) {
         console.error(e);
@@ -988,6 +976,8 @@ export default {
             },
           ],
         };
+        this.majorGender =
+          Math.max(data.male, data.female) == data.male ? "남성" : "여성";
         this.loaded = true;
       } catch (e) {
         console.error(e);
