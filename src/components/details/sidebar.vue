@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h3 class="text-h4 font-weight-bold pb-4">Cumulative Statistics</h3>
+      <h3 class="text-h4 font-weight-bold pb-4">Daily Statistics</h3>
 
       <v-divider></v-divider>
 
@@ -147,9 +147,9 @@ export default {
   data() {
     return {
       title: [
-        "누적 댓글 수",
-        "누적 기사 수",
-        "누적 작성자 수",
+        "수집 댓글 수",
+        "수집 기사 수",
+        "댓글 작성자 수",
         "최다 언급 단어",
         "1인최다 댓글/일",
       ],
