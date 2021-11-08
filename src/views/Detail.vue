@@ -95,7 +95,6 @@
                       >
                     </div>
                     <!--<v-card-title> 성별 분포 </v-card-title>-->
-                    <!--TODO : 데이터에 따라 라벨링하기-->
                     <v-card-text>
                       <bar
                         style="float: left; width: 33%"
@@ -163,10 +162,10 @@
                     colored-border
                     color="accent"
                   >
-                    <!--TODO : 오늘 키워드 대비, 통계 자료 대비 수치의 차이를 눈에 잘 띄는 문구로 넣기-->
                     <b id="각 slide item마다 간단한 해설">
                       <h3>
-                        이 키워드는 '남성'이 더 관심을 가지는 키워드입니다.
+                        이 키워드는 '{{ majorGender }}'이 더 관심을 가지는
+                        키워드입니다.
                       </h3>
                     </b>
                   </v-alert>
