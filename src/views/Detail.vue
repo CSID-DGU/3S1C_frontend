@@ -946,7 +946,6 @@ export default {
     },
     async getGenderRatio() {
       try {
-        console.log("***********");
         this.loaded = false;
         const { data } = await axios.get(
           `/api/keywords/${this.keyword}/gender-ratio`
