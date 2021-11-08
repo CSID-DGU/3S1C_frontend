@@ -248,7 +248,7 @@
                     <!--TODO : 연령 분포에 따라 가장 많이 나온 값 데이터바인딩 하기-->
                     <b id="각 slide item마다 간단한 해설">
                       <h3>
-                        이 키워드는 '{{ majorAge }}'가 가장 관심을 가지는
+                        이 키워드는 '{{ majorAge }}대'가 가장 관심을 가지는
                         키워드입니다.
                       </h3>
                     </b>
@@ -531,7 +531,7 @@ export default {
       avgDataLoaded: false,
       genderRatio: {},
       majorGender: "",
-      majorAge: "",
+      majorAge: 0,
       avgData: {},
       a: {},
       //statistic data set
@@ -866,6 +866,8 @@ export default {
             },
           ],
         };
+        const maxValue = _.max(Object.values(data));
+        this.majorAge = Object.keys(data).find((key) => data[key] === maxValue);
         this.ageLoaded = true;
       } catch (e) {
         console.error(e);
