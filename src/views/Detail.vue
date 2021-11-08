@@ -277,12 +277,6 @@
                           :options="sentimentOptions"
                         />
                       </v-card-actions>
-                      <!--TODO : 감정 강도 공식 
-                        더 많은 비율 감정/더 적은 비율 감정
-                        0~2 : 중립적
-                        2~6 : 일반적
-                        5~  : 편중적
-                        정하기 -> 데이터 바인딩-->
                       <p
                         style="
                           position: absolute;
@@ -308,7 +302,8 @@
                             class="text-h5 font-weight-bold"
                             color="indigo "
                             outlined
-                            >감정 강도</v-btn
+                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;감정
+                            강도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</v-btn
                           >
                         </v-row>
                       </v-col>
@@ -435,8 +430,6 @@
                         </div>
                       </v-col>
                     </v-card>
-                    <!-- TODO : 색 변경하기 배경넣기 -->
-
                     <v-alert
                       class="ma-4 text-h6 text-center"
                       border="left"
