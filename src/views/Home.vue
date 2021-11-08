@@ -271,8 +271,6 @@
 </template>
 
 <script>
-//TODO : Latest Topics 워드클라우드 데이터 바인딩(axios)
-//api위치 : /api/real-time-popularity/latest-topics
 import axios from "axios";
 import _ from "lodash";
 export default {
@@ -282,8 +280,13 @@ export default {
   },
   data() {
     return {
+      // TODO : mock api
       items: {},
       loading: true,
+      //female: 30,
+      //male: 70,
+      //value: this.female > this.male ? typeof(this.female) : typeof(this.male),
+      //text: this.female > this.male ? "여성" : "남성", // TODO : 성별 infographic으로 변경하기
     };
   },
   methods: {
