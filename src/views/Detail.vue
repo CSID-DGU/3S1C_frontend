@@ -823,6 +823,7 @@ export default {
       ]);
       this.test2 = true;
       this.wordcloudLoaded = true;
+      this.$forceUpdate();
     },
     async fetchAges() {
       try {
