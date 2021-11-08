@@ -29,7 +29,8 @@
                   style="background: rgba(220, 220, 220, 0.3); color: white"
                 >
                   <br />
-                  "Team 3S1C's News-Comment Analyzer"<br /><br />
+                  "Team 3S1C's News-Comment Analyzer"
+                  <br /><br />
                 </h2>
               </v-col>
             </v-row>
@@ -179,22 +180,12 @@
                       "
                     > -->
                     <v-card-text class="pb-1">
-                      <v-btn color="accent">Rank {{ i }}</v-btn>
+                      <v-btn color="accent">{{ i }}일 전</v-btn>
                     </v-card-text>
-
                     <vue-word-cloud
                       class="ma-0"
                       style="height: 120px"
-                      :words="[
-                        ['대통령', 14],
-                        ['문재인', 7],
-                        ['홍준표', 4],
-                        ['노조', 2],
-                        ['민주당', 1],
-                        ['이재명', 5],
-                        ['나라', 4],
-                        ['코로나', 6],
-                      ]"
+                      :words="wordcloud[i - 1]"
                       :color="
                         ([, weight]) =>
                           weight > 10
@@ -280,6 +271,8 @@ export default {
   },
   data() {
     return {
+      wordcloud: [],
+      wordcloudLoaded: false,
       // TODO : mock api
       items: {},
       loading: true,
@@ -290,6 +283,18 @@ export default {
     };
   },
   methods: {
+    async fetchWordcloud() {
+      this.wordcloudLoaded = false;
+      const { data } = await axios.get(
+        `/api/real-time-popularity/latest-topics`
+      );
+      for (const words of data) {
+        this.wordcloud.push(
+          Object.keys(words.rank).map((key) => [key, words.rank[key]])
+        );
+      }
+      this.wordcloudLoaded = true;
+    },
     fetchData() {
       const self = this;
       return axios
@@ -345,8 +350,9 @@ export default {
       }
     },
   },
-  async created() {
-    await this.fetchData();
+  created() {
+    this.fetchData();
+    this.fetchWordcloud();
   },
   mounted() {},
   computed: {

@@ -40,7 +40,6 @@
                     "
                   >
                     " {{ keyword }} "
-                    {{ sentiment }}
                   </div>
                 </v-card-text>
               </v-img>
@@ -358,7 +357,7 @@
                           >
                             <br />
                             이 키워드를 주로 사용한 댓글 작성자는<br /><br /><br />
-                            <h1>격노</h1>
+                            <h1>{{ secondaryEmotion }}</h1>
                             <br /><br />
                             을(를) 느꼈을 가능성이 높습니다.<br />
                           </div>
@@ -717,12 +716,35 @@ export default {
       },
       sentimentChartData: {},
       loadedEmoticon: false,
+      sentimentAnalysisLoaded: false,
+      secondaryEmotion: "",
     };
   },
   methods: {
-    analysisDeepSentiment() {
-      //Math.log
-      //this.emoticon.happy
+    makeDuplicatedEmotion() {
+      this.sentimentAnalysisLoaded = false;
+      const firstEmotion = _.invert(this.emoticon)[
+        _.max(Object.values(this.emoticon))
+      ];
+      this.emoticon[firstEmotion] = 0;
+      const secondEmotion = _.invert(this.emoticon)[
+        _.max(Object.values(this.emoticon))
+      ];
+      const comparedArr = [firstEmotion, secondEmotion].sort();
+      if (_.isEqual(comparedArr, ["angry", "happy"])) {
+        this.secondaryEmotion = "자만심";
+      } else if (_.isEqual(comparedArr, ["happy", "trust"])) {
+        this.secondaryEmotion = "사랑";
+      } else if (_.isEqual(comparedArr, ["angry", "sad"])) {
+        this.secondaryEmotion = "부러움";
+      } else if (_.isEqual(comparedArr, ["angry", "trust"])) {
+        this.secondaryEmotion = "우월감";
+      } else if (_.isEqual(comparedArr, ["sad", "trust"])) {
+        this.secondaryEmotion = "감상적";
+      } else if (_.isEqual(comparedArr, ["happy", "sad"])) {
+        this.secondaryEmotion = "씁쓸함";
+      }
+      this.sentimentAnalysisLoaded = true;
     },
     async getEmoticonAnalysis() {
       this.loadedEmoticon = false;
@@ -743,6 +765,7 @@ export default {
       } catch (e) {
         console.error(e);
       }
+      this.makeDuplicatedEmotion();
       this.loadedEmoticon = true;
     },
     getEmotionIntensity() {
@@ -946,7 +969,6 @@ export default {
     },
     async getGenderRatio() {
       try {
-        console.log("***********");
         this.loaded = false;
         const { data } = await axios.get(
           `/api/keywords/${this.keyword}/gender-ratio`
