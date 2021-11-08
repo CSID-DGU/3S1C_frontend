@@ -479,7 +479,7 @@
       </v-col>
       <v-col>
         <div>
-          <!-- <siderbar /> -->
+          <siderbar />
         </div>
       </v-col>
     </v-row>
@@ -498,7 +498,7 @@ import Radar from "@/components/details/radar.vue";
 export default {
   name: "Category",
   components: {
-    // siderbar: () => import("@/components/details/sidebar"),
+    siderbar: () => import("@/components/details/sidebar"),
     Bar,
     Doughnut,
     Radar,
@@ -530,6 +530,8 @@ export default {
       loaded: false,
       avgDataLoaded: false,
       genderRatio: {},
+      majorGender: "",
+      majorAge: "",
       avgData: {},
       a: {},
       //statistic data set
@@ -949,6 +951,8 @@ export default {
             },
           ],
         };
+        this.majorGender =
+          Math.max(data.male, data.female) == data.male ? "남성" : "여성";
         this.loaded = true;
       } catch (e) {
         console.error(e);
