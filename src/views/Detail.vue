@@ -180,7 +180,6 @@
                       >
                     </div>
                     <!--<v-card-title> 연령대 분포 </v-card-title>-->
-                    <!--TODO : 데이터에 따라 라벨링하기-->
                     <v-card-text>
                       <bar
                         style="float: left; width: 33%"
@@ -246,9 +245,11 @@
                     colored-border
                     color="accent"
                   >
+                    <!--TODO : 연령 분포에 따라 가장 많이 나온 값 데이터바인딩 하기-->
                     <b id="각 slide item마다 간단한 해설">
                       <h3>
-                        이 키워드는 '50대'가 가장 관심을 가지는 키워드입니다.
+                        이 키워드는 '{{ majorAge }}'가 가장 관심을 가지는
+                        키워드입니다.
                       </h3>
                     </b>
                   </v-alert>
