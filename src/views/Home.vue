@@ -180,7 +180,9 @@
                       "
                     > -->
                     <v-card-text class="pb-1">
-                      <v-btn color="accent">{{ i }}일 전</v-btn>
+                      <v-btn color="accent" class="font-weight-bold text-h6"
+                        >{{ i }}일 전</v-btn
+                      >
                     </v-card-text>
                     <vue-word-cloud
                       class="ma-0"
