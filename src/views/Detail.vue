@@ -86,15 +86,16 @@
                   </v-col>
                 </v-card>
 
-                <v-container fluid>
-                  <v-card height="570px" class="ma-1">
+                <v-container fluid fill-width>
+                  <v-card fill-width class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 성별 비교</v-btn
                       >
+                      
                     </div>
                     <!--<v-card-title> 성별 분포 </v-card-title>-->
-                    <v-card-text>
+                    
                       <bar
                         style="float: left; width: 33%"
                         v-if="loaded"
@@ -112,24 +113,24 @@
                         :chartdata="statGender"
                         :options="options"
                       />
-                    </v-card-text>
+                    
 
                     <v-col>
                       <v-row align="center" justify="space-around">
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="ml-5 mr-5 text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >이 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="ml-5 mr-5 text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >오늘의 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="ml-5 mr-5 text-h5 font-weight-bold"
+                          class="ml-5 mr-5 text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >대한민국 평균</v-btn
@@ -171,15 +172,15 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
 
-                <v-container fluid>
-                  <v-card height="570px" class="ma-1">
+                <v-container fluid fill-width>
+                  <v-card fill-width class="ma-1">
                     <div class="pa-2">
                       <v-btn depressed color="text-h5 accent font-weight-bold"
                         >관심 연령대 비교</v-btn
                       >
                     </div>
                     <!--<v-card-title> 연령대 분포 </v-card-title>-->
-                    <v-card-text>
+
                       <bar
                         style="float: left; width: 33%"
                         v-if="ageLoaded"
@@ -197,23 +198,23 @@
                         :chartdata="statAge"
                         :options="options4age"
                       />
-                    </v-card-text>
+
                     <v-col>
                       <v-row align="center" justify="space-around">
                         <v-btn
-                          class="text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >이 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >오늘의 키워드 평균</v-btn
                         >
                         <v-btn
-                          class="text-h5 font-weight-bold"
+                          class="text-h5 font-weight-bold mb-5"
                           color="indigo "
                           outlined
                           >대한민국 평균</v-btn
@@ -255,8 +256,8 @@
                 </div>
                 <v-divider class="my-4"></v-divider>
                 <div>
-                  <v-container fluid>
-                    <v-card height="550px" class="ma-1">
+                  <v-container fluid fill-width>
+                    <v-card fill-width class="ma-1">
                       <div class="pa-2">
                         <v-btn depressed color="text-h5 accent font-weight-bold"
                           >키워드 감성 분석</v-btn
@@ -292,13 +293,13 @@
                       <v-col class="ma-3">
                         <v-row align="center" justify="space-around">
                           <v-btn
-                            class="text-h5 font-weight-bold"
+                            class="text-h5 font-weight-bold mb-5"
                             color="indigo "
                             outlined
                             >긍정 & 부정</v-btn
                           >
                           <v-btn
-                            class="text-h5 font-weight-bold"
+                            class="text-h5 font-weight-bold mb-5"
                             color="indigo "
                             outlined
                             >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;감정
@@ -309,8 +310,8 @@
                     </v-card>
                   </v-container>
                   <v-divider class="my-4"></v-divider>
-                  <v-container fluid>
-                    <v-card height="550px" class="ma-1">
+                  <v-container fluid fill-width>
+                    <v-card fill-width class="ma-1">
                       <div class="pa-2">
                         <v-btn depressed color="text-h5 accent font-weight-bold"
                           >심층 감성 분석(beta)</v-btn
@@ -333,10 +334,9 @@
                           "
                           height="400px"
                         >
-                          <div
+                          <div v-resize-text ="{ratio:1.3, minFontSize: '10px', maxFontSize: '20px', delay: 200}"
                             style="
-                              font-weight: bold;
-                              font-size: 25px;
+                              font-weight: bold;                            
                               text-align: center;
                             "
                           >
@@ -347,10 +347,9 @@
                             을(를) 느꼈을 가능성이 높습니다.<br />
                           </div>
                           <v-divider class="my-4"></v-divider>
-                          <div
+                          <div v-resize-text ="{ratio:1.3, minFontSize: '10px', maxFontSize: '20px', delay: 200}"
                             style="
                               font-weight: bold;
-                              font-size: 25px;
                               text-align: center;
                             "
                           >
@@ -367,7 +366,7 @@
                       <v-col class="ma-4">
                         <v-row align="center" justify="space-around">
                           <v-btn
-                            class="text-h5 font-weight-bold"
+                            class="text-h5 font-weight-bold mb-5"
                             color="indigo "
                             outlined
                             >감정 표현 분포</v-btn
@@ -494,6 +493,8 @@ import Bar from "@/components/details/bar.vue";
 // import Card from "@/components/Card.vue";
 import Doughnut from "@/components/details/doughnut.vue";
 import Radar from "@/components/details/radar.vue";
+//import VueSocialSharing from 'vue-social-sharing';
+
 export default {
   name: "Category",
   components: {

@@ -1,7 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import VueSocialSharing from 'vue-social-sharing'
+import VueResizeText from 'vue-resize-text';
 
+Vue.use(VueResizeText)
+Vue.use(VueSocialSharing, {
+  networks: {
+    fakeblock: 'https://fakeblock.com/share?url=@url&title=@title'
+  }
+})
 Vue.use(VueRouter)
 
 const routes = [

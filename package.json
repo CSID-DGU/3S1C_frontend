@@ -16,7 +16,9 @@
     "vue": "^2.6.11",
     "vue-chartist": "^2.3.1",
     "vue-chartjs": "^3.5.1",
+    "vue-resize-text": "^0.1.1",
     "vue-router": "^3.5.2",
+    "vue-social-sharing": "^3.0.8",
     "vuetify": "^2.4.0",
     "vuewordcloud": "^18.7.12"
   },
